@@ -1,0 +1,53 @@
+
+NixOps
+
+The NixOS Cloud Deployment Tool
+
+NixOps is a tool for deploying sets of NixOS Linux machines, either to real hardware or to virtual machines. It extends NixOS’s declarative approach to system configuration management to networks and adds provisioning. For example, here is a NixOps specification of a network consisting of two machines — one running Apache httpd, the other serving a file system via NFS:
+    {
+    webserver =
+        { deployment.targetEnv = "virtualbox";
+          services.httpd.enable = true;
+          services.httpd.documentRoot = "/data";
+          fileSystems."/data" =
+            { fsType = "nfs4";
+              device = "fileserver:/"; };
+        };
+
+    fileserver =
+        { deployment.targetEnv = "virtualbox";
+          services.nfs.server.enable = true;
+          services.nfs.server.exports = "...";
+        };
+    }
+The values of the webserver and fileserver attributes are regular NixOS system specifications, except for the deployment.* options, which tell NixOps how each machine should be instantiated (in this case, as VirtualBox virtual machines running on your desktop). You can then run:
+
+    nixops create -d simple network.nix
+    nixops deploy -d simple
+
+This will create the virtual machines, then build and activate the NixOS configurations you specified. To change something to the configuration, you just edit the specification and run nixops deploy again.
+NixOps makes it easy to abstract over target environments, allowing you to use the same “logical” specification for both testing and production deployments. For instance, to deploy to Amazon EC2, you would just change the deployment.* options to:
+
+    deployment.targetEnv = "ec2";
+    deployment.region = "eu-west-1";
+
+
+NixOps currently supports provisioning the following resources:
+Amazon EC2 instances and other resources (such as S3 buckets, EC2 key pairs, elastic IPs, etc.).
+Google Cloud Engine instances and other resources (such as networks, firewalls, IPs, disks, etc.).
+VirtualBox virtual machines.
+  Hetzner machines.
+  NixOS containers.
+  Any machine already running NixOS.
+  Getting it
+If you already have Nix or NixOS installed, you can get NixOps by running:
+
+    nix-env -i nixops
+
+You can also get the latest development version; see the manual for details.
+Documentation
+The NixOps manual tells you everything you need to know about using NixOps.
+There is a short paper that gives an overview of NixOps (called Charon back then).
+
+https://nixos.org/nixops/manual
+https://nixos.org/~eelco/pubs/charon-releng2013-final.pdf

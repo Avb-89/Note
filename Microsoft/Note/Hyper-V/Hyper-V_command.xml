@@ -1,0 +1,266 @@
+
+Плучить полный список команд для Hyper-V:
+# Get-Command -Module hyper-v | Out-GridView
+
+Получение списка всех виртуальных машин
+# Get-VM
+
+Получение списка только запущенных виртулаьных машин:
+# Get-VM | where {$_.State -eq 'Running'}
+
+Получение списка выключеных машин:
+# Get-VM | where {$_.State -eq 'Off'}
+
+Запустить VM:
+# Start-VM -Name <virtual machine name>
+
+Остановить VM:
+# Stop-VM -Name <virtual machine name>
+################################################################################
+С помощью ключа Force мы принудительно завершим работу ВМ, не смотря на незавершенные процессы:
+Stop-VM -Name <virtual machine name> -Force
+Для выключения питания используем ключ TurnOff, и ключ Save для сохранение состояния ВМ:
+Stop-VM -Name <virtual machine name> -TurnOff
+Stop-VM -Name <virtual machine name> -Save
+################################################################################
+
+
+Запустить все выключенные VM:
+# Get-VM | where {$_.State -eq 'Off'} | Start-VM
+
+Выключить все запущенные машины
+# Get-VM | where {$_.State -eq 'Running'} | Stop-VM
+
+Создать snapshot VM
+# Get-VM -Name <VM Name> | Checkpoint-VM -SnapshotName <name for snapshot>
+
+Мигрировать VM:
+# Move-VM <VMNAME> -DestinationHost <HostName> -IncludeStorage -DestinationStoragePath C:\VMs
+
+Мигрировать Диск VM:
+# Move-VMStorage -VMName WKS81 -DestinationStoragePath ″C:\VM″
+
+################################################################################
+Создание новой виртуальной машины
+
+New-VM -Name <virtual machine name> –MemoryStartupBytes 1GB -NewVHDPath c:\<virtual machine name>.vhd -NewVHDSizeBytes 60GB
+
+New-VM –Name Test # Создать новую виртуальную машину с именем «test»
+
+Создать новый виртуальный жесткий диск по пути d:\VHDs\test.vhd
+
+New-VHD –Path F:\VHDs\test.vhd
+
+
+Следующий пример демонстрирует создание виртуальной машины в интегрированной среде сценариев (ISE) PowerShell. Это простой пример. Его можно усложнить, добавив дополнительные функции PowerShell и расширенные сценарии развертывания виртуальной машины.
+Чтобы открыть среду ISE PowerShell, нажмите кнопку "Пуск" и введите PowerShell ISE.
+Запустите указанный ниже код для создания виртуальной машины. Подробные сведения о команде New-VM см. в документации по команде New-VM.
+PowerShell code:
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$VMName = "VMNAME"
+
+$VM = @{
+  Name = $VMName
+  MemoryStartupBytes = 2147483648
+  Generation = 2
+  NewVHDPath = "C:\Virtual Machines\$VMName\$VMName.vhdx"
+  NewVHDSizeBytes = 53687091200
+  BootDevice = "VHD"
+  Path = "C:\Virtual Machines\$VMName"
+  SwitchName = (Get-VMSwitch).Name[0]
+}
+
+New-VM $VM
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+################################################################################
+
+
+Для того чтобы посмотреть Интегрированные службы (Integrated Services)
+# Get-VMIntegrationService -ComputerName VM001 -VMName VM01
+
+Включить те или иные сервисы
+# Enable-VMIntegrationService -ComputerName VM001 -VMName VM01
+
+Узнать Информацию о VM (на машине с которой запущена команда)
+#Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Auto"
+
+Подключить виртуальный сетевой адаптер на виртуальной машине «test» к коммутатору «QA».
+
+Connect-VMNetworkAdapter –VMName test –SwitchName QA
+
+Экспортировать «на лету» виртуалку Win7_ZKAcces в папку F:\virt\clone\Win7_ZKAcces\23-09-2016 (сделать бакап)
+
+Export-VM –Name Win7_ZKAcces –Path F:\virt\clone\Win7_ZKAcces\23-09-2016
+
+Импорт (копирование и генерация нового ID). Для импорта указываем XML-файл конфигурации виртуальной машины, находящийся в папке Virtual Machines:
+
+Import-VM -Path ″C:\VM\Virtual Machines\4596AEB4-AB71-43E2-9B1D-4579B7CFC4D1.xml″ -Copy -GenerateNewID
+
+Переместить «на лету» файл жесткого диска виртуальной машины Win7_ZKAcces из папки F:\serv1c.vhdx в папку D:\Virt\serv1c\serv1c\serv1c.vhdx
+
+Move-VMStorage "Win7_ZKAcces" –VHDs @(@{«SourceFilePath» = «F:\serv1c.vhdx»; «DestinationFilePath» = «D:\Virt\serv1c\serv1c\serv1c.vhdx»})
+
+Увеличить файл жёсткого диска serv1c.vhdx до 85 Гб (виртуальная машина должна быть остановлена)
+
+Resize-VHD –Path F:\serv1c.vhdx –SizeBytes 85GB
+
+Получить информацию о разделах жесткого диска под номером 1
+
+Get-Partition -DiskNumber 1
+
+Удалить на жестком диске номер 1 логический раздел номер 2
+
+Remove-Partition -DiskNumber 1 -PartitionNumber 2
+
+Создать на жестком диске номер 1 новый раздел под буквой F, используя всё доступное пространство
+
+New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter F
+
+Форматировать логический раздел с буквой F в файловую систему NTFS
+
+Format-Volume -DriveLetter F -FileSystem NTFS
+
+
+Контрольные точки (Checkpoint) позволяют сделать моментальный снимок виртуальной машины,
+сохранив ее состояние на определенный момент времени.
+создадим для ВМ WKS81 чекпойнт с именем Test:
+
+Checkpoint-VM -VMName WKS81 -Name Test
+
+Просмотрим все имеющиеся у машины чекпойнты:
+
+Get-VMSnapshot -VMName WKS81
+
+Применим созданный чекпойнт
+
+Restore-VMSnapshot -VMName WKS81 -Name Test
+
+И удалим его:
+
+Remove-VMSnapshot -VMName WKS81 -Name Test
+
+переместить хранилище ВМ можно из консоли PowerShell, например для переноса всех файлов машины WKS81 в одно расположение выполним команду:
+
+Move-VMStorage -VMName WKS81 -DestinationStoragePath ″C:\VM″
+
+Экспорт и импорт ВМ
+
+Export-VM -Name WKS81 -Path C:\VM
+
+И импорт (копирование и генерация нового ID). Для импорта указываем XML-файл конфигурации виртуальной машины, находящийся в папке Virtual Machines:
+
+Import-VM -Path ″C:\VM\Virtual Machines\4596AEB4-AB71-43E2-9B1D-4579B7CFC4D1.xml″ -Copy -GenerateNewID
+
+
+Вывести состояние конкретной ВМ в более менее удобочитаемом виде можно такой командой:
+
+Get-VM -Name WKS81 | fl
+
+А для вывода всех имеющихся характеристик ВМ можно сделать так:
+
+Get-VM -Name WKS7 | fl *
+
+Выключение виртуальной машины осуществляется командлетом Stop-VM с различными ключами. Например, для завершения работы операционной системы ВМ WKS81 воспользуемся командой:
+
+Stop-VM -Name WKS81
+
+С помощью ключа Force мы принудительно завершим работу ВМ, не смотря на незавершенные процессы:
+
+Stop-VM -Name WKS81 -Force
+
+Для выключения питания используем ключ TurnOff, и ключ Save для сохранение состояния ВМ:
+
+Stop-VM -Name WKS81 -TurnOff
+Stop-VM -Name WKS81 -Save
+
+Ну а для включения или восстановления состояния используется командлет Start-VM:
+
+Start-VM -Name WKS81
+
+http://www.vmstart.ru/opisaniya-i-czeny/556-nastrojka-hyper-v-server-2012-r2#link1
+
+Проверяем текущую настройку IPv6 на интерфейсе.
+Имя интерфейса берем из вывода командлетов Get-NetAdapter или Get-NetIPConfiguration.
+
+Get-NetAdapterBinding -InterfaceDescription "Microsoft Hyper-V Network Adapter" | Where-Object -Property DisplayName -Match IPv6 | Format-Table –AutoSize
+
+Отключить поддержку IPv6 на сетевом адаптере можно командлетом Disable-NetAdapterBinding
+
+Disable-NetAdapterBinding -InterfaceDescription "Microsoft Hyper-V Network Adapter" -ComponentID ms_tcpip6
+
+Настройка межсетевого экрана (Advanced Firewall)
+
+Get-NetFirewallRule | Where-Object -Property DisplayName -Match "firewall" | Format-List -Property Name, DisplayName, Enabled
+
+Включаем оба правила.
+
+Enable-NetFirewallRule -Name RemoteFwAdmin-In-TCP,RemoteFwAdmin-RPCSS-In-TCP
+
+добавить на Hyper-V Server в доверенные узлы WinRM на хосте управления и обновить текущее состояние в ServerManager.
+
+Set-Item wsman:\localhost\Client\TrustedHosts HYPER-V01 -Concatenate –Force
+
+
+Модуль Hyper-V для Windows PowerShell
+
+https://technet.microsoft.com/ru-ru/library/hh846767(v=ws.11).aspx
+
+
+
+ссылка для скачивания всех компонентов System Center 2012 RC.
+
+https://technet.microsoft.com/library/hh546785(v=sc.12).aspx
+документация из библиотеки Technet по System Center 2012 Virtual Machine Manager.
+http://technet.microsoft.com/en-us/library/gg610610.aspx
+курс Microsoft Virtual Academy по System Center 2012 Virtual Machine Manager
+http://www.microsoftvirtualacademy.com/tracks/system-center-virtual-machine-manager-2012
+Введение в облачные технологии Microsoft
+http://www.microsoft.com/microsoftservices/en/us/journey_to_the_cloud.aspx
+различные вебкасты по компонентам System Center на Techdays.ru.
+http://www.techdays.ru/videos/System%20Center
+
+http://legotin.com/new-features-system-center-2012-vmm/
+http://itnotices.ru/klonirovanie-virtualnih-mashin-v-hyper-v/
+
+
+Клонирование виртуальных машин Hyper-V с использованием PowerShell
+
+1. Экспорт виртуальной машины.
+
+Export-VM -Name SYD-DC -Path 'D:\VMM\Export'
+
+
+2. Импорт виртуальной машины.
+
+Import-VM -Path 'D:\VMM\Export\SYD-DC\Virtual Machines\4E9FC690-E871-47A1-A783-786A0B604CB4.XML' -VhdDestinationPath 'D:\VMM\VHD\SRV2' -Copy -GenerateNewId
+
+
+3. Переименовываем виртуальную машину. Для начала узнаем ID клонированной машины.
+
+get-vm | select VMNAME,VMId
+
+Нас интересуют две машины с одинаковым именем, но разными ID. Переименовывать будем машину ID которой отличается от ID импортируемой на шаге 2 машины. Следующий набор команд выполнит переименование. 5F3E5C8D-1280-43ED-8F1E-7274AB3B9643 — это полученный при выполнении предыдущей команды идентификатор.
+
+get-vm | Where-Object {$_.VMId -eq "5F3E5C8D-1280-43ED-8F1E-7274AB3B9643"} | Rename-VM -NewName SRV2
+
+
+4. Переименовываем виртуальный жесткий диск.
+
+Get-VHD -VMId 5f3e5c8d-1280-43ed-8f1e-7274ab3b9643 | Select Path | Rename-Item -NewName SRV2.vhdx
+Remove-VMHardDiskDrive -VMName SRV2 -ControllerType SCSI -ControllerLocation 0 -ControllerNumber 0
+Add-VMHardDiskDrive -VMName SRV2 -ControllerType SCSI -ControllerNumber 0 -ControllerLocation 0 -Path 'D:\VMM\VHD\SRV2\SRV2.vhdx'
+
+
+5. Изменяем MAC адрес для виртуального адаптера виртуальной машины. Здесь может быть два варианта. Первый, это выставить динамическое получение MAC адреса. И, соответственно, второй — это указать MAC в ручную.
+
+Set-VMNetworkAdapter -VMName SRV2 -DynamicMacAddress
+Set-VMNetworkAdapter -VMName SRV2 -StaticMacAddress '00-15-5D-80-55-01'
+Start-VM -Name SRV2
+
+
+6. Меняем IP адрес и имя виртуального сервера. К сожалению, у меня не получилось реализовать данные задачи без запуска виртуальной машины. Следующие команды необходимо выполнить непосредственно в консоли powershell виртуального сервера.
+
+Rename-Computer SRV2
+Remove-NetIPAddress -InterfaceAlias «Ethernet» -AddressFamily IPV4
+New-NetIPAddress -IPAddress 192.168.0.20 -InterfaceAlias «Ethernet» -AddressFamily IPv4 -PrefixLength 24
+Restart-Computer

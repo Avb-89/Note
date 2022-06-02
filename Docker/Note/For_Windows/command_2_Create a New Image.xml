@@ -1,0 +1,18 @@
+Create a New Image
+We can now build a new image using the previously downloaded Windows Server image as a starting point. Before starting, you’ll need a Docker ID. If you don’t already have one, sign up for a Docker account here.
+Sponsored
+Docker images are usually created from Docker file recipes, but for the purposes of the demonstration, we’ll run a command on the image we downloaded, create a new image based on the change, and then upload it to Docker so that it’s accessible from the cloud.
+
+Modify the image (Image Credit: Russell Smith)
+Notice in the command line below, the -t parameter gives the image a tag, enabling you to easily identify the image. Furthermore, pay special attention to the hyphen that appears after the tag name.
+
+# "FROM microsoft/windowsservercore `n CMD echo Hello World!" | docker build -t mydockerid/windows-test-image –
+
+Once Docker has finished building the new image, check the list of available images on the local server. You should see both microsoft/windowsservercore and mydockerid/windows-test-image in the list.
+
+# docker images
+
+List the images available on the local server (Image Credit: Russell Smith)
+Now run the new image in a container, not forgetting to replace mydockerid with your Docker ID name, and you should see Hello World! Appear in the output:
+
+# docker run mydockerid/windows-test-image

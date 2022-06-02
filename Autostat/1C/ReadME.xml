@@ -1,0 +1,104 @@
+Сервер 1с находится на сервере  1c-server.autostat.lan 
+```
+спецификация:
+MEM: 32Gb
+SWAP: 2Gb
+CPU: Intel(R) Xeon(R) CPU E5-2643 v2 @ 3.50GHz x 8
+
+Диски:
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               8:0    0   50G  0 disk
+|-sda1            8:1    0    1G  0 part /boot
+|-sda2            8:2    0   19G  0 part
+| |-centos-root 253:0    0   47G  0 lvm  /
+| `-centos-swap 253:1    0    2G  0 lvm  [SWAP]
+`-sda3            8:3    0   30G  0 part
+  `-centos-root 253:0    0   47G  0 lvm  /
+sdb               8:16   0   70G  0 disk
+`-sdb1            8:17   0   70G  0 part /DB_Stor
+sdc               8:32   0   40G  0 disk
+`-sdc1            8:33   0   40G  0 part /Backup
+ЗАМЕТЬ - 2раздела SDA2 и SDA3 обьеденены в один LVM раздел. Просто расширить sda2 система не дала. 
+```
+
+Там же находится postgresql10 версия 10.3-2.1C она была установлена вместе с 1с
+```
+                                             List of databases
+               Name               |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges
+----------------------------------+----------+----------+-------------+-------------+-----------------------
+ 001_Auto_Stat_2.0                | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 01_Auto_Stat                     | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 01_Auto_Stat_Test_UT             | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 01_Auto_Stat_test                | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 02_AutoKonsaltig_Copy            | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 02_Auto_Konsalting               | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 03_Kamin_5                       | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 04_Ok_Dealer                     | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 05_Price_Stat                    | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 06_Kamin                         | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 06_Kamin_Copy                    | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 07_Vostok_Invest_Info            | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 08_IP_Shvarcman                  | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 09_IP_Tikhonova.Lazarev          | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 10_Ypravlenie_torgovley          | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 11_Vip-Master_Tlt                | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 12_Autostat_Media                | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 14 ????? (?????? ????)           | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 20_Raboch_Basa_2_(Almira)        | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 21_Raboch.basa_8.2_(St)          | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 22_Test_base_Almira_for_Exchange | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 23_Test_base_ST_for_Exchenge     | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 33_Kamin5_Copy                   | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 96 Clear Base                    | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 96_Group_Company_2019            | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 97_Auto-Marketing_(old)          | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 98_AutoIndex                     | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99-1c-ut-copy                    | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99-a-media-test2-ut              | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99_A-Media_test_UT               | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99_AutoMarketolog                | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99_Auto_Konsalting_test_UT       | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ 99_Kamin_test_UT                 | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ Kamin5                           | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 | 
+ Kamin5_test                      | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ postgres                         | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 |
+ template0                        | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 | =c/postgres          +
+                                  |          |          |             |             | postgres=CTc/postgres 
+ template1                        | postgres | UTF8     | ru_RU.UTF-8 | ru_RU.UTF-8 | postgres=CTc/postgres+
+                                  |          |          |             |             | =c/postgres
+```
+
+Подключение к базам осущевствляется через клиент 1с который находится на сервере RDP-CRM.
+
+1c-server состояние cron:
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+
+# Выгрузка БД в будние дни в полночь
+00 00 * * 1 root /Backup/everyday-backup-pgsql.sh
+00 00 * * 2 root /Backup/everyday-backup-pgsql.sh
+00 00 * * 3 root /Backup/everyday-backup-pgsql.sh
+00 00 * * 4 root /Backup/everyday-backup-pgsql.sh
+00 00 * * 5 root /Backup/everyday-backup-pgsql.sh
+
+# Выгрузка БД каждое воскресенье в 00:30
+30 00 * * 7 root /Backup/everyweek-backup-pgsql.sh
+
+# Выгрузка БД каждое 1-ое число месяца в 01:00
+00 01 1 * * root /Backup/everymonth-backup-pgsql.sh
+
+# Исполнение срипта регламентных операций:
+00 02 * * * root /Backup/servis-everyday.sh

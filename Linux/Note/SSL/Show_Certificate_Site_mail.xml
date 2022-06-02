@@ -1,0 +1,24 @@
+Выяснить сертификат сервера:
+
+openssl s_client -connect airalab.org:443 -servername airalab.org -tlsextdebug
+
+Выдать сертификат с датой окончания
+ openssl s_client -connect serveradmin.ru:443 -servername serveradmin.ru -tlsextdebug 2>/dev/null | openssl x509 -noout -dates 2>/dev/null
+ 
+ 
+Выдать строчку только с окончанием сертификата
+ 
+openssl s_client -connect serveradmin.ru:443 -servername serveradmin.ru -tlsextdebug 2>/dev/null | openssl x509 -noout -dates 2>/dev/null | grep notAfter | cut -d'=' -f2
+
+
+
+
+
+
+
+
+Для почтового сервера
+
+вывод срок окончания сертификата
+
+openssl s_client -starttls smtp -connect mail.zeroxzed.ru:25 | openssl x509 -noout -dates 2>/dev/null | grep notAfter | cut -d'=' -f2

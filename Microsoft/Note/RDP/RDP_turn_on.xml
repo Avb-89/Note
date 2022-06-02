@@ -1,0 +1,21 @@
+RDP_включить
+Первая команда активирует галку "Разрешить удаленные подключения к этому компьютеру"
+(Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1)
+Вторая команда активирует галку "Разрешить подключение только с компьютеров, на которых работает удаленный рабочий стол с проверкой подлинности на уровне сети"
+(Get-WmiObject -Class "Win32_TSGeneralSetting" -Namespace root\cimv2\TerminalServices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)
+Третья команда, включает правило в Брандмауэре
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+
+Попробовать:
+1. Войти в сессию на удаленном компе
+Enter-PSSession -ComputerName SRV4
+2. Включить RDP
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+
+Возможно нужно ещё это, но мне хватило верхнего пункта
+2) Allow incoming RDP on firewall
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+3) Enable secure RDP authentication
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1

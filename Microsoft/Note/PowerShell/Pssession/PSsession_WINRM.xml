@@ -1,0 +1,7 @@
+﻿
+С мащины с которой подключаемся пишем:
+Enable-PSremoting -Force
+winrm s winrm/config/client '@{TrustedHosts="SRV"}'
+winrm quickconfig
+
+Enter-Pssesion -Computername SRV -Credential Administrator

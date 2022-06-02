@@ -1,0 +1,37 @@
+Работает только в powershell
+============================================================================================
+
+
+PS C:\> Resolve-DnsName www.google.ru
+
+Name                                           Type   TTL   Section    IPAddress
+----                                           ----   ---   -------    ---------
+www.google.ru                                  AAAA   39    Answer     2a00:1450:4001:821::2003
+www.google.ru                                  A      39    Answer     172.217.16.195
+
+PS C:\> Resolve-DnsName 216.58.205.227
+
+Name                           Type   TTL   Section    NameHost
+----                           ----   ---   -------    --------
+227.205.58.216.in-addr.arpa    PTR    21599 Answer     fra15s24-in-f227.1e100.net
+227.205.58.216.in-addr.arpa    PTR    21599 Answer     fra15s24-in-f3.1e100.net
+============================================================================================
+Работает везде
+============================================================================================
+PS C:\> nslookup www.google.ru
+Server:  google-public-dns-a.google.com
+Address:  8.8.8.8
+
+Non-authoritative answer:
+Name:    www.google.ru
+Addresses:  2a00:1450:4001:811::2003
+          216.58.205.227
+		  
+PS C:\> nslookup 216.58.205.227
+Server:  google-public-dns-a.google.com
+Address:  8.8.8.8
+
+Name:    fra15s24-in-f227.1e100.net
+Address:  216.58.205.227
+
+============================================================================================

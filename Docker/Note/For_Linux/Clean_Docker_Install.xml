@@ -1,0 +1,15 @@
+1) Устанавливаем ОС (CentOS)
+1.1) настраиваем сеть yum install net-tools
+ifconfig.
+1.2) настраиваем доступ к сетевым папкам «yum install cifs-utils».
+
+2) install Docker
+# yum install docker
+# systemctl enable docker.service
+# systemctl start docker.service
+
+3) install docker-compose
+# yum install epel-release
+# yum install -y python-pip
+# pip install docker-compose
+# yum upgrade python*

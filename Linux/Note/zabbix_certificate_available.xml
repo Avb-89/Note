@@ -1,0 +1,89 @@
+Создаем папку для скриптов в директории с настройками zabbix:
+
+# mkdir /etc/zabbix/scripts
+Первым делом создадим 2 текстовых файла для хранения списков доменов.
+
+# touch /etc/zabbix/scripts/ssl_https.txt /etc/zabbix/scripts/ssl_smtp.txt
+В эти файлы необходимо добавить домены по одному на каждую строку. Дальше добавляем скрипты для автообнаружения этих доменов и передачи в zabbix.
+
+# mcedit /etc/zabbix/scripts/disc_ssl_https.sh
+#!/bin/bash
+
+JSON=$(for i in `cat /etc/zabbix/scripts/ssl_https.txt`; do printf "{\"{#DOMAIN_HTTPS}\":\"$i\"},"; done | sed 's/^\(.*\).$/\1/')
+printf "{\"data\":["
+printf "$JSON"
+printf "]}"
+# mcedit /etc/zabbix/scripts/disc_ssl_smtp.sh
+#!/bin/bash
+
+JSON=$(for i in `cat /etc/zabbix/scripts/ssl_smtp.txt`; do printf "{\"{#DOMAIN_SMTP}\":\"$i\"},"; done | sed 's/^\(.*\).$/\1/')
+printf "{\"data\":["
+printf "$JSON"
+printf "]}"
+
+# mcedit /etc/zabbix/scripts/disc_ssl_smtp.sh
+#!/bin/bash
+
+JSON=$(for i in `cat /etc/zabbix/scripts/ssl_smtp.txt`; do printf "{\"{#DOMAIN_SMTP}\":\"$i\"},"; done | sed 's/^\(.*\).$/\1/')
+printf "{\"data\":["
+printf "$JSON"
+printf "]}"
+Делаем эти файлы исполняемыми:
+
+# cd /etc/zabbix/scripts
+# chmod 0740 disc_ssl_https.sh disc_ssl_smtp.sh
+Для проверки достаточно выполнить один из скриптов. На выходе должен быть вывод списка доменов в формате JSON.
+
+{"data":[{"{#DOMAIN_HTTPS}":"serveradmin.ru"}]}
+Если доменов несколько, то они перечисляются через запятую.
+
+Пишем скрипты, которые будут определять, сколько дней осталось до окончания срока действия сертификата. За основу они будут брать ту дату, что мы выводили на предыдущем шаге.
+
+# mcedit /etc/zabbix/scripts/check_ssl_https.sh
+#!/bin/bash
+
+SERVER=$1
+TIMEOUT=25
+RETVAL=0
+TIMESTAMP=`echo | date`
+EXPIRE_DATE=`echo | openssl s_client -connect $SERVER:443 -servername $SERVER -tlsextdebug 2>/dev/null | openssl x509 -noout -dates 2>/dev/null | grep notAfter | cut -d'=' -f2`
+EXPIRE_SECS=`date -d "${EXPIRE_DATE}" +%s`
+EXPIRE_TIME=$(( ${EXPIRE_SECS} - `date +%s` ))
+if test $EXPIRE_TIME -lt 0
+then
+RETVAL=0
+else
+RETVAL=$(( ${EXPIRE_TIME} / 24 / 3600 ))
+fi
+
+echo ${RETVAL}
+# mcedit /etc/zabbix/scripts/check_ssl_smtp.sh
+#!/bin/bash
+
+SERVER=$1
+TIMEOUT=25
+RETVAL=0
+TIMESTAMP=`echo | date`
+EXPIRE_DATE=`echo | openssl s_client -starttls smtp -connect $SERVER:25 2>/dev/null | openssl x509 -noout -dates 2>/dev/null | grep notAfter | cut -d'=' -f2`
+EXPIRE_SECS=`date -d "${EXPIRE_DATE}" +%s`
+EXPIRE_TIME=$(( ${EXPIRE_SECS} - `date +%s` ))
+if test $EXPIRE_TIME -lt 0
+then
+RETVAL=0
+else
+RETVAL=$(( ${EXPIRE_TIME} / 24 / 3600 ))
+fi
+
+echo ${RETVAL}
+Делаем скрипты исполняемыми:
+
+# chmod 0740 check_ssl_https.sh check_ssl_smtp.sh
+Проверить работу скриптов можно вот так:
+
+# /etc/zabbix/scripts/check_ssl_https.sh serveradmin.ru
+66
+# /etc/zabbix/scripts/check_ssl_smtp.sh mail.zeroxzed.ru
+87
+Не забывайте подставлять значения своих доменов, чтобы наверняка быть уверенными в том, что они нормально отдают сертификаты. На выходе у вас должна быть только цифра с количеством дней актуальности ssl сертификата. Больше ничего. Это важно, иначе заббикс сервер будет выдавать ошибку.
+
+Связываем все наши скрипты с самим zabbix.

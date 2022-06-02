@@ -1,0 +1,74 @@
+**Установка заббикс**
+
+*Для начала нужно настроить окружение (вэб сервер, бд, php)*
+
+    # apt-get update
+    # apt-get install apache2
+    # apt-get install mysql-server
+    # apt-get install php php-cli php-common php-mysql
+
+*необходимо настроить правильный часовой пояс в php.ini. Вам нужна секция Data и строка timezone:*
+*их может быть несколько:
+./etc/php/7.2/apache2/php.ini
+./etc/php/7.2/cli/php.ini
+Редактировать надо apache2*
+
+    [Date]
+    date.timezone = 'Europe/Samara'
+
+*скачать и установить заббикс, найти его можно тут http://repo.zabbix.com/zabbix/*
+
+    *скачать заббикс*
+    # wget https://repo.zabbix.com/zabbix/4.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_4.0-2+bionic_all.deb
+    *добавить в репы*
+    # dpkg -i zabbix-release_4.0-2+bionic_all.deb
+    # apt update
+    *Устновить сервер и интерфейс*
+    # apt-get install zabbix-server-mysql zabbix-frontend-php
+
+*Настройка mysql:*
+
+    *Зайдем в консоль mysql*
+    mysql -u root -p
+    *создадим БД*
+    mysql> CREATE DATABASE zabbixdb;
+    *настроим кодировку бд*
+    mysql> ALTER DATABASE zabbixdb CHARACTER SET utf8 COLLATE utf8_general_ci;
+    *настроить права на базу для пользователя*
+    mysql> GRANT ALL on zabbixdb.* to zabbix@localhost IDENTIFIED BY 'password';
+    mysql> FLUSH PRIVILEGES;
+
+*Теперь нужно загрузить все таблицы в бд:*
+
+    zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz | mysql -u root -p zabbixdb
+
+*Настройка подключения к бд заббиксом*
+
+    nano /etc/zabbix/zabbix_server.conf
+
+    DBHost=localhost
+    DBName=zabbixdb
+    DBUser=zabbix
+    DBPassword=password
+
+*Рестартим службы*
+
+    # service apache2 restart
+    # service zabbix-server restart
+
+*установка и Настройка агента*
+
+    # apt-get install zabbix-agent
+    *Редактируем файл*
+
+    # nano /etc/zabbix/zabbix_agentd.conf
+
+    Server=localhost (указываем имя или ip сервера)
+    Hostname=Zabbix
+
+    # service zabbix-agent restart
+
+*Логин и пароль для входа*
+
+    Admin
+    zabbix

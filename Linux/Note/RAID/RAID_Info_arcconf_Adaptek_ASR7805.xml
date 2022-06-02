@@ -1,0 +1,7 @@
+./arcconf getstatus - узнать статус выполняемых операций в данный моммент 
+./arcconf getconfig 1 LD 0 - увидеть Logical Device number 0 
+./arcconf getconfig 1 AD - увидеть Adapter information  
+./arcconf getconfig 1 PD - увидеть Physical Device information 
+./arcconf getconfig 1 pd 0 0\9 -увидеть диски в рейде по одному 
+./arcconf SETALARM 1 silence - ОТЛЮЧИТЬ ЗВУК 
+arcconf failover 1 on\off - вкл\выкл отказоустойчивость дисков в рейде.

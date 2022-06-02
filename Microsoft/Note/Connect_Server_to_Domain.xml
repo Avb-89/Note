@@ -1,0 +1,1 @@
+Add-Computer -DomainName dmosk.local -Credential dmosk\kdo

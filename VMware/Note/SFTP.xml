@@ -1,0 +1,19 @@
+Требоваллось передать файл в ESXI без использования консоли.
+
+использовал Cygwin для линухового окружения
+SFTP:
+PS:> sftp root@192.168.4.16
+ввел пароль
+sftp> cd vmfs
+sftp> cd volumes
+sftp> cd DATA # так называется мой диск
+sftp> cd ISO
+для виндовых путей нужно использовать \\
+sftp> put C:\\Torrents\\ubuntu.iso
+Uploading C:\Torrents\ubuntu.iso to /vmfs/volumes/5a7456a8-9ccc5561-cf90-10bf4820570a/ubuntu.iso
+C:\Torrents\ubuntu.iso                                                                 64%  929MB   4.7MB/s   01:46 ETA
+
+sftp> get -R MSSRV2016/ E:\\ISO\\
+Fetching /vmfs/volumes/5a7456a8-9ccc5561-cf90-10bf4820570a/ISO/MSSRV2016/ to E:\ISO\/MSSRV2016
+Retrieving /vmfs/volumes/5a7456a8-9ccc5561-cf90-10bf4820570a/ISO/MSSRV2016
+/vmfs/volumes/5a7456a8-9ccc5561-cf90-10bf4820570a/ISO/MSSRV2016/en_microsoft_hyper-v_server_2016_x64_dvd_9718828.iso              100% 2696MB   5.5MB/s   08:09

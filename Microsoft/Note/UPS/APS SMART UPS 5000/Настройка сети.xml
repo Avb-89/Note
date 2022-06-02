@@ -1,0 +1,27 @@
+http://www.apc.com/us/en/faqs/FA156064/#Terminal
+
+Подключаться к сетевой плате в дырку Console проводом 940-0299 (выглядит: С одной стороны мама COM port с другой стороны pin 2,5mm)
+
+
+Network Management Card 2 (AP9630, AP9631) and related accessories require different configuration settings in order to be configured locally.
+
+In order to connect to one of these cards, you must use the 940-0299 Tip, Ring Sleeve (TRS) to DB9 cable and connect it directly to the NMC2 into the 2.5mm jack labeled "console" rather than the UPS serial port.
+Within a UPS, the NMC2 devices communicate with the following port settings:
+9600 bps, 8 data bits, no parity, 1 stop bit, and no flow control.
+Apply the port settings to establish the connection.
+Press enter 3-5 times to display the username prompt.
+Use the default username and password of  "apc"
+ 
+You are now in the command line control console.
+ 
+Type help or ? to display all available commands.
+Use the tcpip command to configure manual network settings to assign manual IP settings. The tcpip command automatically changes your boot mode to manual once you submit it. It is necessary to issue a reboot command immediately after assigning your manual settings. Text in italics indicates a variable. For each variable, type a numeric value that has the format xxx.xxx.xxx.xxx.
+ 
+apc> tcpip -i yourIPaddress -s yourSubnetMask -g yourDefaultGateway
+apc> reboot
+
+
+
+Example:
+apc> tcpip -i 159.216.45.39 -s 255.255.254.0 -g 159.216.45.1
+apc> reboot

@@ -1,0 +1,208 @@
+Отказоустойчивая система на базе репликации mySQL и сетевого протокола CARP
+MySQL
+Из песочницы
+И так задача.
+Есть 2 сервера: 1 — Master, 2 — Slave. Нужно сконфигурировать отказоустойчивую систему, которая позволит в случае падения 1го сервера и/или базы данных, автоматически переключиться на 2й при минимальном downtime. После восстановлении Мастера, он должен стать слейвом, а Слейв — Мастером. ОС FreeBSD.
+
+Немного про «рыбу».
+
+Для начала разберемся с САRP
+CARP (от англ. Common Address Redundancy Protocol — протокол дупликации общего адреса) — сетевой протокол, основной задачей которого является использование одного IP-адреса несколькими хостами в пределах сегмента сети. // взято из википедии
+
+## 192.168.10.1 — Мастер 1
+## 192.168.10.2 — Slave 2
+
+1. Добавим carp в конфигурацию и пересоберем ядро.
+
+master1# ee /usr/src/sys/i386/conf/MYKERNEL
+device carp # Common Address Redundancy Protocol
+master1# cd /usr/src/
+master1# make biuldkernel KERNCONF=MYKERNEL
+master1# make installkernel KERNCONF=MYKERNEL
+
+// На 2м сервере делаем тоже самое.
+
+2. Далее на Master1 добавим в /etc/rc.conf записи:
+
+master1# ee /etc/rc.conf
+
+## Configure CARP
+cloned_interfaces=«carp0»
+ifconfig_carp0=«vhid 1 advskew 100 pass seCret 192.168.10.3/24»
+
+#vhid — это номер группы, в которой работает интерфейс.
+#pass — это пароль для аутентификации в группе.
+#advskew — это приоритет, чем меньше, тем главнее.
+#192.168.10.3/24 — это будет общий айпишник.
+
+На втором сервере (Пускай условно называется Slave2) добавим в /etc/rc.conf записи:
+
+slave2# ee /etc/rc.conf
+
+## Configure CARP
+cloned_interfaces=«carp0»
+ifconfig_carp0=«vhid 1 advskew 200 pass seCret 192.168.10.3/24»
+
+3. Далее на обоих машинах выставляем опцию sysctl
+
+master1# sysctl net.inet.carp.preempt=1
+slave2# sysctl net.inet.carp.preempt=1
+
+Добавим на обоих серверах в /etc/sysctl.conf данную опцию:
+net.inet.carp.preempt=1
+
+#Посылает сигнал отключения интерфейсов carp, при штатном отключении системы.
+
+4. Перезагружаем сервера. После ребута делаем
+ifconfig carp0 на мастер системе:
+
+carp0: flags=49 metric 0 mtu 1500
+inet 192.168.10.3 netmask 0xffff0000
+carp: MASTER vhid 1 advbase 1 advskew 100
+
+делаем ifconfig carp0 на слейв системе:
+
+carp0: flags=49 metric 0 mtu 1500
+inet 192.168.10.3 netmask 0xffff0000
+carp: BACKUP vhid 1 advbase 1 advskew 200
+
+С «рыбой» закончили, перейдем к настройке репликации.
+
+Настройка репликации
+
+
+Достаточно детально про mySQL репликацию описано тут, так что сразу перейдем к настройке.
+
+На обоих серверах установим mySQL из портов.
+
+Master1# cd /usr/ports/databases/mysql55-server
+Master1# make install clean && rehash
+
+Скопируем из примеров конфиг
+Master1# cp /usr/local/share/mysql/my-huge.cnf /etc/my.cnf
+
+1. Открываем конфиг /etc/my.cnf на Мастере1 и добавляем
+в секцию [mysqld]
+
+## Master 1
+auto_increment_increment = 2
+auto_increment_offset = 1
+server-id = 1
+relay-log = mysql-relay-bin
+log_slave_updates = 1
+skip_slave_start
+relay-log-space-limit = 1G
+log-bin = mysql-bin
+
+2. На Слейв2 добавляем в конфиг /etc/my.cnf
+
+## Master 2
+auto_increment_increment = 2
+auto_increment_offset = 2
+log-bin = mysql-bin
+server-id = 2
+relay-log = mysql-relay-bin
+log_slave_updates = 1
+skip_slave_start
+relay-log-space-limit = 1G
+
+// Конечно, для оптимизации работы mySQL с конфигами потребуется поработать «напильником». Кто очень ленивый, или не хочет вдаваться в тонкости конфига то можно оставить дефолтный. Но я бы Вам предложил воспользоваться достаточно удобным сервисом tools.percona.com от Percona Server по формированию конфигов, кстате, можно и саму перкону использовать вместо mySQL-server.
+
+3. Запускаем mysql
+/usr/local/etc/rc.d/mysql-server start
+Starting mysql.
+
+3. Входим в mysql на Мастере1:
+mysql@master1> show master status;
++------------------+----------+--------------+------------------+
+| File | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| mysql-bin.000001 | 499 | | |
++------------------+----------+--------------+------------------+
+1 row in set (0.00 sec)
+
+4. Входим в mysql на Слейв2:
+mysql@slave2> show master status;
++------------------+----------+--------------+------------------+
+| File | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| mysql-bin.000002 | 499 | | |
++------------------+----------+--------------+------------------+
+1 row in set (0.00 sec)
+
+5. Входим в mysql на мастере1 и добавляем юзеров:
+
+mysql@master1> GRANT REPLICATION SLAVE ON *.* TO repl@192.168.10.1 IDENTIFIED BY 'replpass';
+mysql@master1> GRANT REPLICATION SLAVE ON *.* TO repl@192.168.10.2 IDENTIFIED BY 'replpass';
+mysql@master1> FLUSH PRIVILEGES;
+
+6. Аналогично на slave2:
+
+mysql@slave2> GRANT REPLICATION SLAVE ON *.* TO repl@192.168.10.1 IDENTIFIED BY 'replpass';
+mysql@slave2> GRANT REPLICATION SLAVE ON *.* TO repl@192.168.10.2 IDENTIFIED BY 'replpass';
+mysql@slave2> FLUSH PRIVILEGES;
+
+7. На slave2:
+mysql@slave2> CHANGE MASTER TO MASTER_HOST = «192.168.10.1», MASTER_USER = «repl», MASTER_PASSWORD = «replpass», MASTER_LOG_FILE = «mysql-bin.000001», MASTER_LOG_POS = 499;
+
+mysql@slave2> start slave;
+
+8. На Мастере1:
+mysql@master1> CHANGE MASTER TO MASTER_HOST = «192.168.10.2», MASTER_USER = «repl», MASTER_PASSWORD = «replpass», MASTER_LOG_FILE = «mysql-bin.000002», MASTER_LOG_POS = 499;
+
+mysql@master1> start slave;
+
+9. На обоих мастерах делаем:
+mysql@master1> show slave status\G
+
+Нужная нам информация — это Slave_IO_Running и Slave_SQL_Running
+
+Slave_IO_Running: Yes
+Slave_SQL_Running: Yes
+
+Ура. Мастер — Мастер репликация готова.
+
+Скрипт
+
+На данный момент, связка почти готова, остался один момент.
+Если Мастер1 упадет по сети, то средствами CARP пассивный Слейв2 станет активным Мастером. Теперь нужно научить «рыбу» делать с пассивного Слейв -> активного Мастера если упадет БД.
+
+Напишем простенький скрипт.
+
+Slave2# cd /tmp
+Slave2# touch switch_script.sh && chmod +x switch_script.sh
+Slave2# ee switch_script.sh
+
+#!/bin/sh
+
+HOST1='192.168.10.1';   # master on server1
+HOST2='192.168.10.2';   # slave  on server2
+GENERAL='192.168.10.3'; # General IP-adress
+
+MYSQL='/usr/local/bin/mysql'
+
+# Create infinite loop
+x=1
+while [ $x -le 5 ];	do
+	${MYSQL} -s -h${HOST1} -urepl -preplpass --connect-timeout=10 -e 'SELECT VERSION()' > /dev/null
+	out=$?
+		if [ $out -eq 0 ]; then
+			echo "server ${HOST1} is OK"
+			sleep 60 		# delay 1 min
+		else
+   			/usr/local/bin/mysqladmin stop-slave
+			/sbin/ifconfig carp0 ${GENERAL} vhid 1 advskew 50
+			echo "FAILED, cannot connect to mySQL"
+			echo "This host ${HOST2} became a MASTER "
+			exit 0
+		fi
+done
+
+
+Запускаем скрипт:
+Slave2# ./switch_script.sh
+
+Подведем итоги.
+
+У нас получилась достаточно простая, но при этом эффективная отказоустойчивая система на базе mySQL Mater-Master (Active-Passive) репликации и сетевого протокола CARP.
+Спасибо за внимание.

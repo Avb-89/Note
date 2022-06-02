@@ -1,0 +1,6 @@
+Узнать стоит ли сервис в автозагрузке:
+$ systemctl is-enabled SERVICE
+Убрать сервис из автозагрузки в Ubuntu-16.04:
+$ sudo systemctl disable SERVICE
+Добавить сервис в автозагрузку в Ubuntu-16.04:
+$ sudo systemctl enable SERVICE

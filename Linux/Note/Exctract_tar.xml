@@ -1,0 +1,2 @@
+# tar -xvzf archive.tar.gz
+# tar -xpJf archive.tar.xz

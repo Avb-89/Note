@@ -1,0 +1,9 @@
+
+Для загрузки Image используем Rufus:
+
+boot selection - выбираем ISO
+Partition Scheme - GPT
+Target system UEFI
+filesystem NTFS
+ClusterSize 4096
+Write DD image

@@ -1,0 +1,42 @@
+
+**Получить список команд для настройки TCP/IP**
+
+        Get-Command -Module NetTCPIP
+
+**Получить список твоих адаптеров:**
+
+        Get-NetAdapter
+
+**Настроить DHCP на сетевой карте Ethernet**
+
+        Get-NetAdapter Ethernet | Set-NetIPInterface -Dhcp Enabled
+
+**Сбросить настройки DNS**
+
+        Get-NetAdapter Ethernet | Set-DnsClientServerAddress -ResetServerAddresses
+
+
+   =============================================================================
+**Перенастроить для группы карт по маске (Например для карт виртуальных машин)**
+
+        $NetAdapter = Get-NetAdapter -Name '*internal*'
+        $NetAdapter | Set-NetIPInterface -Dhcp Enabled
+        $NetAdapter | Set-DnsClientServerAddress -ResetServerAddresses
+
+   =============================================================================
+
+**Дать статический IP адрес**
+
+        Get-NetAdapter Ethernet | New-NetIPAddress -IPAddress 172.20.0.100 -PrefixLength 24 -DefaultGateway 172.20.0.1
+
+**Дать Статический DNS**
+
+        Get-NetAdapter Ethernet | Set-DnsClientServerAddress -ServerAddresses 172.20.0.8,172.20.0.9
+
+**Удалить статический IP адрес**
+
+       Get-NetAdapter Ethernet  | Remove-NetIPAddress
+
+**Удалить шлюз**
+
+        Get-NetAdapter Ethernet | Remove-NetRoute -DestinationPrefix 0.0.0.0/0

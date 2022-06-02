@@ -1,0 +1,21 @@
+server {
+  server_name localhost;
+  listen 127.0.0.1:80;
+  root/var/www/localhost;
+  index index.php;
+    location / {
+      index index.html index.php;
+    }
+location ~ \.php$
+    {
+    include fastcgi_params;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME
+$document_root$fastcgi_script_name;
+
+  }
+location ~*\.(gif|jpg|png)$ {
+          root/var/www/localhost;
+        expires 30d;
+        }
+}

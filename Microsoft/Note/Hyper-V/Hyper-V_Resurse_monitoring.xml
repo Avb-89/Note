@@ -1,0 +1,18 @@
+﻿
+ Включить использование ресурсного пула
+ #Enable-VMResourceMetering -ComputerName VM001 -VMName VM01
+
+Показывает Сколько ресурсов потребляет машина
+# Measure-VM -ComputerName VM001 -VMName VM01
+
+Для полной информации используй ключ | fl
+# Measure-VM -ComputerName VM001 -VMName VM01 | fl
+
+Выбрать информацию по использованию жесткого диска
+# Measure-VM -ComputerName VM001 -VMName VM01 |select -Expand Harddiskmetrics
+
+Выбрать информацию по использованию Сети
+#Measure-VM -ComputerName VM001 -VMName VM01 |select -Expand NetworkMeteredtrafficreport
+
+Включить защиту ресурсов (это значит что машина не сможет выжрать ресурсы на хосте чтобы тот завис)
+# Set-VMProcessor -ComputerName VM001 -VMName VM01 -EnableHostResourceProtection $True

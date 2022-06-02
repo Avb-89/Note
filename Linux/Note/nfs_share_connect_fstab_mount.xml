@@ -1,0 +1,32 @@
+<Монтирование NFS шары> 
+=================================
+
+Монтирование командой:
+
+$ sudo mount -t nfs -O uid=1000,iocharset=utf-8 192.168.10.108:/volume1/BackupLinux /media/BackupLinux/
+Этот способ "одноразовый" при перезагрузки придется запускать еще раз.
+
+если ошибка:
+
+mount: wrong fs type, bad option, bad superblock on 192.168.10.108:/volumeSATA/satashare/1C/1C_bases_backup,
+       missing codepage or helper program, or other error
+       (for several filesystems (e.g. nfs, cifs) you might
+       need a /sbin/mount.<type> helper program)
+
+$ sudo yum install nfs-utils
+or
+$ sudo apt-get install nfs-common
+
+
+
+Монтирование чтобы поднималось при запуске системы:
+
+в файле /etc/fstab пишем:
+
+(ЧТО)											(КУДА)            (КАК)         (Доп ерунда, читай man fstab)
+192.168.10.108:/volume1/BackupLinux       /media/BackupLinux/     nfs     defaults        0 0
+</=================================>
+
+
+
+

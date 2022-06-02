@@ -1,0 +1,258 @@
+﻿<# Notes:
+
+Author - Greg Shields
+
+Goal - Create a domain controller and populate with OUs, Groups, and Users.
+
+This script must be run after prepDomainController.ps1.
+
+Disclaimer - This example code is provided without copyright and AS IS.  It is free for you to use and modify.
+
+#>
+
+<#
+Specify the configuration to be applied to the server.  This section
+defines which configurations you're interested in managing.
+#>
+
+configuration buildDomainController  (название конфигурации)
+{
+    Import-DscResource -ModuleName xComputerManagement -ModuleVersion 3.2.0.0 (Скачиваем модули с версиями
+    Import-DscResource -ModuleName xNetworking -ModuleVersion 5.4.0.0          не ниже указанного
+    Import-DscResource -ModuleName xDnsServer -ModuleVersion 1.9.0.0           каждая версия хранит в себе
+    Import-DscResource -ModuleName xActiveDirectory -ModuleVersion 2.16.0.0    разные возможности)
+
+    Node localhost  (Имя компьютера на котором устанавливаем)
+    {
+        LocalConfigurationManager {                          (отвечает за синтаксический анализ и применение конфигурации)
+            ActionAfterReboot = "ContinueConfiguration"      (Что делать после перезагрузки)
+            ConfigurationMode = "ApplyOnly"                  (Указывает образом принимать изменения ApplyOnly, ApleAndMonitor, AppleAndAutoCorrect)
+            RebootNodeIfNeeded = $true                       (Перезагрузить Компьютер если нужно $true, $false)
+        }
+  
+        xIPAddress NewIPAddress {                            (Конфигурация IP адреса, Имя может быть любым)
+            IPAddress = $node.IPAddressCIDR                  (Желаемый IP Адрес. Тут указана ссылка на данные внизу скрипта)
+            InterfaceAlias = $node.InterfaceAlias            (Имя адаптера. Указана ссылка на данные внизу скрипта) 
+            AddressFamily = "IPV4"                           (Какой протокол использовать "IPV4" и "IPV6")
+        }
+
+        xDefaultGatewayAddress NewIPGateway {                (Конфигурация шлюза. Имя может быть любым)
+            Address = $node.GatewayAddress                   (IP Адрес шлюза. Указана ссылка на данные внизу скрипта)
+            InterfaceAlias = $node.InterfaceAlias            (Имя адаптера. Указана ссылка на данные внизу скрипта)
+            AddressFamily = "IPV4"                           (Используемы протокол "IPV4" и "IPV6")
+            DependsOn = "[xIPAddress]NewIPAddress"           (Зависимость. Указывает что перед настройкой нужно настроить другой ресурс")
+        }
+
+        xDnsServerAddress PrimaryDNSClient {                 (Конфигурация DNS. Имя может быть любым)
+            Address        = $node.DNSAddress                (Адрес DNS. Указана ссылка на данные внизу скрипта)
+            InterfaceAlias = $node.InterfaceAlias            (Имя Адаптера. Указана ссылка на данные внизу скрипта)
+            AddressFamily = "IPV4"                           (Используемый протокл "IPV4" и "IPV6")
+            DependsOn = "[xDefaultGatewayAddress]NewIPGateway" (Зависимость. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        User Administrator {                                 (Указываем пользователя. Имя может быть любым)
+            Ensure = "Present"                               (Указывает существует ли учетная запись. "Present" да "Absent" нет)
+            UserName = "Administrator"                       (Указывает имя пользователя)
+            Password = $Cred                                 (Указывает пароль. $Cred нужно чтобы спросил какой пароль использовать -см.низ скрипта)
+            DependsOn = "[xDnsServerAddress]PrimaryDNSClient"(Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xComputer NewComputerName {                          (Указываем имя компа, домен или раб группу. Имя может быть любым)
+            Name = $node.ThisComputerName                    (Указывает Имя Компа, Указывает что перед настройкой нужно настроить другой ресурс)
+	    DomainName = "AnyDomain.loc"                     (Указывает имя домена, РАЗОБРАТЬСЯ!!!!!!!!!!!!!!!!!!!!!!)
+	    WorkGroupName = "WorkGroup"
+            DependsOn = "[User]Administrator"                (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        WindowsFeature DNSInstall { 			     (предоставляет механизм добавления и удаления ролей и компонентов)
+            Ensure = "Present"				     (Указывает существует ли компонент. "Present" да "Absent" нет)
+            Name = "DNS"				     (Указывает имя компонента)
+            DependsOn = "[xComputer]NewComputerName"	     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xDnsServerPrimaryZone addForwardZoneCompanyPri {     (первичная зона для DNS-сервера)
+            Ensure = "Present"				     (Указывает существует ли зона "Present" да "Absent" нет)
+            Name = "company.pri"			     (Указывает имя зоны)
+            DynamicUpdate = "NonsecureAndSecure"	     (Указывает, как зона принимает динамические обновления. 
+							      Серверы, которые принимают динамические обновления, 
+							      могут получать запросы на регистрацию клиентов. 
+							      Допустимыми значениями для этого параметра являются:
+							      "None" - не принимать диначические обновления
+						              "Secure" - принимает обновления только от членов ActiveDirectory
+							      "NonsecureAndSecure" - принимает обновления от всех членов в сети.
+
+
+)
+            DependsOn = "[WindowsFeature]DNSInstall"		(Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+                                                             "Производится настройка Reverse Lookup Zone"
+        xDnsServerPrimaryZone addReverseADZone3Net {	     (первичная зона для DNS-сервера)
+            Ensure = "Present"                               (Указывает существует ли зона "Present" да "Absent" нет)
+            Name = "3.168.192.in-addr.arpa"                  (Указывает имя зоны)
+            DynamicUpdate = "NonsecureAndSecure"             (Указывает, как зона принимает динамические обновления)
+            DependsOn = "[WindowsFeature]DNSInstall"         (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xDnsServerPrimaryZone addReverseADZone4Net {	     (первичная зона для DNS-сервера)
+            Ensure = "Present"                               (Указывает существует ли зона "Present" да "Absent" нет)
+            Name = "4.168.192.in-addr.arpa"                  (Указывает имя зоны)
+            DynamicUpdate = "NonsecureAndSecure"             (Указывает, как зона принимает динамические обновления)
+            DependsOn = "[WindowsFeature]DNSInstall"         (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xDnsServerPrimaryZone addReverseADZone5Net {	     (первичная зона для DNS-сервера)
+            Ensure = "Present"                               (Указывает существует ли зона "Present" да "Absent" нет)
+            Name = "5.168.192.in-addr.arpa"                  (Указывает имя зоны)
+            DynamicUpdate = "NonsecureAndSecure"             (Указывает, как зона принимает динамические обновления)
+            DependsOn = "[WindowsFeature]DNSInstall"         (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        WindowsFeature ADDSInstall {			     (Установка ActiveDirectoryDomainServices)
+            Ensure = "Present"				     (Указывает существует ли данный компонент)
+            Name = "AD-Domain-Services"			     (Указывает имя компонента)
+            DependsOn = "[xDnsServerPrimaryZone]addForwardZoneCompanyPri" (Зависимоть. Указывает что перед настройкой,
+										 нужно настроить другой ресурс)
+        }
+
+        xADDomain FirstDC { 				     (xADDomain командаплет блока который добавляет домен имя может быть любым)
+            DomainName = $node.DomainName 		     (Указывает имя домена. Сейчас стоит алиас)
+            DomainAdministratorCredential = $domainCred      (Учетные данные, которые будут  в новом домене)
+            SafemodeAdministratorPassword = $domainCred      (Пароль учетной записи администратора для ввостановления)
+            DatabasePath = $node.DCDatabasePath              (Путь к БД Актив Директори)
+            LogPath = $node.DCLogPath                        (Путь к логам этой базы)
+            SysvolPath = $node.SysvolPath                    (Путь к Sysvol) РАЗОБРАТЬСЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            DependsOn = "[WindowsFeature]ADDSInstall"        (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADUser myaccount {				     (xADuser командаплет блока который добаляет пользователя. Имя может быть любым)
+            DomainName = $node.DomainName		     (Имя домена в котором мы будем создавать пользователя)
+            Path = "CN=Users,$($node.DomainDN)"		     (Путь к папке которая находится в 'Users and Computers')       
+            UserName = "myaccount"			     (Логин нового пользователя имя может быть любым)               
+            GivenName = "My"				     (Реальное имя)
+            Surname = "Account"				     (Фамилия)
+            DisplayName = "My Account"                       (Имя для отображения на экране)
+            Enabled = $true	                             (Отключен пользователь или нет $True-включен $False-отключен)
+            Password = $Cred 				     (Пароль дожн содержать не менее 8 символов и содержать заглавные строчные и цифры)
+            DomainAdministratorCredential = $Cred            (Учетные данные которые используются для создания пользователя. Обычно Администратор домена)
+            PasswordNeverExpires = $true 		     ($true-Пароль никогда не истекает $false - пароль истекает через заданные время)
+            DependsOn = "[xADDomain]FirstDC" 		     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADUser gshields { 				     (xADuser командаплет блока который добаляет пользователя. Имя может быть любым)
+            DomainName = $node.DomainName                    (Имя домена в котором мы будем создавать пользователя)
+            Path = "CN=Users,$($node.DomainDN)"              (Путь к папке которая находится в 'Users and Computers')
+            UserName = "gshields"                            (Логин нового пользователя имя может быть любым)
+            GivenName = "Greg"                               (Реальное имя)
+            Surname = "Shields"                              (Фамилия)
+            DisplayName = "Greg Shields"                     (Имя для отображения на экране)
+            Enabled = $true                                  (Отключен пользователь или нет $True-включен $False-отключен)
+            Password = $Cred                                 (Пароль дожн содержать не менее 8 символов и содержать заглавные строчные и цифры)
+            DomainAdministratorCredential = $Cred            (Учетные данные которые используются для создания пользователя. Обычно Администратор домена)
+            PasswordNeverExpires = $true                     ($true-Пароль никогда не истекает $false - пароль истекает через заданные время)
+            DependsOn = "[xADDomain]FirstDC"                 (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADUser djones {				     (xADuser командаплет блока который добаляет пользователя. Имя может быть любым)
+            DomainName = $node.DomainName                    (Имя домена в котором мы будем создавать пользователя)
+            Path = "CN=Users,$($node.DomainDN)"              (Путь к папке которая находится в 'Users and Computers')
+            UserName = "djones"                              (Логин нового пользователя имя может быть любым)
+            GivenName = "Dan"                                (Реальное имя)
+            Surname = "Jones"                                (Фамилия)
+            DisplayName = "Dan Jones"                        (Имя для отображения на экране)
+            Enabled = $true                                  (Отключен пользователь или нет $True-включен $False-отключен)
+            Password = $Cred                                 (Пароль дожн содержать не менее 8 символов и содержать заглавные строчные и цифры)
+            DomainAdministratorCredential = $Cred            (Учетные данные которые используются для создания пользователя. Обычно Администратор домена)
+            PasswordNeverExpires = $true                     ($true-Пароль никогда не истекает $false - пароль истекает через заданные время)
+            DependsOn = "[xADDomain]FirstDC"                 (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADUser jhelmick {				     (xADuser командаплет блока который добаляет пользователя. Имя может быть любым)
+            DomainName = $node.DomainName                    (Имя домена в котором мы будем создавать пользователя)
+            Path = "CN=Users,$($node.DomainDN)"              (Путь к папке которая находится в 'Users and Computers')
+            UserName = "jhelmick"                            (Логин нового пользователя имя может быть любым)
+            GivenName = "Jane"                               (Реальное имя)
+            Surname = "Helmick"                              (Фамилия)
+            DisplayName = "Jane Helmick"                     (Имя для отображения на экране)
+            Enabled = $true                                  (Отключен пользователь или нет $True-включен $False-отключен)
+            Password = $Cred                                 (Пароль дожн содержать не менее 8 символов и содержать заглавные строчные и цифры)
+            DomainAdministratorCredential = $Cred            (Учетные данные которые используются для создания пользователя. Обычно Администратор домена)
+            PasswordNeverExpires = $true                     ($true-Пароль никогда не истекает $false - пароль истекает через заданные время)
+            DependsOn = "[xADDomain]FirstDC"                 (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADGroup IT { 					     (xADGroup клмандаплет блока который добавляет группу. Имя может быть любым)
+            GroupName = "IT"				     (Имя группы)
+            Path = "CN=Users,$($node.DomainDN)"		     (Путь к папке которая находится в 'Users and Computers')
+            Category = "Security"			     (Указывает тип группы secure-бзопасности(для управления безопасности доступа к ресурсам) или distribution-распостранения(для создания групп почтовой рассылки))
+            GroupScope = "Global"		             (указывается Область действия группы)
+            MembersToInclude = "gshields", "jhelmick", "myaccount" (Пользователи включенные в группу)
+            DependsOn = "[xADDomain]FirstDC"		     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADGroup DomainAdmins {				     (xADGroup клмандаплет блока который добавляет группу. Имя может быть любым)
+            GroupName = "Domain Admins"			     (Имя группы)
+            Path = "CN=Users,$($node.DomainDN)"		     (Путь к папке которая находится в 'Users and Computers')
+            Category = "Security"			     (Указывает тип группы secure-бзопасности(для управления безопасности доступа к ресурсам) или distribution-распостранения(для создания групп почтовой рассылки))
+            GroupScope = "Global"			     (указывается Область действия группы)
+            MembersToInclude = "gshields", "myaccount"       (Пользователи включенные в группу)
+            DependsOn = "[xADDomain]FirstDC"		     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADGroup EnterpriseAdmins {   			     (xADGroup клмандаплет блока который добавляет группу. Имя может быть любым)
+            GroupName = "Enterprise Admins"		     (Имя группы)
+            Path = "CN=Users,$($node.DomainDN)"		     (Путь к папке которая находится в 'Users and Computers')
+            Category = "Security"			     (Указывает тип группы secure-бзопасности(для управления безопасности доступа к ресурсам) или distribution-распостранения(для создания групп почтовой рассылки))
+            GroupScope = "Universal"			     (указывается Область действия группы)
+            MembersToInclude = "gshields", "myaccount"	     (Пользователи включенные в группу)
+            DependsOn = "[xADDomain]FirstDC"		     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+
+        xADGroup SchemaAdmins {				     (xADGroup клмандаплет блока который добавляет группу. Имя может быть любым)
+            GroupName = "Schema Admins"	                     (Имя группы)
+            Path = "CN=Users,$($node.DomainDN)"		     (Путь к папке которая находится в 'Users and Computers')
+            Category = "Security"			     (Указывает тип группы secure-бзопасности(для управления безопасности доступа к ресурсам) или distribution-распостранения(для создания групп почтовой рассылки))
+            GroupScope = "Universal"			     (указывается Область действия группы)
+            MembersToInclude = "gshields", "myaccount"       (Пользователи включенные в группу)
+            DependsOn = "[xADDomain]FirstDC"		     (Зависимоть. Указывает что перед настройкой нужно настроить другой ресурс)
+        }
+    }
+}
+
+<#
+Specify values for the configurations you're interested in managing.
+See in the configuration above how variables are used to reference values listed here.
+#>
+          						     (значения всех переменных)  
+$ConfigData = @{
+    AllNodes = @(
+        @{
+            Nodename = "localhost"
+            ThisComputerName = "dc"
+            IPAddressCIDR = "192.168.3.10/24"
+            GatewayAddress = "192.168.3.2"
+            DNSAddress = "192.168.3.10"
+            InterfaceAlias = "Ethernet0"
+            DomainName = "company.pri"
+            DomainDN = "DC=Company,DC=Pri"
+            DCDatabasePath = "C:\NTDS"
+            DCLogPath = "C:\Windows\NTDS"
+            SysvolPath = "C:\Windows\SYSVOL"
+            PSDscAllowPlainTextPassword = $true            (чтобы не получать ошибки об использовании доменных учетных данных)
+            PSDscAllowDomainUser = $true                   (чтобы не получать ошибки об использовании доменных учетных данных)
+        }
+    )
+}
+
+<#
+Lastly, prompt for the necessary username and password combinations, then
+compile the configuration, and then instruct the server to execute that
+configuration against the settings on this local server.
+#>
+
+$domainCred = Get-Credential -UserName company\Administrator -Message "Please enter a new password for Domain Administrator."
+$Cred = Get-Credential -UserName Administrator -Message "Please enter a new password for Local Administrator and other accounts."
+
+BuildDomainController -ConfigurationData $ConfigData       (Заканчивает скрипт и указывает откуда брать информацию "$configData")
+
+Set-DSCLocalConfigurationManager -Path .\buildDomainController –Verbose       (LCM - local configuration manager для применения настроек используется командаплет и указывается путь)
+Start-DscConfiguration -Wait -Force -Path .\buildDomainController -Verbose    (Запускает DSC - disire state configuration желаемое сотояние)

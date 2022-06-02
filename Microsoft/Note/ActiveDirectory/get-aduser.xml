@@ -1,0 +1,18 @@
+**Для изменения пароля пользователя:**
+
+    Set-ADAccountPassword avb -Reset
+
+=========================================
+**Для добавления его в группу:**
+
+    Get-ADGroup -Filter * | ft   **получить список групп**
+    Add-ADGroupMember "DNSOPS" -Members avb  **внести пользователя в группу**
+=========================================
+
+**Поиск пользователей**
+
+Get-ADUser -Filter 'Name -like "*"' | FT Name,SamAccountName -A  -выводит список пользователей
+Get-ADUser -filter 'samaccountname -like "*ersh*"' | ft 
+Get-ADUser GlenJohn -Properties *  - показывает все свойства пользователя
+
+=========================================

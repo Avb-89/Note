@@ -1,0 +1,49 @@
+Создает новое правило входящего или исходящего брандмауэра и добавляет правило на целевой компьютер.
+
+Командлет New-NetFirewallRule создает правило входящего или исходящего брандмауэра и добавляет правило
+на целевой компьютер.
+Некоторые параметры используются для указания условий, которые должны быть сопоставлены для применяемого правила,
+таких как параметры LocalAddress и RemoteAddress. 
+Другие параметры определяют способ защиты соединения, например параметры аутентификации и шифрования. 
+Существующие правила могут управляться с помощью командлетов Get-NetFirewallRule и Set-NetFirewallRule.
+Фильтрующие объекты, такие как NetFirewallAddressFilter или NetFirewallApplicationFilter,
+создаются с каждым правилом брандмауэра. 
+Объекты и правила фильтра всегда индивидуальны и управляются автоматически.
+
+
+Примеры
+EXAMPLE 1
+This example creates an outbound firewall rule to block all of the traffic from the local computer that originates on TCP port 80.
+
+PS C:\> New-NetFirewallRule -DisplayName "Block Outbound Port 80" -Direction Outbound –LocalPort 80 -Protocol TCP -Action Block
+
+EXAMPLE 2
+This example creates a firewall rule that blocks all inbound traffic from all WINS servers.
+
+PS C:\> New-NetFirewallRule -DisplayName "Block WINS" -Direction Inbound -Action Block -RemoteAddress WINS
+
+EXAMPLE 3
+This example creates an inbound firewall rule that allows traffic for the Windows Messenger program only from computers on the same subnet as the local computer.
+
+PS C:\> New-NetFirewallRule -DisplayName "Allow Messenger" -Direction Inbound -Program "C:\Program Files (x86)\Messenger\msmsgs.exe" -RemoteAddress LocalSubnet -Action Allow
+
+EXAMPLE 4
+This example creates a firewall rule that allowsinboundWindows Messenger network traffic only if the connection from the remote computer is authenticated by using a separate IPsec rule.
+
+PS C:\> New-NetFirewallRule -DisplayName "Allow Authenticated Messenger" -Direction Inbound -Program "C:\Program Files (x86)\Messenger\msmsgs.exe" -Authentication Required -Action Allow
+
+EXAMPLE 5
+This example creates a firewall rule that allows all of the network traffic from computers that are members of a specific computer group, and only from users that are members of a specific user group. Both memberships must be confirmed by authentication using a separate connection security rule.
+
+PS C:\> New-NetFirewallRule -DisplayName "Allow Only Specific Computers and Users" -Direction Inbound -RemoteMachine "D:(A;;CC;;;SIDforMachineGroupAccount)" -RemoteUser "D:(A;;CC;;;SIDforUserGroupAccount)" -Action AllowBypass -Authentication Required
+
+EXAMPLE 6
+This example uses two cmdlets to create firewall rules that block all of the wireless network traffic.
+
+PS C:\> New-NetFirewallRule -Name "Block Wireless In" -Direction Inbound -InterfaceType Wireless -Action Block
+PS C:\> New-NetFirewallRule -Name "Block Wireless Out" -Direction Outbound -InterfaceType Wireless -Action Block
+
+EXAMPLE 7
+This example creates a firewall rule to allowTCP traffic addressed to port 12345 and the range of ports 5000-5020 to a specific application from the computers on the remote side of an edge (NAT) device, using the Teredo IPv6 interface.
+
+PS C:\> New-NetFirewallRule -DisplayName "Allow TCP 12345 and 5000-5020 over Teredo" -Direction Inbound -Action Allow -EdgeTraversalPolicy Allow -Protocol TCP -LocalPort 12345,5000-5020 -Program "C:\Program Files (x86)\TestIPv6App.exe"

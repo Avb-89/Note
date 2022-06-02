@@ -1,0 +1,3 @@
+Создать тунель SSH
+
+ssh -L 8000:localhost:8888 admin2@pynode.autostat.lan

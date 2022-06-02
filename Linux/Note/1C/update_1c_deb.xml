@@ -1,0 +1,59 @@
+о просьбам трудящихся описываю процесс обновления как самого сервера 1С:Предприятие, так и сервера баз данных PostgreSQL.
+
+Для начала надо сделать бэкапы (резервные копии) баз данных (предварительно выгнав всех из 1С), которые крутятся на сервере. Бэкапы будем делать средствами 1С. Для этого открываем конфигуратор, в меню Сервис выбираем пункт Выгрузить информационную базу:
+
+В открывшемся окне выбираем директорию, куда будет сохраняться бэкап, и указываем имя бэкапа (я просто добавляю к стандартному имени бэкапа дату в формате ГГГГ.ММ.ДД):
+
+Теперь нужно удалить пакеты сервера 1С:Предприятие, которые необходимо обновить. Но перед удалением, завершим процессы сервера 1С:Предприятие:
+
+service srv1cv82 stop
+
+
+Получаем выхлоп:
+
+Stopping 1C:Enterprise 8.2 server: OK
+
+Затем посмотрим, какие пакеты сервера 1С:Предприятие у нас установлены:
+
+dpkg -l | grep 1c-enterprise
+
+
+Получаем примерный выхлоп:
+
+ii 1c-enterprise82-common 8.2.14-533 1C:Enterprise 8.2 common components
+ii 1c-enterprise82-common-nls 8.2.14-533 National resource files for 1C:Enterpise 8.2 common components for Linux
+ii 1c-enterprise82-server 8.2.14-533 1C:Enterprise 8.2 server for Linux
+ii 1c-enterprise82-server-nls 8.2.14-533 National resource files for 1C:Enterpise 8.2 server for Linux
+ii 1c-enterprise82-ws 8.2.14-533 1C:Enterpise 8.2 Web-services components for Linux
+ii 1c-enterprise82-ws-nls 8.2.14-533 National resource files for 1C:Enterpise 8.2 Web-services components for Linux
+
+Мы узнали какие пакеты сервера 1С:Предприятия у нас установлены, можно приступить к их удалению. Пакеты удаляются в обратно порядке:
+
+dpkg -r 1c-enterprise82-ws-nls 1c-enterprise82-ws 1c-enterprise82-server-nls 1c-enterprise82-server 1c-enterprise82-common-nls 1c-enterprise82-common
+
+
+Проверим, не осталось ли каких либо файлов, после удаления пакетов:
+
+dpkg -l | grep 1c-enterprise
+
+
+Получаем примерный выхлоп:
+
+rc 1c-enterprise82-server 8.2.14-533 1C:Enterprise 8.2 server for Linux
+rc 1c-enterprise82-ws 8.2.14-533 1C:Enterpise 8.2 Web-services components for Linux
+
+После удаления остались некоторые файлы настроек, их тоже необходимо удалить:
+
+dpkg -P 1c-enterprise82-ws 1c-enterprise82-server
+
+
+И вновь проверяем, не осталось ли каких либо файлов от пакетов сервера 1С:Предприятие:
+
+dpkg -l | grep 1c-enterprise
+
+
+Все, команда не показывает никаких пакетов, значит мы полностью удалили сервер 1С:Предприятие.
+
+Теперь можно устанавливать пакеты новой версии сервера 1С:Предприятие.
+
+источник http://linuxforum.ru/topic/11116

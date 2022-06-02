@@ -1,0 +1,11 @@
+Поиск через powershell
+
+поиск конкретного файла
+get-childitem Дирекория -Recurse файл
+например
+get-childitem d:\ -Recurse ssh.exe
+или
+поиск файлов по маске
+Get-ChildItem Директория -Recurse -Filter Маски файлов
+например
+Get-ChildItem d:\test -Recurse -Filter *img_*.svg

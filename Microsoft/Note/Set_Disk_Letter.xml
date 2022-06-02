@@ -1,0 +1,6 @@
+
+# Изменить букву диска 
+
+set-partition -driveletter V -newdriveletter E
+или
+set-Partition -DiskNumber 1 -PartitionNumber 2 -NewDriveLetter E

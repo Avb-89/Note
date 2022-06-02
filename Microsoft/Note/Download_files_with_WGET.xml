@@ -1,0 +1,5 @@
+wget "https://www.microsoft.com/ru-ru/?epb=1&form=MY009W" -OutFile "E:\Downloads\MS_EDGE.exe"
+
+or 
+
+Invoke-WebRequest "https://download.mozilla.org/?product=firefox-32.0.3-SSL&os=win&lang=ru" -outfile “c:\tools\firefox setup 32.0.3.exe” 

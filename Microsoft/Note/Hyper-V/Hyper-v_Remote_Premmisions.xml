@@ -1,0 +1,4 @@
+
+
+cmdkey /add:VH01 /user:Administrator /pass:Password
+winrm set winrm/config/client @{TrustedHosts="VH01"}
