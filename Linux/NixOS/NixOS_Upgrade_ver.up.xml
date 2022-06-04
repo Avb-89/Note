@@ -1,0 +1,8 @@
+<Upgrade_Nixos_Version>
+  ==============================================================================
+  NixOS can upgrade own version.
+  I have version 17.03 me need version 18.09
+
+  In config i add strings
+     <system.autoUpgrade.enable = true;
+	   <system.autoUpgrade.channel = https://nixos.org/channels/nixos-17.03;

@@ -1,0 +1,228 @@
+https://www.8host.com/blog/nastrojka-virtualnyx-xostov-apache-v-debian-8/
+
+
+
+Настройка виртуальных хостов Apache в Debian 8
+
+
+1: Создание структуры каталогов
+
+Для начала нужно создать структуру каталогов, в которой будут храниться данные сайта.
+Каталог document root (каталог, содержащий контент для Apache) по умолчанию находится в /var/www; в нём нужно создать отдельный каталог для каждого виртуального хоста. В каждом таком каталоге будет размещен каталог public_html, в котором будут находиться нужные файлы. Благодаря этому хостинг становится более гибким.
+Необходимые каталоги можно создать при помощи следующих команд:
+
+  sudo mkdir -p /var/www/example.com/public_html
+  sudo mkdir -p /var/www/test.com/public_html
+
+Примечание: Замените условные доменные имена в командах.
+
+Поскольку каталоги созданы с помощью sudo, все они принадлежат пользователю root. Чтобы обычный пользователь мог изменять файлы в этих каталогах, измените права на каталоги:
+
+  sudo chown -R $USER:$USER /var/www/example.com/public_html
+  sudo chown -R $USER:$USER /var/www/test.com/public_html
+
+Переменная $USER примет имя текущего пользователя. После этого текущий пользователь получит права на подкаталоги public_html, в которых будет храниться контент.
+Также нужно предоставить пользователям право на чтение каталога сайта и всех его подкаталогов (чтобы страницы отображались правильно). Для этого запустите:
+
+  sudo chmod -R 755 /var/www
+
+
+2: Создание демо-страниц для виртуальных хостов
+
+Создайте тестовый контент; для пробной настройки простых страниц будет достаточно. Просто создайте страницы index.html для каждого сайта.
+
+Начнём с example.com; откройте файл index.html в текстовом редакторе:
+
+  nano /var/www/example.com/public_html/index.html
+
+В этом файле создайте простой HTML-документ, который указывает, к какому сайту подключена страница. В данном случае этот файл выглядит так:
+
+  <html>
+  <head>
+  <title>Welcome to Example.com!</title>
+  </head>
+  <body>
+  <h1>Success! The example.com virtual host is working!</h1>
+  </body>
+  </html>
+
+Сохраните и закройте файл.
+
+Затем можно скопировать этот файл и использовать его как шаблон для второго сайта:
+
+  cp /var/www/example.com/public_html/index.html /var/www/test.com/public_html/index.html
+
+Откройте скопированный файл и внесите соответствующие коррективы:
+
+  nano /var/www/test.com/public_html/index.html
+
+  <html>
+  <head>
+  <title>Welcome to Test.com!</title>
+  </head>
+  <body> <h1>Success! The test.com virtual host is working!</h1>
+  </body>
+  </html>
+
+Сохраните и закройте файл. Теперь тестовые страницы готовы.
+
+3: Создание файлов виртуальных хостов
+
+Файлы виртуальных хостов задают настройки отдельных сайтов и помогают Apache корректно отвечать на запросы.
+Apache поставляется со стандартным файлом хоста по имени 000-default.conf, который можно использовать в качестве шаблона. Скопируйте его, чтобы создать виртуальный хост для каждого доменного имени.
+Примечание: По умолчанию настройки Ubuntu требуют, чтобы файлы виртуальных хостов заканчивались на .conf.
+
+  sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/example.com.conf
+
+Откройте файл в редакторе:
+
+  sudo nano /etc/apache2/sites-available/example.com.conf
+
+По умолчанию он содержит примерно следующее:
+
+  <VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/html
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>
+
+Как видите, файл не такой уж объёмный. Этот виртуальный хост будет отвечать на запросы, отправляемые на стандартный HTTP-порт 80. Теперь нужно внести данные о первом домене и добавить несколько директив.
+Сначала нужно изменить директиву ServerAdmin, указав электронный адрес администратора сайта.
+
+  ServerAdmin admin@example.com
+
+После этого нужно добавить две директивы. Первая – ServerName, которая определяет базовый домен, для которого предназначен хост. Вторая – ServerAlias, которая определяет псевдонимы домена (например, домен с префиксом www).  Добавьте их после ServerAdmin:
+
+  <VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  ServerName example.com
+  ServerAlias www.example.com
+  DocumentRoot /var/www/html
+  ...
+
+Укажите путь к каталогу document root в директиве DocumentRoot.
+
+  DocumentRoot /var/www/example.com/public_html
+
+В результате виртуальный хост будет выглядеть так:
+
+  <VirtualHost *:80>
+  ServerAdmin admin@example.com
+  ServerName example.com
+  ServerAlias www.example.com
+  DocumentRoot /var/www/example.com/public_html
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>
+
+Сохраните и закройте файл.
+Скопируйте только что созданный файл и используйте его как шаблон для виртуального хоста второго сайта, отредактировав соответствующие данные.
+
+  sudo cp /etc/apache2/sites-available/example.com.conf /etc/apache2/sites-available/test.com.conf
+
+Откройте полученный файл в редакторе:
+
+  sudo nano /etc/apache2/sites-available/test.com.conf
+
+Теперь осталось откорректировать соответствующие данные, чтобы файл мог обслуживать второй домен. В результате второй файл виртуального хоста имеет такой вид:
+
+  <VirtualHost *:80>
+  ServerAdmin admin@test.com
+  ServerName test.com
+  ServerAlias www.test.com
+  DocumentRoot /var/www/test.com/public_html
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>
+
+Сохраните и закройте файл.
+
+
+4: Включение виртуальных хостов
+
+Создав файлы виртуальных хостов, нужно включить их. Apache предоставляет для этого специальные инструменты.
+К примеру, для этого можно использовать a2ensite:
+
+  sudo a2ensite example.com.conf
+
+Команда вернёт:
+
+Enabling site example.com.
+To activate the new configuration, you need to run:
+service apache2 reload
+
+Чтобы включить второй сайт, введите:
+
+  sudo a2ensite test.com.conf
+
+На экране появится такое же сообщение:
+
+Enabling site test.com.
+To activate the new configuration, you need to run:
+service apache2 reload
+
+Затем отключите стандартный виртуальный хост 000-default.conf:
+
+  sudo a2dissite 000-default.conf
+
+Перезапустите Apache, чтобы активировать изменения:
+
+  sudo systemctl restart apache2
+
+
+5: Настройка локальных хостов (опционально)
+Если у вас нет доменного имени, и вместо настоящего вы использовали условный домен, вы можете протестировать настройки, временно отредактировав файл hosts на локальном компьютере. он будет перехватывать запросы на настроенные ранее домены и направлять их на VPS (то есть, выполнять работу DNS). Но этот метод работает только на локальной машине и подходит только для тестирования.
+Примечание: Убедитесь, что вы перешли на локальную машину. Для выполнения данного раздела нужны учётные данные администратора.
+В системах Mac или Linux отредактируйте файл hosts с привилегиями администратора.
+sudo nano /etc/hosts
+в Windows откройте командную строку с правами администратора и введите:
+notepad %windir%\system32\drivers\etc\hosts
+В этом файле нужно указать IP-адрес сервера, а затем доменное имя, которое будет использоваться для доступа к серверу.
+К примеру, если IP-адрес сервера — 111.111.111.111, в конец файла хоста нужно внести следующие строки:
+127.0.0.1   localhost
+...
+111.111.111.111 example.com
+111.111.111.111 test.com
+Теперь все запросы к example.com и test.com будут отправлены на локальный компьютер, а оттуда — на IP-адрес сервера.
+Сохраните и закройте файл.
+6: Результаты
+Чтобы протестировать настройку виртуальных хостов, просто откройте домен в веб-браузере:
+http://example.com
+сообщение:
+Success! The example.com virtual host is working!
+Примечание: Результат, появившийся на экране, зависит от содержания файла, созданного в разделе 3.
+Точно так же нужно проверить и второй сайт:
+http://test.com
+На экране появится следующий результат:
+Success! The test.com virtual host is working!
+Если оба сайта работают, значит, виртуальные хосты успешно настроены.
+Примечание: Если файл hosts на локальном компьютере был изменён, после тестирования удалите внесённые в него строки, чтобы не засорять файл ненужными записями.
+Заключение
+Теперь сервер Debian 8 поддерживает два сайта на отдельных доменах. В целом, количество хостов, которое может поддерживать Apache, зависит только от ресурсов виртуального выделенного сервера. Чтобы добавить на сервер новый виртуальный хост, просто повторите весь вышеописанный процесс.
+
+
+
+
+
+
+Выводим спиcок файлов папки на web-сервере Apache
+ Июнь 27th, 2011  firefly
+По умолчанию веб сервер пытается открыть index.html, сделаем так что бы он строил список файлов находящихся на сервере. Для этого задействуем модуль mod_autoindex.
+Создаем файл .htaccess следующего содержания:
+ Options +Indexes
+IndexOptions FancyIndexing FoldersFirst
+IndexIgnore .htaccess .htaccess~ footer.html header.html
+IndexOrderDefault Descending Name
+AddDescription "File 1" file1.tar
+AddDescription "File 2" file2.i386.rpm
+HeaderName header.html
+ReadmeName footer.html
+где:
+Options +Indexes — эта директива разрешает показ листинга директории;
+IndexOptions — задает опции для отображения листинга; в нашем примере: FancyIndexing — разрешает отображение подробного листинга (с иконками для разных типов файлов, комментариями и т.п.), FoldersFirst — указывает первыми в списке показывать директории;
+IndexIgnore — указывает, какие файлы не должны отображаться в листинге;
+IndexOrderDefault — задает порядок сортировки записей в списке; в нашем случае — сортировка по имени по убыванию;
+AddDescription — добавить описание к какому-либо файлу или группе файлов;
+HeaderName — имя файла, в котором задается текст или HTML-код, который добавляется в верх («шапку») листинга;
+ReadmeName — имя файла, в котором задается текст или HTML-код, который добавляется после списка.

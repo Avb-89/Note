@@ -1,5 +1,0 @@
-не во всех есть команда ifconfig
-
-можно установить:
-
-apt-get install net-tools

@@ -1,0 +1,30 @@
+sudo -u postgres psql
+
+Узнать физическое расположение баз: 
+
+show data_directory;
+
+
+
+CREATE DATABASE test_database;
+CREATE USER test_user WITH password 'qwerty';
+GRANT ALL ON DATABASE test_database TO test_user;
+
+DROP DATABASE your_data_base
+
+psql -l - список баз данных.
+psql -d dbname - подключение к БД dbname.
+
+\c dbname - подсоединение к БД dbname.
+\l - список баз данных.
+\dt - список всех таблиц.
+\d table - структура таблицы table.
+\du - список всех пользователей и их привилегий.
+\dt+ - список всех таблиц с описанием.
+\dt *s* - список всех таблиц, содержащих s в имени.
+\i FILE - выполнить команды из файла FILE.
+\o FILE - сохранить результат запроса в файл FILE.
+\a - переключение между режимами вывода: с/без выравнивания.
+
+
+CREATE DATABASE jiradb WITH ENCODING 'UNICODE' LC_COLLATE 'C' LC_CTYPE 'C' TEMPLATE template0;

@@ -1,0 +1,16 @@
+УДАЛИТЬ RAID 
+./arcconf delete 1 logicaldrive 0 - Удалить logicaldrive (в моем случае cheeta-10) 
+  
+СОЗДАТЬ RAID 
+./arcconf create 1 logicaldrive max 1 0,0 0,1 - создать 1рый рейд из двух дисков 
+In our command line: arcconf create 1 logicaldrive max 1 0,3 0,4: 
+create – создать 
+1 – номер контроллера 
+logicaldrive – где создаем 
+max – использовать весь диск 
+1 – уровень RAID 
+0,3 0,4 – Номера дисков (./arcconf getconfig 1 pd 0 0\9 -увидеть диски в рейде по одному) 
+[noprompt] – I would’ve use that to avoid confirmation dialog but I forgot. It came out all right regardless. 
+  
+ИЗМЕНИТЬ ИМЯ МАСИВА 
+./arcconf SETNAME <Controller#> LOGICALDRIVE <LogicalDrive#> <New Name> 
