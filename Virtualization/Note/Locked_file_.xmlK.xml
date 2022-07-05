@@ -1,0 +1,61 @@
+Залоченные файлы виртуальной машины в VMware vSphere - Could not power on VM: Lock was not free.
+
+Ошибка заблокированного файла VM:
+
+Could not power on VM: Lock was not free
+
+Встречаются также такие вариации сообщений и ошибок при попытке включения виртуальной машины, которое зависает на 95%:
+
+Unable to open Swap File
+Unable to access a file since it is locked
+Unable to access a file <filename> since it is locked
+Unable to access Virtual machine configuration
+
+Ну а при попытке соединения с консолью ВМ получается вот такое:
+
+Error connecting to <path><virtual machine>.vmx because the VMX is not started
+
+Все это симптомы одной проблемы - один из следующих файлов ВМ залочен хост-сервером VMware ESXi:
+
+<VMNAME>.vswp
+<DISKNAME>-flat.vmdk
+<DISKNAME>-<ITERATION>-delta.vmdk
+<VMNAME>.vmx
+<VMNAME>.vmxf
+vmware.log
+
+При этом залочил файл не тот хост ESXi, на котором машина зарегистрирована. Поэтому решение проблемы в данном случае - переместить ВМ холодной миграций на тот хост, который залочил файл и включить ее там, после чего уже можно переносить ее куда требуется. Но как найти тот хост ESXi, который залочил файл? Об этом и рассказывается ниже.
+
+-------------
+
+Поиск залоченного файла ВМ
+
+Нужно открыть лог vmware.log, который расположен в папке с виртуальной машиной, и найти там строчки вроде следующих:
+
+Failed to initialize swap file : Lock was not free
+
+
+За логом на экране можно следить командой (запустите ее и включайте ВМ):
+
+# tail /vmfs/volumes/<UUID>/<VMDIR>/vmware.log
+
+
+После того, как залоченный файл найден, нужно определить его владельца. Сначала попробуем команду touch, которая проверяет, может ли бы обновлен time stamp файла, т.е. можно ли его залочить, или он уже залочен. Выполняем следующую команду:
+
+# touch /vmfs/volumes/<UUID>/<VMDIR>/<filename>
+
+Если файл уже залочен, мы получим вот такое сообщение для него:
+
+cannot touch: Device or resource busy
+
+Дальше выполняем такую команду:
+
+# vmkfstools -D /vmfs/volumes/<UUID>/<VMDIR>/<filename>
+
+
+
+В значении "owner" мы видим MAC-адрес залочившего файл хоста VMware ESXi (выделено красным). Ну а как узнать MAC-адрес хоста ESXi - это вы должны знать. Дальше просто делаем Cold Migration виртуальной машины на залочивший файл хост ESXi и включаем ее там.
+
+Те, кто хочет дальше изучать вопрос, могут проследовать в KB 10051.
+
+Источник: "Could not power on VM - lock was not free".
