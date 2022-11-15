@@ -1,0 +1,5 @@
+Если не находит PSgallery
+WARNING: Unable to find package sources
+Register-PSRepository -Default
+
+Get-PackageSource

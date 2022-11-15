@@ -1,0 +1,5 @@
+Вложенная Виртуализация на Hyper-V
+
+Чтобы установить на виртуальную машину еще одну виртуалку требуется обеспечить процессор возможностью виртуализации:
+
+# Set-VMProcessor-VMname "servername" -ExposeVirtualization Extensions $True

@@ -1,0 +1,42 @@
+﻿Управление службами.
+https://habr.com/company/netwrix/blog/167171/
+
+Увидеть службы со статусом "запущенно" или "Остановленно"
+Get-Service | Where-Object {$_.Status -EQ "Running"}
+Get-Service | Where-Object {$_.Status -EQ "Stopping"}
+
+# Получить информацию о командах связзаных с управелнием службами
+Get-command -noun service
+
+-Passthru позволяет увидеть процесс выполнения
+
+# stop-service service - останавливает службу, вместо "service" пишем название службы
+# restart-service - Перезапускат службу
+# start-service - Запускает службу
+# suspend-service - "Замораживает" службу
+# resume-service - "Размораживает" службу
+# Set-Service service -StartupType Manual - Позволяет изменить тип запуска 'Manual' 'Automatic' 'Disabled'
+
+$$$$$Технически Set-Service нужен для изменение отображаемого имени и описания службы$$$$
+
+
+Вырубить службу нахрен
+SetService spooler -StartupType Disabled -passThru | Stop-service -passThru
+
+Также есть более цивилизованный вариант
+Get-service spooler | where {$_.status -eq 'running'} | stop-service -pass
+Чтобы выключить несколько служб, пишем их через запятную
+
+Запустить службу и все зависимые от нее службы
+# get-service service | Foreach {start-service $_.name -passthru; start-service $_DependentServices -passthru}
+
+Для ОСТАНОВКИ и ПЕРЕЗАПУСКА службы может потребоваться команда 
+
+# -Force
+
+Получить полную информацию о всех службах
+
+# Get-service | select *  
+- чтобы получить информацию о конкретной службе пишем ее имя, например: Get-service bits | select *
+
+Также с помощью нее можно посмотреть поддерживает служба  "Заморозку" и "Разморозку"

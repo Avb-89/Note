@@ -1,0 +1,4 @@
+wmic bios get serialnumber
+
+
+wmic computersystem get model,name,manufacturer,systemtype

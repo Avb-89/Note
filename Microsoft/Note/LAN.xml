@@ -1,4 +1,0 @@
-Настроить сеть можно так:
-
-get-NetIPAddress | ft
-New-NetIPAddress -InterfaceIndex 3 -IPAddress 172.16.0.1 -PrefixLength 24 -AddressFamily IPv4

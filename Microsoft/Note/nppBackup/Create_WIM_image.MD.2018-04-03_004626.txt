@@ -1,0 +1,10 @@
+Create WIM Image:
+
+1) boot in windows ISO and select recovery
+2) select comand line and input:
+# wpeinit
+# diskpart
+# select disk 0
+# clean
+# create partition primary size=100
+# select partition 1

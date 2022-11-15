@@ -1,2 +1,0 @@
-docker run -it --name имя -d Образ - установит и запустит его
-(docker run -it --name infinite -d eon01/infinite)

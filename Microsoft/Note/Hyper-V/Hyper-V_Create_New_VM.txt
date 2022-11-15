@@ -1,0 +1,27 @@
+<Создание_виртуальной_машны_через_PS>
+
+  ==============================================================================
+
+  PS C:\> New-VM -Name "NixOS" -Path R:\LABARATORY\VMS\ -MemoryStartupBytes 2GB -NewVHDPath R:\LABARATORY\HDD\NixOS.vhdx -NewVHDSizeBytes 36GB -SwitchName "Default Switch" -Generation 2
+
+  Name  State CPUUsage(%) MemoryAssigned(M) Uptime   Status             Version
+  ----  ----- ----------- ----------------- ------   ------             -------
+  NixOS Off   0           0                 00:00:00 Operating normally 8.3
+
+=============================================================================</>
+
+-Name — имя создаваемой виртуальной машины;
+-Path — путь для размещение файлов машины;
+-MemoryStartupBytes — объем оперативной памяти;
+-NewVHDPath — путь расположения виртуального жесткого диска;
+-NewVHDSizeBytes — объем жесткого диска;
+-SwitchName — название виртуального коммутатора для подключения к сети.
+-Generation 2 - выбор поколения VM
+
+<Подключить_ISO_к_виртуальной_машине>
+
+    ============================================================================
+
+    PS C:\> Set-VMDvdDrive -VMName NixOS -Path R:\TEMP\ISO\nixos-graphical-19.03pre154454.f2b3bbe44e4-x86_64-linux.iso
+
+    =========================================================================</>

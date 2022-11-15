@@ -1,6 +1,0 @@
-Download an Image from Docker and Start Container Process
-
-docker pull - download container
-docker run - start container
-
-

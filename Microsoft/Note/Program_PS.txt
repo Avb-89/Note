@@ -1,0 +1,13 @@
+КАк запустить различные утилиты через PowerSHell
+
+Монитор ресурсов
+
+# perfmon
+
+Управелние компьютером (Manage)
+
+# compmgmt.msc
+
+Запустить EDGE
+
+# start Microsoft-edge:

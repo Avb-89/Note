@@ -1,3 +1,0 @@
-Посмотреть установленные программы
-C:\>wmic
-wmic:root\cli>product get name, version

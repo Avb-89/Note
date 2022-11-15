@@ -1,0 +1,3 @@
+Open all Traffic in server
+
+New-NetFirewallRule -Displayname "Allow all Traffic" -Direction Outbound -Action Allow

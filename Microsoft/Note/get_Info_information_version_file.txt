@@ -1,0 +1,7 @@
+Powershell получить информацию  о файле:
+
+
+<Получить version>
+=========================================
+get-childitem msmdsrv.exe | foreach-object { "{0}`t{1}" -f $_.Name, [System.Diagnostics.FileVersionInfo]::GetVersionInfo($_).FileVersion }
+=========================================</>

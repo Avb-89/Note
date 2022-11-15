@@ -1,0 +1,14 @@
+Upload an Image to Docker
+Let’s upload the image we just created to Docker so that it’s accessible from the cloud. Log in using your Docker ID and password:
+
+# docker login -u mydockerid -p mypassword
+
+Log in to Docker and upload the modified image to the cloud (Image Credit: Russell Smith)
+Use docker push to upload the image we created in the previous steps, replacing mydockerid with your Docker ID name:
+
+# docker push mydockerid/windows-test-image
+
+If you log in to Docker here, and click Repositories on the home screen, you should see the image you just pushed in the list.
+
+View images available in your repository in the Docker cloud (Image Credit: Russell Smith)
+In this article, I showed you how to pull a default Windows Server image from Docker, modify and build a new image, and upload it to a Docker repository.

@@ -1,0 +1,9 @@
+img look here https://hub.docker.com/r/microsoft/nanoserver/tags/
+
+latest
+
+docker pull microsoft/nanoserver
+
+or previos versions
+
+docker pull microsoft/nanoserver:10.0.14393.2430

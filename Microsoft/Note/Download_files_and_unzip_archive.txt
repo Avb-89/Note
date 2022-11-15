@@ -1,0 +1,44 @@
+<Скачиваем и распаковываем файл из Интернета при помощи Powershell>
+
+Для загрузки файлов из Интернета в Powershell предусмотрен метод DownloadFile, которому нужно передать два аргумента — что скачиваем и куда.
+По HTTP или  HTTPS
+    DownloadFile
+    Invoke-WebRequest
+С FTP-сервера
+Распаковка архива
+Возможные проблемы
+Скачать по HTTP или  HTTPS
+DownloadFile
+Пример скрипта:
+$download_url = "http://download_ahyware/file1.zip"
+$local_path = "C:\Downloads\file1.zip" 
+$WebClient = New-Object System.Net.WebClient
+$WebClient.DownloadFile($download_url, $local_path)
+* в данном примере мы скачаем файл http://download_ahyware/file1.zip и разместим его на компьютере по пути C:\Downloads\file1.zip.
+Invoke-WebRequest
+Данный командлет предназначен для загрузки содержимого html документа. Также с его помощью можно скачивать файлы:
+Invoke-WebRequest -URI https://www.dmosk.ru/files/winsetupfromusb.zip -outfile c:\temp\winsetupfromusb.zip
+* где URI — путь-источник (что скачиваем); outfile — путь-назначение (куда скачиваем).
+Для удобства можно использовать команду wget — по сути, это алиас на Invoke-WebRequest.
+Скачать с FTP
+Принцип скачивания файлов с FTP-сервера такой же, за исключением того, что сначала необходима авторизация.
+Пример скрипта:
+$download_url = "ftp://download_ahyware/file1.zip"
+$local_path = "C:\Downloads\file1.zip"
+$user = "myFtpUser"
+$pass = "myPassword123"
+
+$WebClient = New-Object System.Net.WebClient 
+$WebClient.Credentials = New-Object System.Net.NetworkCredential($user, $pass)
+$WebClient.DownloadFile($download_url, $local_path)
+* в данном скрипте мы авторизовываемся на FTP-сервере с учетной записью myFtpUser и паролем myPassword123. После, как в примере выше, мы скачали файл в папку C:\Downloads.
+Распаковываем архив
+Чаще всего, файлы в сети Интернет хранятся в сжатом виде. Поэтому, после загрузки файла есть необходимость его распаковать. Для этого в Powershell можно использовать следующую команду:
+Expand-Archive $archive_file.zip -DestinationPath C:\Unzip\
+Однако, не все версии Powershell поддерживают командлет Expand-Archive. В таком случае можно вызвать стороннее приложение, например 7-zip. Пример скрипта:
+set-alias sz "$env:ProgramFiles\7-Zip\7z.exe" 
+sz x -r C:\Downloads\file1.zip -oC:\Unzip\
+Возможные ошибки
+Исключение при вызове downloadfile с 2 аргументами исключение во время запроса webclient
+Причина: как правило, неправильно указан путь для загрузки или отсутствие прав на папку, в которую должно идти скачивание.
+Решение: проверяем путь или пробуем указать другой.

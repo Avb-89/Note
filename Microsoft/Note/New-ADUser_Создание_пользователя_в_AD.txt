@@ -1,0 +1,61 @@
+New-ADUser: Создание пользователя в AD
+Для создания нового пользователя в AD можно использовать командлет New-ADUser. Создать пользователя можно командой:
+New-ADUser -Name "Andrey Petrov" -GivenName "Andrey" -Surname "Petrov" -SamAccountName "apetrov" -UserPrincipalName "apetrov@winitpro.ru " -Path "OU=Users,OU=Ufa,DC=winitpro,DC=loc" -AccountPassword(Read-Host -AsSecureString "Input Password") -Enabled $true
+
+
+
+Add-AdGroupMember: Добавить пользователя в группу AD
+Чтобы добавить пользователей в существующую группу безопасности в домене AD, выполните команду:
+Add-AdGroupMember -Identity MskSales -Members apterov, divanov
+
+Add-AdGroupMember: Добавить пользователя в группу AD
+Чтобы добавить пользователей в существующую группу безопасности в домене AD, выполните команду:
+Add-AdGroupMember -Identity MskSales -Members apterov, divanov
+Вывести список пользователей в группе AD и выгрузить его в файл:
+Get-ADGroupMember MskSales -recursive| ft samaccountname| Out-File c:\script\export_users.csv
+Более подробно об управлении группами AD из PowerShell.
+Set-ADAccountPassword: Сброс пароля пользователя в AD
+Чтобы сбросить пароль пользователя в AD из PowerShell, выполните:
+Set-ADAccountPassword apterov -Reset -NewPassword (ConvertTo-SecureString -AsPlainText “P@ssw0rd1” -Force -Verbose) –PassThru
+Блокировка/разблокировка пользователя
+Отключить учетную запись:
+Disable-ADAccount apterov
+Включить учетную запись:
+Enable-ADAccount apterov
+Разблокировать аккаунт после блокировки парольной политикой:
+Unlock-ADAccount apterov
+Search-ADAccount: Поиск неактивных компьютеров в домене
+Чтобы найти и заблокировать в домене все компьютеры, которые не регистрировались в сети более 100 дней, воспользуйтесь командлетом Search-ADAccount:
+$timespan = New-Timespan –Days 100
+Search-ADAccount -AccountInactive -ComputersOnly –TimeSpan $timespan | Disable-ADAccount
+New-ADOrganizationalUnit: Создать структуру OU в AD
+Чтобы быстро создать типовую структуры Organizational Unit в AD, можно воспользоваться скриптом PowerShell. Допустим, нам нужно создать несколько OU с городами, в которых создать типовые контейнеры. Вручную через графическую консоль ADUC такую структуру создавать довольно долго, а модуль AD для PowerShell позволяет решить такую задачу за несколько секунд (не считая время на написание скрипта):
+$fqdn = Get-ADDomain
+$fulldomain = $fqdn.DNSRoot
+$domain = $fulldomain.split(".")
+$Dom = $domain[0]
+$Ext = $domain[1]
+$Sites = ("SPB","MSK","Sochi")
+$Services = ("Users","Admins","Computers","Servers","Contacts")
+$FirstOU ="Russia"
+New-ADOrganizationalUnit -Name $FirstOU -Description $FirstOU -Path "DC=$Dom,DC=$EXT" -ProtectedFromAccidentalDeletion $false
+foreach ($S in $Sites)
+{
+New-ADOrganizationalUnit -Name $S -Description "$S" -Path "OU=$FirstOU,DC=$Dom,DC=$EXT" -ProtectedFromAccidentalDeletion $false
+foreach ($Serv in $Services)
+{
+New-ADOrganizationalUnit -Name $Serv -Description "$S $Serv" -Path "OU=$S,OU=$FirstOU,DC=$Dom,DC=$EXT" -ProtectedFromAccidentalDeletion $false
+}
+}
+После выполнения скрипта у нас в AD появилась такая структура OU.
+
+Для переноса объектов между контейнерами AD можно использовать командлет Move-ADObject:
+$TargetOU = "OU=Buhgalteriya,OU=Computers,DC=corp,DC=winitpro,DC=ru"
+Get-ADComputer -Filter 'Name -like "BuhPC*"' | Move-ADObject -TargetPath $TargetOU
+Get-ADReplicationFailure: Проверка репликации в AD
+С помощью командлета Get-ADReplicationFailure можно проверить состояние репликации между контроллерами домена AD:
+Get-ADReplicationFailure -Target DC01,DC02
+Получить информацию обо всех DC в домене с помощью командлета Get-AdDomainController:
+Get-ADDomainController –filter * | select hostname,IPv4Address,IsGlobalCatalog,IsReadOnly,OperatingSystem | format-table –auto
+
+Итак, в этой статье мы рассмотрели базовые возможности и особенности использования модуля AD для PowerShell для администрирования AD. Надеюсь, эта статья подтолкнет вас к дальнейшему исследованию возможностей этого модуля и автоматизации большинства задач управления AD.
