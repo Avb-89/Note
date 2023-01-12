@@ -37,7 +37,7 @@ services:
         # задаем пароль для root пользователя
         environment:
 
-         - MYSQL_ROOT_PASSWORD=chd8h14
+         - MYSQL_ROOT_PASSWORD=password!
          - MYSQL_DATABASE=magento2
          - MYSQL_USER=magento2
          - MYSQL_PASSWORD=magento2

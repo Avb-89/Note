@@ -1,7 +1,7 @@
 Удобста:
 
 Создать пользователя
-# net user root chd8h14 /add
+# net user root password! /add
 
 Узнать имя пользователя
 # whoami
