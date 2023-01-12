@@ -115,12 +115,12 @@ Command (? for help): w
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 ======
 
-Затем я включил сервер ssh, и добавил пользователя avb, чтобы после установки можно было сразу логиниться в систему:
+Затем я включил сервер ssh, и добавил пользователя user, чтобы после установки можно было сразу логиниться в систему:
 ======
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-    users.extraUsers.avb = {
+    users.extraUsers.user = {
         isNormalUser = true;
         uid = 1000;
         # я одмин ^_^

@@ -22,4 +22,4 @@ services:
         # задаем пароль для sa пользователя
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=Fdnjcnfn2012!
+            - SA_PASSWORD=password!

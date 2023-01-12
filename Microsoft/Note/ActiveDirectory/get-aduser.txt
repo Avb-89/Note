@@ -10,13 +10,13 @@ New-ADUser -Name "Test User1" -GivenName "Test" -Surname "User1" -SamAccountName
 =========================================
 **Для изменения пароля пользователя:**
 
-    Set-ADAccountPassword avb -Reset
+    Set-ADAccountPassword user -Reset
 
 =========================================
 **Для добавления его в группу:**
 
     Get-ADGroup -Filter * | ft   **получить список групп**
-    Add-ADGroupMember "DNSOPS" -Members avb  **внести пользователя в группу**
+    Add-ADGroupMember "DNSOPS" -Members user  **внести пользователя в группу**
 =========================================
 
 **Поиск пользователей**

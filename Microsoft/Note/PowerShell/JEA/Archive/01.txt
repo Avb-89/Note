@@ -6,7 +6,7 @@
 
 **Добавить в нее пользователя**
 
-        Add-ADGroupMember "DNSOPS" -Members avb
+        Add-ADGroupMember "DNSOPS" -Members user
 
 **Создать папку в C:\Program Files\WindowsPowerShell\Modules\**
 
