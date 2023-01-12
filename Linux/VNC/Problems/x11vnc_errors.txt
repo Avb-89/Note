@@ -9,5 +9,6 @@ The session starts like normal...
 
 
 
-отредактируйте etc/gdm3/custom.conf и раскомментируйте etc/gdm3/custom.conf и расскоментируйте #WaylandEnable=false by ssh. 
+отредактируйте etc/gdm3/custom.conf и раскомментируйте etc/gdm3/custom.conf 
+и расскоментируйте #WaylandEnable=false by ssh. 
 @see How do you switch from Wayland back to Xorg in Ubuntu 17.10? – 

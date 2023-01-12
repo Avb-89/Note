@@ -1,8 +1,8 @@
 Добавить пользователя:
- ($adduser admin2)
+ $ sudo adduser admin2 
 ===========================
 Добавить в группу:
- $ usermod -aG sudo admin2
+ $ sudo usermod -aG sudo admin2
 ===========================
 Удалить пользователя:
  $userdel -r -Z bugakov
