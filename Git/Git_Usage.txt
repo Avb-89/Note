@@ -1,10 +1,11 @@
-[Источник](https://proglib.io/p/git-for-half-an-hour)
-
 
 ## === Установка ===
  For Ubuntu - `$ sudo apt-get install git`
 
- For Mac - `$ brew install git`
+ For Mac - Он предустановлен, если не ошибка:
+ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+ то:
+  # xcode-select --install
 
 ## === Настройка ===
 `$ git config  user.name "My Name"`
