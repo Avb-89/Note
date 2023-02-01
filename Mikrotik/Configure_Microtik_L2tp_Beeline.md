@@ -35,9 +35,9 @@
 |4 RS ether5  |    ether  |         1500 |  1598 |      9214 | DC:2C:6E:01:57:5B|
 |5 RS WLAN2G  |    wlan   |         1500 |  1600 |      2290 | DC:2C:6E:01:57:5C|
 
-`[sitis@MikroTik] > interface disable WLAN2G,ether2,ether3,ether4,ether5`
+`[sitis@MikroTik] > interface disable ether1,ether2,ether3,ether4,ether5`
 
-    Я подключен через ether1 проводом поэтому этот интерфейс я не выключаю
+    Я подключен через wlan поэтому эти интерфейсы я не выключаю
 
 
 ## === Настройка портов и моста (bridge) ===
@@ -48,9 +48,6 @@
 
 Далее идём в меню Bridge и добавляем два моста – bridge1-LAN и bridge2-WAN
 
-WinBox – добавляем bridge-LAN
-
-WinBox – добавляем bridge-LAN
 
 Далее открываем там же вкладку Ports и добавляем там порты в наши мосты )) Порты ether1-ether4 и wlan1-wlan2 в бридж bridge1-LAN, порт ether5 соответственно в bridge2-WAN
 
