@@ -1,0 +1,62 @@
+1 - Сброс конфигурации и настройка времени
+[admin@MikroTik] > system reset-configuration 
+[admin@MikroTik] > system clock set time-zone-name=Europe/Samara 
+[admin@MikroTik] > system clock set time=11:33:00
+[admin@MikroTik] > system clock set date=feb/01/2023
+
+
+2 - отключение всех интерфейсов кроме настроечного порта
+[admin@MikroTik] > interface print
+[admin@MikroTik] > interface disable ether1,ether2,ether3,ether4,ether5,wlan2
+
+3 - добавление пользователя, отключение админа
+[admin@MikroTik] > user add name=username password=pass group=full 
+[admin@MikroTik] > user disable admin 
+[admin@MikroTik] > system reboot
+
+4 - переименовываем интерфейсы для удобства использования
+[admin@MikroTik] > interface edit ether1 name (internet)
+[admin@MikroTik] > interface edit ether2 name (TV)
+[admin@MikroTik] > interface edit ether3 name (PS4)
+[admin@MikroTik] > interface edit ether4 name (user1)
+[admin@MikroTik] > interface edit ether5 name (user2)
+[admin@MikroTik] > interface edit wlan2 name  (wi-fi-5g)
+[admin@MikroTik] > interface edit wlan1 name  (wi-fi-2g)
+
+5 - включаем интерфейс internet 
+[admin@MikroTik] > interface enable internet
+
+6 - создаем подключение beeline
+interface l2tp-client add name=Beeline max-mtu=1420 connect-to=tp.internet.beeline.ru user=dogovor password=pass default-route-distance=1 allow=chap add-default-route=yes 
+
+7 - ковыряние в dhcp
+[admin@MikroTik] > ip dhcp-client edit internet default-route-distance (10)
+[admin@MikroTik] > ip dhcp-client option add name=parameter_request_list code=55 value=0x01F90321062A 
+[admin@MikroTik] > ip dhcp-client edit internet dhcp-options (добавить parameter_request_list)
+[admin@MikroTik] > ip dhcp-server edit defconf lease-time (3d)
+
+8 - прописываем роуты
+[admin@MikroTik] > ip route add dst-address=195.239.225.93 gateway=10.14.240.1 scope=30 target-scope=10
+[admin@MikroTik] > ip route add dst-address=195.239.225.94 gateway=10.14.240.1 scope=30 target-scope=10
+
+После этого подключение к интернету на микротике заработает.
+
+9 - Чтобы интернет появился в сети
+
+[admin@MikroTik] > interface list member set interface=Beeline
+
+10 - защищаемся
+ip firewall filter add chain=input protocol=tcp dst-port=21,22,23,3389,8291,80,443,8728,8729 in-interface-list=WAN connection-state=new action=add-src-to-address-list address-list=Moms_Hacker comment=Block_attacks
+ip firewall raw add chain=prerouting in-interface-list=WAN src-address-list=Moms_Hacker action=drop comment=Block_attack
+ip firewall filter add chain=input protocol=tcp dst-port=21,22,23,3389,8291,80,443,8728,8729 in-interface=internet connection-state=new action=add-src-to-address-list address-list=Moms_Hacker comment=Block_attacks
+ip firewall raw add chain=prerouting in-interface=internet src-address-list=Moms_Hacker action=drop comment=Block_attack
+
+
+ 11 - настройка WiFi
+
+interface wireless security-profiles add name=W5G mode=dynamic-keys authentication-types=wpa2-psk unicast-ciphers=aes-ccm group-ciphers=aes-ccm wpa2-pre-shared-key=pass group-key-update=1h management-protection=disabled 
+interface wireless security-profiles add name=W2G mode=dynamic-keys authentication-types=wpa2-psk unicast-ciphers=aes-ccm group-ciphers=aes-ccm wpa2-pre-shared-key=pass group-key-update=1h management-protection=disabled 
+interface wireless edit wi-fi-5g ssid (W5G)
+interface wireless edit wi-fi-5g security-profile (W5G)
+interface wireless edit wi-fi-2g security-profile (W2G)
+interface wireless edit wi-fi-2g ssid (W2G)

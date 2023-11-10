@@ -1,0 +1,332 @@
+Добрый день!
+
+Все чаще стучась в различные компании разработчиков в качестве DevOps инженера, я получаю приблизительно одни и те же тестовые задания. Они отличаются друг от друга версиями PHP или проектами которые надо запустить.
+Но в целом они упираются в одну связку это Nginx\Appache, SQL (тут вариаций много, все зависит от предпочтений заказчика), PHP и желательно чтобы это было разложено по контейнерам.
+Поэтому я решил рассказать на примере, как все это поднять без особых усилий.
+Возможно кому-то это поможет понять, на простом примере, что к чему.
+Описывать что такое Docker я не буду, т.к. статей на эту тему вагон и маленькая тележка.
+
+В данной статье, мы подготовим небольшую структуру:
+- В качестве вэб сервера будет использоваться Nginx с минимальной настройкой для запуска проекта;
+- В качестве SQL будет использовать MySQL;
+- PHP7.0-fpm версия c небольшими надстройками для запуска нашего проекта;
+- В качестве проекта который мы будем разворачивать - берем magento2.
+
+Для начала установим Docker.
+Все зависит от системы в которой вы хотите работать, в отношении кроссплатформенности, docker приятно удивляет (один и тот же файл конфигурации позволяет собрать и запустить контейнеры на любой системе *nix, Win, iOS).
+
+Для Linux (к примеру в CentOS).
+
+Устанавливаем:
+<source lang="bash"># yum install docker
+</source>
+Включаем и стартуем сервис:
+<source lang="bash">
+# systemctl enable docker.service
+# systemctl start docker.service
+</source>
+Чтобы наша структура создавалась одной командой нам потребуется docker-compose.
+
+Для начала поставим необходимые для него компоненты:
+<source lang="bash">
+# yum install epel-release
+# yum install -y python-pip
+</source>
+Дальше устанавливаем docker-compose и обновляем python:
+<source lang="bash">
+# yum install docker-compose</source>
+(или # pip install docker-compose)
+
+<source lang="bash">
+# yum upgrade python*
+</source>
+
+Для Win систем (многие считают это извращением)
+Но если вы решили, настоятельно рекомендую вам это делать на версии которая поддерживает Hyper-V (например win10 Prof).
+Включаем компонент Hyper-V в "Включении и отключении компонентов Windows" (Turn Windows features on or of).
+Скачиваем установщик с оф.сайта докера и устанавливаем. Также, дополнительно вы можете поставить GUI (Kitematiс) для наглядного отображения.
+
+Приступим к созданию окружения:
+
+Для начала создадим под этот проект папку и заходим в нее:
+<source lang="bash">
+# mkdir /mage (папка может быть названа как угодно)
+# cd /mage
+</source>
+Дальше строим структуру папок таким образом:
+<source lang="bash">
+# mkdir MySQL Nginx PHP
+</source>
+Создаем понятную среду для nginx:
+<source lang="bash">
+# cd Nginx
+# mkdir core html Logs www
+</source>
+
+MySQL - в этой папке будут храниться базы. Удобно бэкапить и переносить.
+Nginx - тут будут храниться логи, файл конфигурации и наш проект.
+PHP - сюда мы сложим Dockerfile с настройками и php.ini.
+в корне (в нашем случе папка /mage) будет лежать файл docker-compose.yml.
+
+Создадим конфигурационный файл для Nginx:
+<source lang="bash">
+# cd /mage/Nginx/core
+# touch nginx.conf
+# nano nginx.conf
+</source>
+Можно использовать любой другой редактор. Если его нет - можно установить с помощью:
+
+<source lang="bash">
+# yum install nano
+</source>
+
+И добавляем в nginx.conf следующее:
+
+<source lang="python">
+server {
+    listen 80;
+    index index.php index.html index.htm;
+    server_name magento2.dev;
+    set $MAGE_ROOT /var/www/magento2;
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root $MAGE_ROOT;
+
+
+location ~* \.php$ {
+    try_files $uri $uri/ /index.php last;
+    fastcgi_split_path_info  (.+?\.php)(/.*)$;
+    fastcgi_pass php:9000;
+    fastcgi_index index.php;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+location ~* .php/ { rewrite  (.*.php)/ $1 last; }
+}
+</source>
+Это минимальный конфиг для того, чтобы все завелось.
+В первом блоке описываем какой порт слушать, перечисляем возможные index страницы, обзываем,
+создаем alias для длинного пути где лежит magento2, пишем - какие логи нужны и указываем где они должны храниться, указываем папку где живет magento2 (в данном случае наш alias $MAGE_ROOT)
+
+Во втором блоке прописываем параметры fastcgi.
+
+Третий блок нужен для решения проблемы отображения, в проекте показывалась пустая страница. Из документации вычитал что magento2 требует реврайтинга. (на других проектах таким проблем не возникало)
+
+В папке www создаем каталог для нашего проекта:
+<source lang="bash">
+# cd /mage/Nginx/www
+# mkdir magento2
+</source>
+
+скачиваем с оф.сайта <a href="https://magento.com/tech-resources/download">magento2</a>
+и извлекаем из архива в папку /mage/Nginx/www/magento2
+
+C настройками для Nginx мы закончили.
+
+Теперь займемся PHP:
+
+Начнем с Dockerfile
+
+<source lang="bash"># cd /mage/PHP
+# touch Dockerfile php.ini
+# nano Dockerfile
+</source>
+
+Cобираем сами:
+
+<source lang="python">
+FROM php:7.0-fpm
+
+RUN apt-get update && apt-get install -y \
+curl \
+wget \
+git \
+libfreetype6-dev \
+libjpeg62-turbo-dev \
+libxslt-dev \
+libicu-dev \
+libmcrypt-dev \
+libpng12-dev \
+libxml2-dev \
+
+&& docker-php-ext-install -j$(nproc) iconv mcrypt mbstring mysqli pdo_mysql zip \
+&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+&& docker-php-ext-install -j$(nproc) gd
+
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install xsl
+RUN docker-php-ext-install soap
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
+
+WORKDIR /var/www/magento2
+
+CMD ["php-fpm"]
+</source>
+Это нужно, чтобы мы могли использовать те модули, которые нужны именно под этот проект.
+
+В этом файле мы рассказали что должно быть установленно в этом образе, а так же указали где будет располагаться корневая директория и куда скопировать настройки из php.ini
+
+Теперь настроим php.ini:
+
+<source lang="bash">
+# nano php.ini
+</source>
+
+Это взято из php.ini.sample который предлагают сами разработчики Magento2. Нечего сверхъестественного я в него не добавлял.
+
+<source lang="php">memory_limit = 2G
+
+always_populate_raw_post_data = -1
+
+cgi.fix_pathinfo = 1
+
+fastcgi_split_path_info = 1
+
+max_execution_time = 18000
+
+flag session.auto_start = off
+
+zlib.output_compression = on
+
+suhosin.session.cryptua = off
+
+display_errors = Off
+</source>
+
+
+Все, на этом настройка PHP закончена.
+
+Дальше создаем файл docker-compose который нам все соберет в одну удобную систему.
+
+<source lang="bash">
+# cd /mage
+# touch docker-compose.yml
+# nano docker-compose.yml
+</source>
+
+Тут мы распишем какие сервисы и с какими настройками должны запуститься:
+
+<source lang="python">
+# Пропишем версию
+version: '3.3'
+# Перечислим сервисы
+services:
+    nginx:
+# Пропишем какой образ мы хотим использовать
+        image: nginx:latest
+# Назовем свой контейнер по красивому
+        container_name: nginx
+# Проброс портов
+        ports:
+            - "80:80"
+            - "443:443"
+# Проброс папок
+        volumes:
+            - ./Nginx/core:/etc/nginx/conf.d
+            - ./Nginx/www:/var/www/
+            - ./Nginx/Logs:/var/log/nginx/
+            - ./Nginx/html:/usr/share/nginx/html/
+# Укажем зависимости
+        links:
+            - php
+
+    mysql:
+
+        image: mysql:latest
+
+        ports:
+            - "3306:3306"
+
+        container_name: mysql
+# Пропишем настройки, предлагаю использовать вместо mypassword более сложный пароль, он пренадлежит root
+        environment:
+
+            - MYSQL_ROOT_PASSWORD=mypassword
+            - MYSQL_DATABASE=magento2
+            - MYSQL_USER=magento2
+            - MYSQL_PASSWORD=magento2
+
+
+        volumes:
+            - ./MySQL:/var/lib/mysql
+
+
+    php:
+# Билдим с помощью dockerfile указав директорию где он лежит
+        build: ./PHP
+
+        container_name: php-fpm
+
+        volumes:
+            - ./Nginx/www:/var/www
+
+        links:
+            - mysql
+
+
+    phpmyadmin:
+
+        image: phpmyadmin/phpmyadmin
+
+        container_name: phpmyadmin
+
+        ports:
+
+            - 8090:80
+
+        links:
+            - mysql:db
+</source>
+
+(или если не хотите наблюдать за работой контейнеров можете добавить -d)
+
+И по экрану побегут строчки, а вы спокойно можете налить себе кружечку горячего кофе, пока машина будет работать за вас.
+
+После установки, у вас в папке MySQL, создастся много файлов и папок, одна из которых будет magento2, а в папке Nginx/Logs появятся 2 лога.
+
+Открыв браузер и набрав там http://localhost вы должны увидеть приглашение к установке Magento2.
+
+Если все таки что-то не получилось, то возможно этот список решений, сможет вам помочь:
+
+1) Версия docker-compose файла не подошла, тогда нужно поправить "version: '3.3'", посмотреть какая именно подойдет вам можно <a href="https://docs.docker.com/compose/compose-file/">тут
+</a>
+2) Все нормально запустилось, но браузер открывает чистую страницу, без единой ошибки - поможет строчка в nginx.conf
+
+<source lang="python">"location ~* .php/ { rewrite  (.*.php)/ $1 last; }"</source>
+
+3) Если после установки самой Magento2 (в браузере) у вас не прорисовываются фреймы и все выглядит как текстовый вариант сайта, вам нужно сделать следующее:
+
+3.1 в SQL, советую зайти через phpmyadmin http://localhost:8090 логин root пароль mypassword, выбрать базу magento2 и ввести sql запрос
+
+<source lang="sql">insert into core_config_data (config_id, scope, scope_id, path, value) values (null, 'default', 0, 'dev/static/sign', 0)</source>
+
+3.2 подключиться к контейнеру c PHP (php-fpm) и набрать
+
+<source lang="bash"># php bin/magento cache:clean config
+# php bin/magento setup:static-content:deploy</source>
+
+Он должен пересчитать и проверить все. И после этого все корректно должно отображаться.
+
+4) Если у Docker нет прав на запись в папки (это он скажет если вы набрали ) docker-compose up (без -d)
+
+4.1 в линуксе надо отключить политику защиты
+Отключение до перезагрузки
+
+# setenforce Permissive
+
+или отключение навсегда
+
+<source lang="bash"># nano /etc/selinux/config</source>
+меняем строчку
+"SELINUX=disabled"
+
+4.2 В windows нужно в настройках docker выбрать shared drivers и выбрать диск на котором у вас лежит проект. После перезапуска Docker проблема уйдет.
+
+Удачи вам в ваших начинаниях господа!
+
+I m Done.

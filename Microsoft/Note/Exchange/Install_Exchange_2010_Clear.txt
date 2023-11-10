@@ -1,0 +1,24 @@
+
+
+Перед установкой непосредственно самого сервера Exchange нужно:
+– добавить свою учетную запись в группы AD Administrators, Schema Admins, Enterprise Admins а также в группу локальных администраторов на сервере;
+Доустановить компоненты:
+# Import-Module ServerManager
+# add-WindowsFeature NET-Framework,RSAT-ADDS,Web-Server,Web-Basic-Auth,Web-Windows-Auth,Web-Metabase,Web-Net-Ext,Web-Lgcy-Mgmt-Console,WAS-Process-Model,RSAT-Web-Server,Web-ISAPI-Ext,Web-Digest-Auth,Web-Dyn-Compression,NET-HTTP-Activation,Web-Asp-Net,Web-Client-Auth,Web-Dir-Browsing,Web-Http-Errors,Web-Http-Logging,Web-Http-Redirect,Web-Http-Tracing,Web-ISAPI-Filter,Web-Request-Monitor,Web-Static-Content,Web-WMI,RPC-Over-HTTP-Proxy
+
+Установить доп пакеты:
+
+Microsoft Office 2010 Filter Packs (http://www.microsoft.com/en-us/download/details.aspx?id=17062).
+Microsoft Office 2010 Filter Packs Service Pack 1 (http://www.microsoft.com/en-us/download/details.aspx?id=26604). 
+
+Далее осуществляется подготовка Active Directory: обновление схемы леса и домена. Последовательно выполним команды:
+Setup.com /PrepareSchema
+
+Setup.com /PrepareAD
+
+Setup.com /PrepareDomain
+
+Примечание. Если установка Exchange Server 2010 выполняется с «нуля» (предыдущие версии отсутствуют), параметр /PrepareAD нужно водить вместе с ключом /OrganizationName.
+
+Установка типового сервера Exchange Server 2010 SP3 на Windows Server 2012 выполняется с помощью команды:
+Setup.com /mode:install /roles:ca,mb,ht /ExternalCASServerDomain:webmail.winitpro.ru

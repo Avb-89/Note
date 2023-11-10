@@ -1,0 +1,15 @@
+pls use sftp:
+
+sftp:
+
+put - передача файлов на удаленную систему
+get - передача файлов на локальную систему
+
+SYNOPSIS
+       sftp  [-46aCfpqrv] [-B buffer_size] [-b batchfile] [-c cipher] [-D sftp_server_path] [-F ssh_config] [-i iden‐
+       tity_file] [-l limit] [-o ssh_option] [-P port] [-R num_requests] [-S program] [-s  subsystem  |  sftp_server]
+       host
+       sftp [user@] host[:file ...]
+       sftp [user@] host[:dir[/]]
+       sftp -b batchfile [user@]host
+       

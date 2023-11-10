@@ -1,0 +1,16 @@
+
+
+repadmin /syncall dc01.elims.org.ua
+repadmin /syncall dc02.elims.org.ua
+repadmin /syncall dc03.elims.org.ua
+
+repadmin.exe поставляется в пакете Support Tools, который вам нужно скачать и установить.
+На клиентских компьютерах ее можно скопировать вручную с сервера или установить пакет RSAT.
+
+Посмотреть результат последних репликаций можно с помощью команды:
+repadmin /showrepl
+
+
+Реплицировать контролеры домена можно также через оснастку "Active Directory Sites and Services":
+Разверните в левой части окна дерево: Sites -> Default-First-Site -> Servers -> ServerName -> NTDS Settings.
+В правой части окна кликните правой кнопкой мышки по "automatically generated" и выберите пункт меню "Replicate Now"

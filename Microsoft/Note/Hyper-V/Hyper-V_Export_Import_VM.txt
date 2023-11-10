@@ -1,0 +1,10 @@
+﻿Экспорт виртуальной машины в папку
+#Export-VM -Name VM01 -Path C:\VME\
+
+Импорт виртуальной машины из папки
+#Import-VM -Path 'C:\VME\VM02\Virtual Machines\C661DFBC-9891-4C4C-882D-607A3B722508.vmcx' -copy -GenerateNewId -VhdDestinationPath 'C:\Users\Public\Documents\Hyper-V\Virtual hard disks\VM02\'
+
+После Импорта виртуаьной машины могу возникнуть проблемы с запуском. Мне жаловалось на недоступность IDE контроллера (Типа он занят) надо:
+1) Удалить Контроллеры
+2) Сохранить - запустить
+3) Добавить снова и включить в него ( в IDE ) диск

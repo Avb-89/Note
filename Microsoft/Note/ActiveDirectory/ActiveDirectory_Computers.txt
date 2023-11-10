@@ -1,0 +1,25 @@
+Get-ADcomputer
+
+Get-ADComputer -Identity 'computername' 
+	- поиск компьютера в AD по имени компьютера
+
+Get-ADComputer -Filter {OperatingSystem -like '*XP*'} | ft
+	- Выбрать все компьютеры с определенным ОС
+
+Get-ADComputer -Filter { OperatingSystem -Like '*Windows Server*' } -Properties OperatingSystem | Select Name, OperatingSystem | Format-Table –AutoSize
+	- Выбрать все компьютеры с серверной ОС
+
+Get-ADComputer -identity 'Computername' -Properties * | FT Name, LastLogonDate -Autosize 
+	- посмотреть когда последний раз подключался
+
+Get-ADComputer -filter * -Properties * | FT Name, LastLogonDate -Autosize 
+	- Увидеть когда подключались все компьютеры
+
+Get-ADComputer -SearchBase ‘OU=Moscow,DC=winitpro,DC=loc’ -Filter * -Properties * | FT Name, LastLogonDate -Autosize
+	- Чтобы вывести данные о компьютерах в определенном контейнере домена (OU), воспользуйтесь параметром SearchBase:
+
+Get-ADComputer -Filter 'Name -like "BuhPC*"' -Properties IPv4Address | Format-table Name,DNSHostName,IPv4Address -A
+	- Список компьютеров, чьи имена начинаются с BuhPC
+
+
+

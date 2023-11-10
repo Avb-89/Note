@@ -1,0 +1,407 @@
+.
+├── ./C++
+│   └── ./C++/type_data.txt
+├── ./DevOps_Learning.txt
+├── ./Docker
+│   └── ./Docker/Note
+│       ├── ./Docker/Note/For_Linux
+│       │   ├── ./Docker/Note/For_Linux/Clean_Docker_Install.txt
+│       │   ├── ./Docker/Note/For_Linux/Command
+│       │   │   ├── ./Docker/Note/For_Linux/Command/Docker_Create_container.txt
+│       │   │   ├── ./Docker/Note/For_Linux/Command/Docker_Delete_Container.txt
+│       │   │   ├── ./Docker/Note/For_Linux/Command/Docker_Delete_Images.txt
+│       │   │   ├── ./Docker/Note/For_Linux/Command/Docker_Search_Images.txt
+│       │   │   └── ./Docker/Note/For_Linux/Command/Docker_View_started_conteiners.txt
+│       │   ├── ./Docker/Note/For_Linux/Docker_Compose
+│       │   │   ├── ./Docker/Note/For_Linux/Docker_Compose/General_comands.txt
+│       │   │   └── ./Docker/Note/For_Linux/Docker_Compose/SQLserverFile.txt
+│       │   ├── ./Docker/Note/For_Linux/General_notions.txt
+│       │   ├── ./Docker/Note/For_Linux/Install
+│       │   │   └── ./Docker/Note/For_Linux/Install/Docker-Compose.txt
+│       │   ├── ./Docker/Note/For_Linux/Setup_conteiners.txt
+│       │   ├── ./Docker/Note/For_Linux/Setup_conteiners_2.txt
+│       │   └── ./Docker/Note/For_Linux/Shpargalka.txt
+│       └── ./Docker/Note/For_Windows
+│           ├── ./Docker/Note/For_Windows/Docker_install_Nanoserver_image.txt
+│           ├── ./Docker/Note/For_Windows/Docker_windows_command_Statya.txt
+│           ├── ./Docker/Note/For_Windows/Install_docker.txt
+│           ├── ./Docker/Note/For_Windows/Remote_Management_of_a_Windows_Docker_Host.txt
+│           ├── ./Docker/Note/For_Windows/command_1_download_and_start_container.txt
+│           ├── ./Docker/Note/For_Windows/command_2_Create_a_New_Image.txt
+│           └── ./Docker/Note/For_Windows/command_3_Upload_an_Image_to_Docker.txt
+├── ./For_HABRAHABR
+│   ├── ./For_HABRAHABR/Nginx+Php-Fpm+MySQL+magento2_Docker.txt
+│   └── ./For_HABRAHABR/[How_to]
+│       └── ./For_HABRAHABR/[How_to]/[How_to]
+├── ./Git
+│   ├── ./Git/GitHub
+│   │   ├── ./Git/GitHub/Learning
+│   │   │   ├── ./Git/GitHub/Learning/Pull_new_files_in_github.txt
+│   │   │   └── ./Git/GitHub/Learning/push_local_repo_in_github.txt
+│   │   ├── ./Git/GitHub/README.md
+│   │   ├── ./Git/GitHub/README.rst
+│   │   ├── ./Git/GitHub/_config.yml
+│   │   ├── ./Git/GitHub/emoji.md
+│   │   └── ./Git/GitHub/�\224ополнени�\217.md
+│   ├── ./Git/GitLab
+│   │   ├── ./Git/GitLab/GitLab_Issue.txt
+│   │   └── ./Git/GitLab/How_to_install.txt
+│   ├── ./Git/Git_Usage.txt
+│   └── ./Git/Git_gitignore.txt
+├── ./Linux
+│   ├── ./Linux/1C
+│   │   ├── ./Linux/1C/1update_1c_rpm.txt
+│   │   ├── ./Linux/1C/postgress_command_on_1c.txt
+│   │   ├── ./Linux/1C/update_1c_deb.txt
+│   │   ├── ./Linux/1C/update_1c_rpm.txt
+│   │   └── ./Linux/1C/ustanovka-i-nastrojka-1s-na-centos-8.txt
+│   ├── ./Linux/Ansible
+│   │   ├── ./Linux/Ansible/Begin.txt
+│   │   ├── ./Linux/Ansible/Hosts.txt
+│   │   ├── ./Linux/Ansible/Playbooks.txt
+│   │   └── ./Linux/Ansible/all.txt
+│   ├── ./Linux/Apache2.txt
+│   ├── ./Linux/Apple
+│   │   ├── ./Linux/Apple/Apple_auto_route_vpn.txt
+│   │   ├── ./Linux/Apple/TTL_change.txt
+│   │   ├── ./Linux/Apple/apple_dns_view.txt
+│   │   └── ./Linux/Apple/apple_route_to.txt
+│   ├── ./Linux/Archive
+│   │   ├── ./Linux/Archive/Exctract_tar.txt
+│   │   └── ./Linux/Archive/Extract_files.txt
+│   ├── ./Linux/CentOS
+│   │   ├── ./Linux/CentOS/Disable_Protection\ policy_CentOS.txt
+│   │   ├── ./Linux/CentOS/IOSTAT.txt
+│   │   ├── ./Linux/CentOS/LAN
+│   │   │   └── ./Linux/CentOS/LAN/Network_Configure.txt
+│   │   └── ./Linux/CentOS/haracter_info_about_system.txt
+│   ├── ./Linux/Debian
+│   │   ├── ./Linux/Debian/CJDNS+IPFS_CLUSTER.txt
+│   │   ├── ./Linux/Debian/Cjdns_in_Debian
+│   │   │   ├── ./Linux/Debian/Cjdns_in_Debian/Install_cjdns.txt
+│   │   │   └── ./Linux/Debian/Cjdns_in_Debian/cjdroute.conf
+│   │   ├── ./Linux/Debian/Edit_source_list_debian.txt
+│   │   ├── ./Linux/Debian/IPFS_in_Debian
+│   │   │   └── ./Linux/Debian/IPFS_in_Debian/Install_IPFS_Cluster_Debian.txt
+│   │   └── ./Linux/Debian/WIFI
+│   │       └── ./Linux/Debian/WIFI/Debian_WIFI_HOTSPOT.txt
+│   ├── ./Linux/Edit_source_list_debian.txt
+│   ├── ./Linux/Find.txt
+│   ├── ./Linux/Get_serialnumber_notebook.txt
+│   ├── ./Linux/HDD
+│   │   ├── ./Linux/HDD/Btrfs_HDD_Filesystem.txt
+│   │   ├── ./Linux/HDD/Linux_free_space.txt
+│   │   ├── ./Linux/HDD/Razmetka_HDD.txt
+│   │   └── ./Linux/HDD/mount_lvm_disks.txt
+│   ├── ./Linux/Humor
+│   │   └── ./Linux/Humor/Patch_Barmina.txt
+│   ├── ./Linux/Information
+│   │   ├── ./Linux/Information/Linux_Cpu_information.txt
+│   │   └── ./Linux/Information/Linux_device_Information.txt
+│   ├── ./Linux/Install_ifconfig.txt
+│   ├── ./Linux/Kerberos
+│   │   └── ./Linux/Kerberos/�\222вод_комп�\214�\216�\202е�\200а_в_домен.txt
+│   ├── ./Linux/LAN
+│   │   ├── ./Linux/LAN/Linux_auto_route_vpn.txt
+│   │   ├── ./Linux/LAN/Linux_look_vpn.txt
+│   │   ├── ./Linux/LAN/Linux_route_to.txt
+│   │   └── ./Linux/LAN/Linux_vpn_operating.txt
+│   ├── ./Linux/Linux_Rename_files_extentions.txt
+│   ├── ./Linux/New_Workstation.txt
+│   ├── ./Linux/Nginx
+│   │   └── ./Linux/Nginx/Php-fpm
+│   │       └── ./Linux/Nginx/Php-fpm/Config_for_php-fpm.txt
+│   ├── ./Linux/NixOS
+│   │   ├── ./Linux/NixOS/Install_nixOS.txt
+│   │   ├── ./Linux/NixOS/Install_nixOS_01.txt
+│   │   ├── ./Linux/NixOS/Install_nixOS_Programms.txt
+│   │   ├── ./Linux/NixOS/Install_nixOS_V2.txt
+│   │   ├── ./Linux/NixOS/Musorka.txt
+│   │   ├── ./Linux/NixOS/NixOPS
+│   │   │   └── ./Linux/NixOS/NixOPS/What_is_NixOPS.txt
+│   │   ├── ./Linux/NixOS/NixOS_Repository.txt
+│   │   ├── ./Linux/NixOS/NixOS_Upgrade_ver.up.txt
+│   │   └── ./Linux/NixOS/linksnixos.txt
+│   ├── ./Linux/Problems
+│   │   └── ./Linux/Problems/bad_interpreter_No_such_file_or_directory.txt
+│   ├── ./Linux/RAID
+│   │   ├── ./Linux/RAID/RAID_Action_arconf_Adaptek_ASR7805.txt
+│   │   ├── ./Linux/RAID/RAID_Action_hpssacli_SmartArrayP410.txt
+│   │   ├── ./Linux/RAID/RAID_Info_arcconf_Adaptek_ASR7805.txt
+│   │   └── ./Linux/RAID/RAID_Info_hpssacli_SmartArrayP410.txt
+│   ├── ./Linux/RAM
+│   │   └── ./Linux/RAM/Linux_swap_manipulation.txt
+│   ├── ./Linux/README.txt
+│   ├── ./Linux/SQL
+│   │   ├── ./Linux/SQL/fault-tolerant_system_MySQL.txt
+│   │   └── ./Linux/SQL/postgresql.txt
+│   ├── ./Linux/SSH
+│   │   ├── ./Linux/SSH/SSH_Enable_root_auth.txt
+│   │   ├── ./Linux/SSH/SSH_Issue.txt
+│   │   ├── ./Linux/SSH/SSH_generate_RSA_ed25519_keys.txt
+│   │   ├── ./Linux/SSH/SSH_non_Password_auth.txt
+│   │   ├── ./Linux/SSH/SSH_tunel.txt
+│   │   └── ./Linux/SSH/WinSCP_for_linux.txt
+│   ├── ./Linux/SSL
+│   │   └── ./Linux/SSL/Show_Certificate_Site_mail.txt
+│   ├── ./Linux/Services_linux.txt
+│   ├── ./Linux/Users
+│   │   ├── ./Linux/Users/linux_add_user.txt
+│   │   └── ./Linux/Users/sudo_nopassword.txt
+│   ├── ./Linux/VNC
+│   │   └── ./Linux/VNC/Problems
+│   │       └── ./Linux/VNC/Problems/x11vnc_errors.txt
+│   ├── ./Linux/VPN
+│   │   ├── ./Linux/VPN/Cisco_connect_vpn_Linux.txt
+│   │   └── ./Linux/VPN/Forty_client_vpn_Linux.txt
+│   ├── ./Linux/Zabbix
+│   │   ├── ./Linux/Zabbix/Create_alerts.txt
+│   │   └── ./Linux/Zabbix/Install_and_settings.txt
+│   ├── ./Linux/add_service_in_autorun.txt
+│   ├── ./Linux/advanced_copy_cp_move_mv_status_bar.txt
+│   ├── ./Linux/alias.txt
+│   ├── ./Linux/command_linux.txt
+│   ├── ./Linux/connect_videocard_in_vm.txt
+│   ├── ./Linux/cp_copy_command.txt
+│   ├── ./Linux/get_version_linux.txt
+│   ├── ./Linux/get_version_package_in_repo.txt
+│   ├── ./Linux/install_viber.txt
+│   ├── ./Linux/mc_colors_change.txt
+│   ├── ./Linux/mcedit_colortheme.txt
+│   ├── ./Linux/nfs_share_connect_fstab_mount.txt
+│   ├── ./Linux/taskwarrior.txt
+│   ├── ./Linux/tmux_command.txt
+│   ├── ./Linux/tree.txt
+│   ├── ./Linux/vpn_pptp_not_use_remote_gateway.txt
+│   ├── ./Linux/winscp_scp_for_linux.txt
+│   ├── ./Linux/yadisk_connect.txt
+│   └── ./Linux/zabbix_certificate_available.txt
+├── ./Microsoft
+│   └── ./Microsoft/Note
+│       ├── ./Microsoft/Note/ActiveDirectory
+│       │   ├── ./Microsoft/Note/ActiveDirectory/ActiveDirectory_Computers.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/ActiveDirectory_Export_Users.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/ActiveDirectory_Sites.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/FSMO_roles_Domain_controllers.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/Forsed_replication_domain.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/Generated_Scripts
+│       │   │   ├── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configre_Servers
+│       │   │   │   ├── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configre_Servers/configureServer.ps1
+│       │   │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configre_Servers/prepServer.ps1
+│       │   │   ├── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configure_Domain
+│       │   │   │   ├── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configure_Domain/buildDomainController.ps1
+│       │   │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configure_Domain/prepDomainController.ps1
+│       │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/new_domain_autoscript.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/get-adgroup_ad_group.txt
+│       │   ├── ./Microsoft/Note/ActiveDirectory/get-aduser.txt
+│       │   └── ./Microsoft/Note/ActiveDirectory/�\222вод\ комп�\214�\216�\202е�\200а\ в\ домен\ Windows.ini
+│       ├── ./Microsoft/Note/BitLocker
+│       │   └── ./Microsoft/Note/BitLocker/Unlock.txt
+│       ├── ./Microsoft/Note/CMD
+│       │   ├── ./Microsoft/Note/CMD/Create_file.txt
+│       │   ├── ./Microsoft/Note/CMD/Shutdown.txt
+│       │   ├── ./Microsoft/Note/CMD/SysPrep(Prepair_to_copy).txt
+│       │   └── ./Microsoft/Note/CMD/services.txt
+│       ├── ./Microsoft/Note/Configure_computer.txt
+│       ├── ./Microsoft/Note/Connect_Server_to_Domain.txt
+│       ├── ./Microsoft/Note/Connect_to_domain_Nanoserver.txt
+│       ├── ./Microsoft/Note/Create_WIM_image
+│       ├── ./Microsoft/Note/Create_WIM_image.txt
+│       ├── ./Microsoft/Note/Create_file_PowerShell.txt
+│       ├── ./Microsoft/Note/DFSR_txtlet.txt
+│       ├── ./Microsoft/Note/DHCP
+│       │   └── ./Microsoft/Note/DHCP/Add-DhcpServer.txt
+│       ├── ./Microsoft/Note/DNS
+│       │   ├── ./Microsoft/Note/DNS/DNS_Cache_show_IP.txt
+│       │   ├── ./Microsoft/Note/DNS/DNS_Command.txt
+│       │   └── ./Microsoft/Note/DNS/DNS_Records.txt
+│       ├── ./Microsoft/Note/Disk_info.txt
+│       ├── ./Microsoft/Note/Download_files_and_unzip_archive.txt
+│       ├── ./Microsoft/Note/Download_files_with_WGET.txt
+│       ├── ./Microsoft/Note/Exchange
+│       │   ├── ./Microsoft/Note/Exchange/ExchangeCalc9.1.xlsm
+│       │   ├── ./Microsoft/Note/Exchange/Install_Exchange_2010_Clear.txt
+│       │   └── ./Microsoft/Note/Exchange/Install_Exchange_2013_Clear.txt
+│       ├── ./Microsoft/Note/Execution_Policy_script_allow.txt
+│       ├── ./Microsoft/Note/Firewall_allow_all_Traffic.txt
+│       ├── ./Microsoft/Note/Forrmat_USB_Boot.txt
+│       ├── ./Microsoft/Note/GPO
+│       │   ├── ./Microsoft/Note/GPO/Gpo_PowerShell.txt
+│       │   └── ./Microsoft/Note/GPO/show_politics_wish_permission.ps1
+│       ├── ./Microsoft/Note/Get-WinEvent_logs_windows.txt
+│       ├── ./Microsoft/Note/Get_Model_and_Sireal_Number.txt
+│       ├── ./Microsoft/Note/Hyper-V
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_ADD_Memory_In_VM.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Create_New_VM.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Disks(VHD,VHDX).txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Export_Import_VM.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_LAN.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Nested_Processors.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_RemoteFX_Win7.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Replication.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Resurse_monitoring.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_Security_boot.txt
+│       │   ├── ./Microsoft/Note/Hyper-V/Hyper-V_command.txt
+│       │   └── ./Microsoft/Note/Hyper-V/Hyper-v_Remote_Premmisions.txt
+│       ├── ./Microsoft/Note/INFO
+│       │   ├── ./Microsoft/Note/INFO/taskManager_Process.txt
+│       │   └── ./Microsoft/Note/INFO/wmic.txt
+│       ├── ./Microsoft/Note/LAN
+│       │   └── ./Microsoft/Note/LAN/netsh.txt
+│       ├── ./Microsoft/Note/LAN.txt
+│       ├── ./Microsoft/Note/Linux_first_commands.txt
+│       ├── ./Microsoft/Note/NOW_INSTALL_INFRASTRUCTURE_PS
+│       │   └── ./Microsoft/Note/NOW_INSTALL_INFRASTRUCTURE_PS/Install_AD_PS.txt
+│       ├── ./Microsoft/Note/New-ADUser_Создание_пол�\214зова�\202ел�\217_в_AD.txt
+│       ├── ./Microsoft/Note/Office
+│       │   └── ./Microsoft/Note/Office/ODT_Office\ Deployment\ Tool_C2R.txt
+│       ├── ./Microsoft/Note/PSGallery.txt
+│       ├── ./Microsoft/Note/PowerShell
+│       │   ├── ./Microsoft/Note/PowerShell/DSC
+│       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_Install_DHCP.txt
+│       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_insall_AD_DNS_USERS_ETC.txt
+│       │   │   └── ./Microsoft/Note/PowerShell/DSC/Description\ for\ xModules.txt
+│       │   ├── ./Microsoft/Note/PowerShell/JEA
+│       │   │   ├── ./Microsoft/Note/PowerShell/JEA/Archive
+│       │   │   │   └── ./Microsoft/Note/PowerShell/JEA/Archive/01.txt
+│       │   │   ├── ./Microsoft/Note/PowerShell/JEA/Example_config_JEA_psrc.txt
+│       │   │   └── ./Microsoft/Note/PowerShell/JEA/Example_config_JEA_pssc.txt
+│       │   ├── ./Microsoft/Note/PowerShell/PowerShell_install_modules.txt
+│       │   ├── ./Microsoft/Note/PowerShell/PowerShell_version.txt
+│       │   ├── ./Microsoft/Note/PowerShell/Pssession
+│       │   │   ├── ./Microsoft/Note/PowerShell/Pssession/PSsession.txt
+│       │   │   └── ./Microsoft/Note/PowerShell/Pssession/PSsession_WINRM.txt
+│       │   ├── ./Microsoft/Note/PowerShell/SQL
+│       │   │   └── ./Microsoft/Note/PowerShell/SQL/Get-Database.txt
+│       │   └── ./Microsoft/Note/PowerShell/WindowsImage
+│       │       └── ./Microsoft/Note/PowerShell/WindowsImage/customizeWindowsImage.txt
+│       ├── ./Microsoft/Note/PowerShell_services.txt
+│       ├── ./Microsoft/Note/Powershell_Set_LAN_Settings.txt
+│       ├── ./Microsoft/Note/Program_PS.txt
+│       ├── ./Microsoft/Note/RDP
+│       │   ├── ./Microsoft/Note/RDP/Problems
+│       │   │   ├── ./Microsoft/Note/RDP/Problems/RDP_Error_CredSSP_encrypt_Oracle.txt
+│       │   │   ├── ./Microsoft/Note/RDP/Problems/RDP_not_connecting_on_server.txt
+│       │   │   ├── ./Microsoft/Note/RDP/Problems/Rdp_not_server_licence.txt
+│       │   │   └── ./Microsoft/Note/RDP/Problems/�\237�\200опадае�\202_�\217з�\213кова�\217_панел�\214_в_RDP_�\201еан�\201е.txt
+│       │   ├── ./Microsoft/Note/RDP/RDP_Forwarding_audio_device.txt
+│       │   ├── ./Microsoft/Note/RDP/RDP_Proccrss_users.txt
+│       │   ├── ./Microsoft/Note/RDP/RDP_connect_shadow_to_users.txt
+│       │   └── ./Microsoft/Note/RDP/RDP_turn_on.txt
+│       ├── ./Microsoft/Note/Remove_Program_PS.txt
+│       ├── ./Microsoft/Note/Rename_files_extentions.txt
+│       ├── ./Microsoft/Note/Routine_tasks
+│       │   └── ./Microsoft/Note/Routine_tasks/Rename_files_extentions.ps1
+│       ├── ./Microsoft/Note/SLMGR_Activation_Windows.txt
+│       ├── ./Microsoft/Note/Search.txt
+│       ├── ./Microsoft/Note/Sertifications
+│       │   ├── ./Microsoft/Note/Sertifications/README.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-comptia.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-itil.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-learning-platforms.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-microsoft.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-network.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-online-communities.txt
+│       │   ├── ./Microsoft/Note/Sertifications/certification-security.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cs-training.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cs-youtube.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-101.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-blogs.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-books.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-cheat-sheets.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-cno.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-deception.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-df.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-exploit-development.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-exploits.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-iaad.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-malware-analysis.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-news-sources.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-nso.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-pen-testing.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-re.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-red-v-blue.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-tactical-techniques.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-wireless-sec.txt
+│       │   ├── ./Microsoft/Note/Sertifications/cyber-youtube.txt
+│       │   ├── ./Microsoft/Note/Sertifications/dev-git.txt
+│       │   ├── ./Microsoft/Note/Sertifications/dev-python.txt
+│       │   ├── ./Microsoft/Note/Sertifications/dev-tools.txt
+│       │   ├── ./Microsoft/Note/Sertifications/dev-training.txt
+│       │   └── ./Microsoft/Note/Sertifications/dev-youtube.txt
+│       ├── ./Microsoft/Note/Set_Disk_Letter.txt
+│       ├── ./Microsoft/Note/Set_reg.exe_with_PS.txt
+│       ├── ./Microsoft/Note/Take_off_acces_for_use_Profile_PS1.txt
+│       ├── ./Microsoft/Note/UPS
+│       │   └── ./Microsoft/Note/UPS/APS\ SMART\ UPS\ 5000
+│       │       └── ./Microsoft/Note/UPS/APS\ SMART\ UPS\ 5000/UPS_Network_configuration.txt
+│       ├── ./Microsoft/Note/Use_Windows_without_GUI.txt
+│       ├── ./Microsoft/Note/User_profile_remove_delete_get.txt
+│       ├── ./Microsoft/Note/User_profile_remove_delete_get1.txt
+│       ├── ./Microsoft/Note/VPN
+│       │   └── ./Microsoft/Note/VPN/CiscoVPN_SHREV.txt
+│       ├── ./Microsoft/Note/VSS.txt
+│       ├── ./Microsoft/Note/View_Files_Folders_Tree.txt
+│       ├── ./Microsoft/Note/WInPE
+│       │   └── ./Microsoft/Note/WInPE/Create_Image_WinPE.txt
+│       ├── ./Microsoft/Note/WMIC_Installed_Programm.txt
+│       ├── ./Microsoft/Note/Windows_11_install_without_lan.txt
+│       ├── ./Microsoft/Note/Windows_Update.txt
+│       ├── ./Microsoft/Note/configureDiskAndApplyWIM.txt
+│       ├── ./Microsoft/Note/configureNanoServer.ps1
+│       ├── ./Microsoft/Note/createNanoServerImage.ps1
+│       ├── ./Microsoft/Note/createWinPEBootableUSB.txt
+│       ├── ./Microsoft/Note/customizeWindowsImage.txt
+│       ├── ./Microsoft/Note/get-proccess_ps.txt
+│       ├── ./Microsoft/Note/get-winEvent.txt
+│       ├── ./Microsoft/Note/get_Info_information_version_file.txt
+│       ├── ./Microsoft/Note/new-NetFirewallRule.txt
+│       ├── ./Microsoft/Note/nppBackup
+│       │   ├── ./Microsoft/Note/nppBackup/Create_WIM_image.MD.2018-04-03_004626.txt
+│       │   └── ./Microsoft/Note/nppBackup/Create_WIM_image.MD.2018-04-03_021256.txt
+│       ├── ./Microsoft/Note/time_sync_resync.txt
+│       ├── ./Microsoft/Note/windows_update_cool_preset_view.txt
+│       └── ./Microsoft/Note/Ч�\202о_должен_зна�\202�\214_WindowsSYSADMIN.txt
+├── ./Mikrotik
+│   ├── ./Mikrotik/Config_home.txt
+│   ├── ./Mikrotik/Configure_Microtik_L2tp_Beeline.md
+│   ├── ./Mikrotik/First_Configure_Mikrotik.md
+│   ├── ./Mikrotik/LAN.md
+│   ├── ./Mikrotik/Readme.md
+│   ├── ./Mikrotik/User.md
+│   └── ./Mikrotik/temp.txt
+├── ./Python
+│   ├── ./Python/Key_words.txt
+│   ├── ./Python/Other_input_Functions.txt
+│   ├── ./Python/Syntax.txt
+│   ├── ./Python/Syntax_Running_programm.txt
+│   └── ./Python/Syntax_specific.txt
+├── ./README.md
+├── ./SQL
+│   ├── ./SQL/Access_to_create_table_for_user.txt
+│   ├── ./SQL/MySQL_shpargalka.txt
+│   ├── ./SQL/SQL_Acces_table.txt
+│   ├── ./SQL/SQL_shrink_log.txt
+│   └── ./SQL/sqllite3.txt
+├── ./UEFI
+│   └── ./UEFI/Create_Boot_Flash.txt
+├── ./Virtualization
+│   ├── ./Virtualization/ESXI
+│   │   ├── ./Virtualization/ESXI/ESXI_diagnostic_lan.txt
+│   │   └── ./Virtualization/ESXI/Update_ESXI_online.txt
+│   ├── ./Virtualization/Note
+│   │   ├── ./Virtualization/Note/Commands_ESXI.txt
+│   │   ├── ./Virtualization/Note/Hyper-V_on_VMware.txt
+│   │   ├── ./Virtualization/Note/Locked_file.txt
+│   │   ├── ./Virtualization/Note/Rename_HOST.txt
+│   │   ├── ./Virtualization/Note/SFTP.txt
+│   │   ├── ./Virtualization/Note/VM_manipulation_CLI
+│   │   │   ├── ./Virtualization/Note/VM_manipulation_CLI/Create_VM.txt
+│   │   │   └── ./Virtualization/Note/VM_manipulation_CLI/Esxi_Command_VM.txt
+│   │   └── ./Virtualization/Note/nppBackup
+│   │       └── ./Virtualization/Note/nppBackup/Hyper-V_on_VMware.txt
+│   └── ./Virtualization/Rename_ESXI_host.md
+├── ./index.txt
+└── ./temp.txt
+
+88 directories, 316 files

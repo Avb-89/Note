@@ -1,0 +1,7 @@
+COnfigure server with scconfig
+
+use command^
+
+PS C:\>sconfig
+
+Позволяет управлять конфигурацией компа с командной строки.

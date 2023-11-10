@@ -1,0 +1,11 @@
+создаем файл /etc/ppp/ip-up 
+
+#!/bin/sh
+/sbin/route add -net 192.168.10.0/24 -interface ppp0
+
+или 
+
+#!/bin/sh
+/sbin/route add -net 192.168.161.0/24 10.10.0.240
+
+дал ему прав на исполнение: chmod +x /etc/ppp/ip-up

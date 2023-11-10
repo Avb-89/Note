@@ -1,0 +1,5 @@
+Запросить базы данных на локальном сервере сервере
+
+Get-SqlDatabase -Credential $SqlCredential | Sort size |Format-Table -AutoSize
+
+Чтобы сработало, нужен модуль SQLSever

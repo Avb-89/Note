@@ -1,0 +1,10 @@
+ cat /etc/os-release
+
+  journalctl -u parity -f
+
+   nixos-rebuild switch -I nixpkgs=/root/airapkgs/
+
+
+    nixos-rebuild switch --upgrade
+
+    nix-channel --add https://nixos.org/channels/nixos-18.09 nixos

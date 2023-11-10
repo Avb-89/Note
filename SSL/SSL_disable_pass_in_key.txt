@@ -1,0 +1,3 @@
+сначала надо переименовать MironovaL.key в MironovaL.pass.key
+
+openssl rsa -in MironovaL.pass.key -out MironovaL.key

@@ -1,0 +1,10 @@
+netsh
+
+посмотреть настройки сети
+netsh interface ip show config
+
+
+изменить параметры сети
+netsh interface ipv4 set address name=Ethernet source=static address=192.168.100.2/24 gateway=192.168.100.1 store=persistent
+netsh dns set dnsservers name=Ethernet source=static address=127.0.0.1
+netsh interface ip delete arpcache

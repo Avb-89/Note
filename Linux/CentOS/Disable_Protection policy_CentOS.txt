@@ -1,0 +1,8 @@
+Отключение до перезагрузки
+setenforce Permissive
+
+или
+
+отключение навсегда
+vim /etc/selinux/config
+SELINUX=disabled

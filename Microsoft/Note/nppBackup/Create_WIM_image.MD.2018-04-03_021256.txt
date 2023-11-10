@@ -1,0 +1,25 @@
+Create WIM Image:
+
+YOU MAST HAVE A WINDOWS PE!!!!!! (And check ImageX)
+
+1) boot in windows ISO and select recovery
+
+2) select comand line and input:
+# wpeinit
+# diskpart
+# select disk 0
+# clean
+# create partition primary size=100
+# select partition 1
+# format fs=ntfs quick label=SYSTEM
+# active
+# create partition primary
+# select partition 2
+# format fs=ntfs quick label=WINDOWS
+# assign letter=g
+# exit
+
+3) connect a share folder
+# net use z: \\sitis\reminst\images (folder must be share)
+# z:
+# imageX /apply win7.wim 1 g:

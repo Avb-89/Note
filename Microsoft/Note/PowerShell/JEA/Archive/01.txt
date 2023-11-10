@@ -1,0 +1,46 @@
+**Начало**
+
+**создать группу в AD**
+
+        New-ADGroup DNSOPS -GroupCategory Security -GroupScope Global
+
+**Добавить в нее пользователя**
+
+        Add-ADGroupMember "DNSOPS" -Members user
+
+**Создать папку в C:\Program Files\WindowsPowerShell\Modules\**
+
+        я создал папку DNSOPS
+
+**Создать манифест модуля в папке DNSOPS (которую я создал)**
+
+        New-ModuleManifest .\DNSOPS.psd1
+
+**Созадать папку для хранения файла возможностей**
+
+        создал папку RoleCapabilities и перешел в нее
+
+**Генерируем файл возможностей**
+
+        New-PSRoleCapabilityFile -Path .\DNSOPS.psrc
+
+**Редактируем файл возможнсотей "psrc"**
+
+***Можно редактором в системе, а можно использовать редктов ISE но это
+будет работать только если вы подключены PSSession через ISE.***
+
+        psedit .\DNSOPS.psrc
+
+**Генерируем файл применения "pssc"**
+
+        New-PSSessionConfigurationFile -Path .\DNSOPS.pssc -full
+
+**Редактируем файл  "pssc"**
+
+        PSEdit .\DNSOPS.pssc
+
+**Регистрируем конфигуацию**
+
+        Register-PSSessionConfiguration -name DNSOPS -Path .\DNSOPS.pssc
+
+***В конце концов на практике это не сработало.***

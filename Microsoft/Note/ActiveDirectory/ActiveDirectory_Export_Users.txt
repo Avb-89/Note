@@ -1,0 +1,5 @@
+Get-ADGroupMember 'Mazda' -Recursive | ft name, SamaccountName >C:\WorkReports\UsersAD.txt
+
+s pochtovimi yashikami
+
+PS C:\Users\Adm> Get-ADGroupMember 'Mazda' -Recursive | foreach {get-aduser $_ -properties mail } | ft name, samaccountname, mail, Password > C:\WorkReports\UsersAD.txt

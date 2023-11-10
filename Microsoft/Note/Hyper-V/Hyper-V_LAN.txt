@@ -1,0 +1,79 @@
+Создать виртуальный свитч
+
+PS C:\> New-VMSwitch -ComputerName VM001.mshome.net -SwitchName NAT -SwitchType Internal
+
+
+Дать IP адрес хосту 
+New-NetIPAddress -InterfaceIndex 22 -IPAddress 192.168.4.1 -PrefixLength 24
+
+
+Создать нат сеть в хосте.
+New-NetNat -Name NAT -InternalIPInterfaceAddressPrefix "192.168.4.0/24"
+Удалить нат сеть в хосте.
+Remove-NetNat -Name NAT
+
+Получить доступ с наружи и внутри через эту сеть
+Add-NetNatStaticMapping -NatName NAT -Protocol TCP -ExternalIPAddress 0.0.0.0 -InternalIPAddress 192.168.4.20 -InternalPort 80 -ExternalPort 80
+
+Ограничение пропускной способности сети
+Выбрать в консоли Hyper-V Settings VM - Network adapter и поставить галочку Enable Bandwith managment и выбрать скорость. 
+млм
+Set-VMNetworkAdapter -MinimumBandwidthWeight
+!!! НЕ СТОИТ ВКЛЮЧАТЬ ЕЕ БЕЗ ОСТРОЙ НЕОбХОДИМОСТИ, СЛИШКОМ МНОГО ПРОБЛЕМ ВЫЗЫВАЕТ !!!
+
+Выдать сетевой карте VM MAC Adress
+ Set-VMNetworkAdapter -StaticMacAddress
+ Set-VMNetworkAdapter -DynamicMacAddress
+ 
+Узнать нагрузку маштабирования сетевой карты.
+На обычных пк, вся нагрузка обработки информации по сети идет на первый процессор, чем тормозит его. В Windows 2016  нагрузка аспределяется по процессорам, и этим не дает загрузить процессор обработкой больших обьемов данных из сети.
+	Get-NetAdapterrss
+
+Создать свитч построенный на NIC (технология работает только с 2мя стевыми катами)
+New-VMSwitch -EnableEmbeddedTeaming $true -NetAdapterName "NIC1", "NIC2"
+
+команда включает RDMA 
+Enable-NetAdapterRdma 
+
+
+Добавить сетевую карту в VM
+NAME
+    Add-VMNetworkAdapter
+
+SYNTAX
+    Add-VMNetworkAdapter [-VMName] <string[]> [-CimSession <CimSession[]>] [-ComputerName <string[]>] [-Credential
+    <pscredential[]>] [-SwitchName <string>] [-IsLegacy <bool>] [-Name <string>] [-DynamicMacAddress]
+    [-StaticMacAddress <string>] [-Passthru] [-ResourcePoolName <string>] [-DeviceNaming {On | Off}] [-WhatIf]
+    [-Confirm]  [<CommonParameters>]
+
+    Add-VMNetworkAdapter [-CimSession <CimSession[]>] [-ComputerName <string[]>] [-Credential <pscredential[]>]
+    [-ManagementOS] [-SwitchName <string>] [-Name <string>] [-DynamicMacAddress] [-StaticMacAddress <string>]
+    [-Passthru] [-DeviceNaming {On | Off}] [-WhatIf] [-Confirm]  [<CommonParameters>]
+
+    Add-VMNetworkAdapter [-VM] <VirtualMachine[]> [-SwitchName <string>] [-IsLegacy <bool>] [-Name <string>]
+    [-DynamicMacAddress] [-StaticMacAddress <string>] [-Passthru] [-ResourcePoolName <string>] [-DeviceNaming {On |
+    Off}] [-WhatIf] [-Confirm]  [<CommonParameters>]
+	
+Для создания изолированной сети
+
+NAME
+    Set-VMNetworkAdapterIsolation
+
+SYNTAX
+    Set-VMNetworkAdapterIsolation [-VMName] <string[]> [-VMNetworkAdapterName <string>] [-CimSession <CimSession[]>]
+    [-ComputerName <string[]>] [-Credential <pscredential[]>] [-IsolationMode {None | NativeVirtualSubnet |
+    ExternalVirtualSubnet | Vlan}] [-AllowUntaggedTraffic <bool>] [-DefaultIsolationID <int>] [-MultiTenantStack {On |
+    Off}] [-Passthru] [-WhatIf] [-Confirm]  [<CommonParameters>]
+
+    Set-VMNetworkAdapterIsolation [-VMNetworkAdapter] <VMNetworkAdapterBase[]> [-IsolationMode {None |
+    NativeVirtualSubnet | ExternalVirtualSubnet | Vlan}] [-AllowUntaggedTraffic <bool>] [-DefaultIsolationID <int>]
+    [-MultiTenantStack {On | Off}] [-Passthru] [-WhatIf] [-Confirm]  [<CommonParameters>]
+
+    Set-VMNetworkAdapterIsolation -ManagementOS [-VMNetworkAdapterName <string>] [-CimSession <CimSession[]>]
+    [-ComputerName <string[]>] [-Credential <pscredential[]>] [-IsolationMode {None | NativeVirtualSubnet |
+    ExternalVirtualSubnet | Vlan}] [-AllowUntaggedTraffic <bool>] [-DefaultIsolationID <int>] [-MultiTenantStack {On |
+    Off}] [-Passthru] [-WhatIf] [-Confirm]  [<CommonParameters>]
+
+    Set-VMNetworkAdapterIsolation [-VM] <VirtualMachine[]> [-VMNetworkAdapterName <string>] [-IsolationMode {None |
+    NativeVirtualSubnet | ExternalVirtualSubnet | Vlan}] [-AllowUntaggedTraffic <bool>] [-DefaultIsolationID <int>]
+    [-MultiTenantStack {On | Off}] [-Passthru] [-WhatIf] [-Confirm]  [<CommonParameters>]

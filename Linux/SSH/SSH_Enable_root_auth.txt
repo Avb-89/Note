@@ -1,0 +1,14 @@
+разрешить root подключать по SSH
+
+Задаем пароль root
+passwd root
+
+идем в настройки ssh
+/etc/ssh/sshd_config
+ищем строчку PermitRootLogin — задаем значение yes
+PermitRootLogin yes
+
+* если параметр закомментирован, снимаем комментарий.
+** по умолчанию, значение может быть without-password или prohibit-password — оно разрешает вход для root средствами GSSAPI (не парольной аутентификации), например, смарт-карты или отпечатка пальца.
+
+/etc/init.d/ssh reload

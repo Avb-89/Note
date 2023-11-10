@@ -1,0 +1,12 @@
+[<< Home](/README.md)
+
+# Books
+* [Red Team Field Manual](http://www.amazon.com/Rtfm-Red-Team-Field-Manual/dp/1494295504/)
+* [Blue Team Field Manual](https://www.amazon.com/Blue-Team-Field-Manual-BTFM/dp/154101636X/)
+* [The Hacker Playbook 2: Practical Guide To Penetration Testing](https://www.amazon.com/Hacker-Playbook-Practical-Penetration-Testing/dp/1512214566)
+* [Red Team: How to Succeed By Thinking Like the Enemy](https://www.amazon.com/Red-Team-Succeed-Thinking-Enemy/dp/0465048943/)
+* [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)
+* [Violent Python: A Cookbook for Hackers, Forensic Analysts, Penetration Testers and Security Engineers](https://www.amazon.com/Violent-Python-Cookbook-Penetration-Engineers/dp/1597499579/)
+* [Gray Hat Python: Python Programming for Hackers and Reverse Engineers](https://www.amazon.com/Gray-Hat-Python-Programming-Engineers/dp/1593271921/)
+* [Free Security eBooks from PacktPub](https://github.com/aidanharris/Free-Security-eBooks-from-PacktPub)
+* [Free Security eBooks from Hack with Github](https://github.com/Hack-with-Github/Free-Security-eBooks)

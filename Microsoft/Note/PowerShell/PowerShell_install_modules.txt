@@ -1,0 +1,21 @@
+
+
+
+
+Если модули не устанавливаются то скорее всего проблема в TLS. Посмотреть поддерживаемые протоколы:
+
+[enum]::GetNames([Net.SecurityProtocolType])
+
+Задать протокол (на эту сессию)
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+Установить модуль:
+
+Install-Module SqlServer
+
+Если лички сыпятся типа таких:
+
+"PackageManagement\Install-Package : A command with name 'SQLSERVER:' is already available on this system. This module 'SqlServer' may override the existing commands. If you still want to install this module 'SqlServer', use -AllowClobber parameter."
+
+Install-Module -Name SqlServer -Force –AllowClobber

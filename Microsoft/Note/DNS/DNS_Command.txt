@@ -1,0 +1,11 @@
+Управление DNS
+================
+
+**Посмотреть все записи ресурсов в зоне home.lab**
+
+        Get-DnsServerResourceRecord -ZoneName home.lab
+
+**Добавить запись типа A**
+
+        Add-DnsServerResourceRecord -ZoneName Home.lab -A -Name Test-SRV1 -IPv4Address 192.168.100.202
+        

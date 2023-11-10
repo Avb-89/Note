@@ -1,0 +1,29 @@
+$ sudo apt-get update
+$ sudo apt-get upgrade -y
+Устанавливаем окружение:
+
+$ sudo apt-get update
+$ sudo apt-get install -y remmina rdesktop openssh-server openssh-sftp-server smbclient python
+создаем пользователя с администраторскими правами:
+
+$ sudo su
+# passwd
+# adduser admin2
+# usermod -aG sudo admin2
+# reboot
+логинимся под root и лишаем прав autostat
+
+$ su -
+# gpasswd -d autostat sudo
+# reboot
+Настройка smbclient и remmina
+
+в /etc/samba/smb.conf установить workgroup = autostat
+в настройках remmina удалить host_key (по умолчанию right control, мешает работе пользователей)
+Настраиваем автоматически вход в RDP
+
+$ sudo touch /home/autostat/connect.sh
+$ tee /home/autostat/connect.sh
+rdesktop server -u username -d autostat -p password -f      # server - имя сервера username - имя пользователя итд
+$ sudo chmod +x connect.sh
+Дальше добавляем его в атозагрузку и выключаем РМ

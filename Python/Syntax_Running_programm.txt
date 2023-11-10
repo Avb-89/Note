@@ -1,0 +1,9 @@
+Python running programms
+
+from subprocess import call
+call (['notepad'])
+
+or
+
+import os
+os.system('notepad')

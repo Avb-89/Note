@@ -1,0 +1,112 @@
+﻿Установка CJDNS и Класстер IPFS
+
+Добрый день!
+
+Эту статью я начал писать очень давно, но никак не хватало времени закончить, за это время много чего изменилось, например проэкт CJDNS к сожалению загнулся (но все еще работает, и пользуется популярностью) 
+
+Для развертывания я испоьзовал Debian 9.5.0
+
+Для начала надо поправить sources.list для того чтобы можно было тянуть программы и обновления с инета, по умолчанию она использует dvd привод для получения программ и обновлений.
+
+# nano /etc/apt/sources.list
+Просто закоментируйте строчки  
+
+Устанавливаем сетевые утилиты:
+
+# apt-get install net-tools
+
+Настраиваем возможность root подключаться по SSH
+
+# nano etc/ssh/sshd_config
+ищем строчку PermitRootLogin — задаем значение yes
+
+# /etc/init.d/ssh reload
+
+Добавляем ключи для доступа
+mkdir ~/.ssh
+nano ~/.ssh/authorized_keys
+и вписываем ключи клиентов которые будут подключаться.
+
+++++++++++
+Если у них нет ключей, их можно создать.
+Создать ключ RSA
+
+# ssh-keygen rsa
+
+1024-битные DSA и RSA уже устаревают и они уже не являются безопасными. Рекомендую использовать ed25519
+
+Создать ключ ed25519
+ssh-keygen -o -a 100 -t ed25519
+
+Ключ который вы должны дать в машину `*.pub`
+++++++++++
+
+Установка cjdns на debian
+
+# apt-get install nodejs git build-essential python2.7
+
+Скачиваем cjdns из GitHub.
+Склонируйте репозиторий из GitHub:
+
+git clone https://github.com/cjdelisle/cjdns.git /CJDNS
+cd /CJDNS
+
+2. Компилируем.
+./do
+
+Дождитесь сообщения Build completed successfully, type ./cjdroute to begin setup.
+
+0: Убедитесь, что у вас всё установлено корректно.
+LANG=C cat /dev/net/tun
+Если ответ: cat: /dev/net/tun: File descriptor in bad state,то всё отлично!
+
+1: Генерируем новый файл с настройками.
+./cjdroute --genconf >> cjdroute.conf
+
+Запускаем!
+# nano /bin/cjdns
+cd /CJDNS && ./cjdroute < cjdroute.conf
+# chmod +x /bin/cjdns
+# cjdns
+Если вы хотите записывать логи в файл, то:
+sudo ./cjdroute < cjdroute.conf > cjdroute.log
+
+# nano /etc/hosts
+fceb:5cc2:caf7:79a4:9a67:bff:bb3e:8a55 node1
+fca9:f0db:3015:746f:6a01:cb8f:32ea:38fa node2
+
+Установка IPFS
+
+Скачать последнее go
+# apt-get update
+# apt-get install golang-go -y
+
+Скачать с оф сайта  https://dist.ipfs.io/#go-ipfs дистрибутив go-ipfs
+# wget https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz
+
+# tar xvfz go-ipfs_v0.4.17_linux-amd64.tar.gz
+# mv go-ipfs/ipfs /usr/local/bin/ipfs
+
+Проверим
+# ipfs version
+
+Инициализация
+
+# IPFS_PATH=~/.ipfs ipfs init
+
+Смотрим для проверки что все получилось ридми
+
+# ipfs cat /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv/readme
+
+Смотрим чтобы появились все папки
+
+# ls ~/.ipfs*
+blocks  config  datastore  datastore_spec  keystore  version
+
+Going Online
+Once you’re ready to take things online, run the daemon in another terminal:
+> ipfs daemon
+Initializing daemon...
+
+проверяем пиры
+> ipfs swarm peers

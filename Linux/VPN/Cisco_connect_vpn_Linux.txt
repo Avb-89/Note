@@ -1,0 +1,52 @@
+Cisco AnyConnect Client
+Cisco AnyConnect Client — это VPN-клиент для подключения к серверу Cisco SSL VPN. Как сказано на сайте Cisco — «предоставляет сотрудникам возможность работать в любое время и в любой точке земного шара, не только на корпоративных ноутбуках, но и на персональных мобильных устройствах».
+
+Скачиваем AnyConnect и извлекаем из архива
+
+$ wget http://ttcit.net/download/linux/anyconnect-linux64-4.6.03049-predeploy-k9.tar.gz
+$ tar xzvf anyconnect-linux64-4.6.03049-predeploy-k9.tar.gz
+Смотрим, что было в архиве
+
+$ cd anyconnect-linux64-4.6.03049/
+$ ls
+dart  nvm  posture  vpn
+Переходим с директорию vpn и запускаем скрипт установки
+
+$ sudo ./vpn_install.sh
+Во время установки нужно принять лицензионное соглашение:
+
+Do you accept the terms in the license agreement? [y/n] y
+You have accepted the license agreement.
+Please wait while Cisco AnyConnect Secure Mobility Client is being installed...
+Starting Cisco AnyConnect Secure Mobility Client Agent...
+Done!
+Можно еще установить DART с помощью скрипта dart_install.sh из директории dart, но это не обязательно.
+
+DART (AnyConnect Diagnostics and Reporting Tool) — инструмент, с помощью которого можно собрать логи и данные, полезные для устранения проблем с установкой AnyConnect и проблем с подключением. В настоящее время доступен как отдельное приложение, так и как часть инфраструктуры AnyConnect.
+
+Находим в списке приложений AnyConnect и добавляем его в Избранное:
+
+
+
+Запускаем VPN-клиент и вводим IP-адрес VPN-сервера, Username и Password. Но перед соединением с VPN-сервером снимаем галочку «Block connections to untrusted servers»:
+
+
+
+Теперь нужно установить Remmina — клиент удаленного рабочего стола. Перед установкой убедитесь, что клиент еще не установлен — у меня, на Ubuntu 18.04, приложение уже было в списке установленных.
+
+$ sudo apt install remmina
+Находим в списке приложений Remmina и добавляем в Избранное:
+
+
+Запускаем RDP-клиент и добавляем новое соединение (зеленый крестик слева сверху). Вводим IP-адрес удаленного компьютера, имя пользователя, пароль, домен — и сохраняем соединение:
+
+
+Все, можно подключаться:
+
+
+
+Есть смысл выполнить еще две настройки (иконки слева):
+
+Переключить в режим динамического обновления разрешения
+Переключить в режим масштабирования
+Скачать Cisco AnyConnect Client для linux, macos и windows можно здесь и здесь.

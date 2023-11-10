@@ -1,0 +1,14 @@
+Я пытаюсь вызвать VNC с удаленного терминала, и независимо от того, какую командную строку я отправляю, я получаю
+****
+X Error of failed request:  BadMatch (invalid parameter attributes)  
+Major opcode of failed request:  73 (X_GetImage)   
+Serial number of failed request:  40   
+Current serial number in output stream:  40
+The session starts like normal...
+****
+
+
+
+отредактируйте etc/gdm3/custom.conf и раскомментируйте etc/gdm3/custom.conf 
+и расскоментируйте #WaylandEnable=false by ssh. 
+@see How do you switch from Wayland back to Xorg in Ubuntu 17.10? – 

@@ -1,0 +1,10 @@
+DevOps нужен для автоматизации разработки программного обеспечения.
+
+Инстрменты для Continuous Integration (CI)
+
+ - Jenkins
+ - Bamboo от Atlasian
+ - TeamCity от JetBrains
+ - TravisCI
+ - Consourse CI
+ - GitLab CI

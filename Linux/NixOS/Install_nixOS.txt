@@ -1,0 +1,62 @@
+<Install_NixOS>
+  <First_Run_NixOS>
+================================================================================
+   Download the ISO
+
+        https://nixos.org/nixos/download.html
+
+Create bootable USBdisk
+
+        "Rufus" or other programs
+
+Boot from bootable USBdisk
+
+        Need desable "security boot"
+
+Connect via ssh
+        # systemctl start sshd
+        # passwd
+        # ifconfig
+
+=============================================================================</>
+
+<Prepare_system>
+
+================================================================================
+
+Prepare disks
+
+    # gdisk /dev/sda
+    o - clean disk
+    n - new partition
+    need partition for boot:
+        for Bios +4MB ef02
+        for UEFI +512MB ef00
+          (you get sda1)
+    need partition for swap:
+        +4GB 8200
+          (you get sda2)
+    need partition for system:
+        8e00
+          (you get sda3)
+    p - shows partitions
+      verify your partitions
+    w - save changes
+
+Prepare_volume:
+
+  # pvcreate /dev/sda2
+  # vgcreate nixos /dev/sda2
+  # lvcreate --extents 100%FREE --name root nixos
+  # mkfs.ext4 /dev/nixos/root
+  # mount /dev/nixos/root /mnt
+
+==============================================================================
+
+Generate configuration:
+
+    # nixos-generate-config  --root /mnt
+
+==============================================================================
+
+    # nixos-install

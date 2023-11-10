@@ -1,0 +1,7 @@
+    /volume1/@appstore/VPNCenter/var/log/synovpncon.db
+    sqlite3 /var/packages/VPNCenter/target/var/log/synovpncon.db
+    sqlite> SELECT * FROM `synovpn_con_tb`;
+
+    sqlite3 /usr/syno/etc/packages/VPNCenter/synovpnlog.db  
+     sqlite> SELECT * FROM `synovpn_log_tb`;
+     sqlite> SELECT * from `synovpn_log_tb` where user like '%Bitrix%';

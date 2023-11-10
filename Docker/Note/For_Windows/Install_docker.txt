@@ -1,0 +1,8 @@
+Install the Docker Engine
+
+Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -Verbose
+Restart-Computer -Force
+
+Start-Service docker
+docker version

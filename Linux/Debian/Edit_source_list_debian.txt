@@ -1,0 +1,13 @@
+Sources.list находтся в etc/apt/source.list
+
+Чтобы загрузка была из интернета надо оставить строчки
+
+
+    deb http://mirror.yandex.ru/debian/ stretch main
+    deb-src http://mirror.yandex.ru/debian/ stretch main
+
+    deb http://security.debian.org/debian-security strech/updates main
+    deb-src http://security.debian.org/debian-security strech/updates main
+
+    deb http://mirror.yandex.ru/debian/ strech/updates main
+    deb-src http://mirror.yandex.ru/debian/ strech/updates main

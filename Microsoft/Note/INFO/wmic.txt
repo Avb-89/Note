@@ -1,0 +1,62 @@
+Наиболее полезные WMI запросы
+
+Версия BIOS: wmic path win32_bios get biosversion, releasedate
+
+Производитель платы и SKU системы: wmic baseboard get product,manufacturer
+
+Модель компьютера (не работает на платах производства Intel): wmic computersystem get model
+
+Производитель платы (может не совпадать с информаций в класе BIOS): wmic computersystem get manufacturer
+
+Тип шасси: wmic /namespace:\\root\cimv2 path Win32_SystemEnclosure get ChassisTypes
+
+Информация о диске: wmic diskdrive get model,name,size
+
+Получить версию Intel Management Engine firmware (ME): wmic /namespace:\\root\Intel_ME path ME_System get FWVersion
+
+Список периферийных устройств: wmic path Win32_PnPdevice
+
+Список процессов на указанном PC (включая удаленный): wmic /node:computername get name, processid
+
+Список и состояние принтеров на указанном PC: wmic /node:hostname printer list status
+
+Конфигурация принтеров: wmic printerconfig
+
+Информация об операционной системе с выводом в HTML файл: wmic os get bootdevice, buildnumber, caption, freespaceinpagingfiles, installdate, name, systemdrive, windowsdirectory /format:htable > c:\osinfo.htm
+
+Username залогиненного пользователя: wmic /node:(computername or ip address) computersystem get username
+
+Список серверов на удаленной машине: wmic /node:remotehost service list brief
+
+Список всех установленных программ: wmic product get name
+
+Архитектура компьютера: wmic computersystem get systemtype
+
+Название операционной системы: wmic os get name
+
+Список установленных апдейтов: wmic qfe get description,installedOn,Hotfixid
+
+Получить Hardware ID видеокарты: wmic PATH Win32_videocontroller GET pnpdeviceid
+
+Список программ в автозагрузке: wmic startup get caption,command
+
+Получить версию файла (обратите внимание на двойной \\ в пути к файлу): wmic datafile where name=»C:\\Windows\\notepad.exe» get version
+Список локальных пользоваелей: wmic USERACCOUNT Get Domain,Name,Sid
+Выполнить команду в удаленной консоли (без psexec!): wmic process call create «cmd.exe /c calc.exe»
+Прибить процесс: wmic process where name=»iexplore.exe» call terminate
+
+
+
+При написании скриптов на Powershell следует использовать команделт Get-WmiObject:
+
+$computer = $env:COMPUTERNAME
+$namespace = "ROOT\cimv2"
+$classname = "Win32_ComputerSystem"
+ 
+Write-Output "====================================="
+Write-Output "COMPUTER : $computer "
+Write-Output "CLASS : $classname "
+Write-Output "====================================="
+ 
+Get-WmiObject -Class $classname -ComputerName $computer -Namespace $namespace |
+Select-Object * -ExcludeProperty PSComputerName, Scope, Path, Options, ClassPath, Properties, SystemProperties, Qualifiers, Site, Container | Format-List -Property [a-z]*

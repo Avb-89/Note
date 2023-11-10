@@ -1,0 +1,106 @@
+## ===Настройка учеток===
+Создаем учетку
+
+[admin@MikroTik] > user add name=user password=password group=full
+
+Выключаем учетку админа
+
+[admin@MikroTik] > user disable admin
+
+## ===Настройка Мостов===
+
+Можно разделить сети для удобства, для этого создадим пока пустые мосты:
+
+[sitis@MikroTik] > interface bridge add name=PS4
+[sitis@MikroTik] > interface bridge add name=TV
+[sitis@MikroTik] > interface bridge add name=SRV
+[sitis@MikroTik] > interface bridge add name=WiFi
+
+Последний бридж это администраторский мост, его я планирую сделать без каких либо ограничений
+
+[sitis@MikroTik] > interface bridge add name=ADM в нашем случае, это будет вайфай.
+
+Создадим списки для каждого интерфейса ( в будущем разграничим права, и возможности каждого интерфейса) 
+Я это делаю для того, чтобы было видно на каком интерфейсе что происходит, всегда можно будет их поменять,
+и это не повлияет на работу других устройств в моей сети. вставил в 2 порт вместо телевизора PS4 - не беда, переназначил.
+одно из использований, например для PS4 нужен специальный MTU и его можно прописать мосту, а не порту.
+
+[sitis@MikroTik] > interface list add name=PS4_LAN
+[sitis@MikroTik] > interface list add name=TV_LAN
+[sitis@MikroTik] > interface list add name=SRV_LAN
+[sitis@MikroTik] > interface list add name=WiFi_LAN
+[sitis@MikroTik] > interface list add name=ADM_LAN
+
+Теперь создадим группы, и привяжем к ним наши мосты
+
+[sitis@MikroTik] > interface list member add interface=PS4 list=PS4_LAN 
+[sitis@MikroTik] > interface list member add interface=TV  list=TV_LAN  
+[sitis@MikroTik] > interface list member add interface=SRV list=SRV_LAN   
+[sitis@MikroTik] > interface list member add interface=WiFi list=WiFi_LAN   
+[sitis@MikroTik] > interface list member add interface=ADM list=ADM_LAN
+
+Теперь назначим каждому мосту свой интерфейс 
+
+[sitis@MikroTik] > interface bridge port set interface=ether2 bridge=PS4 numbers=0 
+[sitis@MikroTik] > interface bridge port set interface=ether3 bridge=TV numbers=1 
+[sitis@MikroTik] > interface bridge port set interface=ether4 bridge=SRV numbers=2 
+[sitis@MikroTik] > interface bridge port set interface=wlan2 bridge=ADM  numbers=5 
+
+numbers= это номер записи, глянуть можно так:
+interface bridge port print
+
+5 интерфейс я не переносил потому что не придумал куда его пристроить.
+wlan1 - через него я в данный момент настраиваю, если я его перенесу, то потеряю доступ к роутеру.
+
+## ===Настройка локальной сети===
+
+Сначала зададим ip адрес устройству, а также обозначим в какой сети мы будем работать и какой интерфейс будет исопльзоваться.
+
+[sitis@MikroTik] > ip address add address=192.168.44.1/24 network=192.168.44.0 interface=ADM
+
+Для сети желательно использовать DHCP сервер, т.к. он автоматически рассылает 
+
+[sitis@MikroTik] > ip dhcp-server setup
+
+Переименуем
+
+[sitis@MikroTik] > ip dhcp-server set name=DHCP_LAN numbers=1
+
+Можно настроить dhcp и вручную:
+
+[sitis@MikroTik] > ip address add address=192.168.44.1/24 network=192.168.44.0 interface=PS4
+
+[sitis@MikroTik] > ip dhcp-server network add address=192.168.22.0/24 gateway=192.168.22.1 netmask=24 dns-server=8.8.8.8,8.8.4.4 
+
+
+## ===Настройка подключения L2TP на MikroTik===
+
+Первым делом нужно настроить DHCP-Client
+
+[sitis@MikroTik] > ip dhcp-client set numbers=0 default-route-distance=10 dhcp-options=parameter_request_list,hostname,clientid
+[sitis@MikroTik] > ip dhcp-client option add name=parameter_request_list code=55 value=0x010306212A79F9
+
+Теперь натроим L2TP подключение
+
+подкл
+tp.internet.beeline.ru (L2TP) (194.186.92.15)
+gateway                    10.14.240.1
+Primary DNS		195.239.225.93
+Secondary DNS	195.239.225.94
+
+Primary DNS		195.239.225.93
+Secondary DNS		195.239.225.94
+Primary NTP		195.14.50.21
+Secondary NTP		85.21.78.23
+
+gateway 10.151.112.1
+
+Добавить маршрут 195.239.225.93 через 10.151.112.1
+
+
+
+
+
+
+
+

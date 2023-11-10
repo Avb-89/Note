@@ -1,0 +1,195 @@
+https://clsv.ru/linux/probrasyivaem_videokartu_v_virtualnuyu_mashinu,_delaem_igrovuyu_sistemu_39
+
+Пробрасываем видеокарту в виртуальную машину, делаем игровую систему.
+Бывает такой момент, что без Windows никак не обойтись, и даже wine не помогает, и тут к нам на помощь приходят виртуальный машины. Под Linux их хватает, VirtualBox, VMWare, XEN(гипервизор, но все же), qemu с kvm. Иногда нам необходима полноценная 3D графика, на виртуалке, и тут нам поможет проброс(passthrough) видеокарты в виртуалку.
+
+
+В интернете полно статей, что да как делать, но интернет у нас большой и от еще одной статейки он не лопнет.
+Для начала нам необходимо, что бы в компьютере было 2 видеокарты, например встроенная и дискретная. У меня основная видеокарта Geforce GXT 550ti, а прокидывал я GTX 650ti и Ati HD4850 и все успешно работало.
+Существует 2 вида проброса, использовать OVMF, данный проект позволяет использовать UEFI в виртуалке, но и видеокарта должна быть не простая, а аж с двумя биосами, это можно выяснить следующим образом [ http://vfio.blogspot.ru/2014/08/does-my-graphics-card-rom-support-efi.html ].
+Скачиваем, компилируем
+git clone https://github.com/awilliam/rom-parser
+cd rom-parser
+make
+Получаем BIOS видекарты
+cd /sys/bus/pci/devices/0000:01:00.0/
+echo 1 > rom
+cat rom > image.rom
+echo 0 > rom
+0000:01:00.0 — надо изменить на код вашего девайса.
+
+Проверяем BIOS ./rom-parser image.rom
+Если вы видите подобное PCIR: type 3(EFI ROM), то ваша видеокарта поддерживает OVMF.
+Valid ROM signature found @0h, PCIR offset 190h
+ PCIR: type 0, vendor: 10de, device: 1280, class: 030000
+ PCIR: revision 0, vendor revision: 1
+Valid ROM signature found @f400h, PCIR offset 1ch
+ PCIR: type 3, vendor: 10de, device: 1280, class: 030000
+ PCIR: revision 3, vendor revision: 0
+  EFI: Signature Valid
+ Last image
+Ваш конфиг виртуалки будет немножко отличаться.
+
+Я поэкспериментировал с ядрами, ни к чему интересному и хорошему это не привело, писали [https://bbs.archlinux.org/viewtopic.php?id=203240] что в ядре 4.2.2-1 поломали проброс, но как оказалось все прекрасно работает.
+Но если же у вас все же есть желание, то устанавливайте из AUR'a:
+1. [ https://aur.archlinux.org/packages/linux-vfio/ ] — на данный момент типа багнутое ядро, где сломан проброс, но используются полезные патчи для видюх интел и еще что-то там
+2. [ https://aur.archlinux.org/packages/linux-vfio-lts/ ] — рабочее ядро, с теми же патчами, что и выше.
+Как пользоваться makepkg, разберетесь сами.
+
+1. Устанавливаем необходимый софт pacman -S qemu libvirt synergy
+2. Нужно подкорректировать загрузку ядра, что бы не подцеплялась, наша видеокарта которую мы будем прокидывать. Нужно узнать id вендора и кода нашей видеокарты. Для этого выводим lspci
+02:00.0 VGA compatible controller: NVIDIA Corporation GK106 [GeForce GTX 650 Ti] (rev a1)
+02:00.1 Audio device: NVIDIA Corporation GK106 HDMI Audio Controller (rev a1)
+Находим там код видеокарты, запоминаем его, и вводим уже lspci -n
+02:00.0 0300: 10de:11c6 (rev a1)
+02:00.1 0403: 10de:0e0b (rev a1)
+Теперь правим параметры загрузки grub, для этого открываем /etc/default/grub
+и добавляем параметр в GRUB_CMDLINE_LINUX_DEFAULT pci-stub.ids=10de:11c6,10de:0e0b
+У меня следующего вида
+GRUB_CMDLINE_LINUX_DEFAULT="noresume iommu=noaperture pci-stub.ids=10de:11c6,10de:0e0b"
+Применяем параметры grub-mkconfig -o /boot/grub/grub.cfg, после перезагрузки, должно быть нечто подобное dmesg | grep pci-stub:
+[    3.616355] pci-stub: add 10DE:11C6 sub=FFFFFFFF:FFFFFFFF cls=00000000/00000000
+[    3.616375] pci-stub 0000:02:00.0: claimed by stub
+[    3.616382] pci-stub: add 10DE:0E0B sub=FFFFFFFF:FFFFFFFF cls=00000000/00000000
+[    3.616391] pci-stub 0000:02:00.1: claimed by stub
+[    3.850331] pci-stub 0000:02:00.0: enabling device (0000 -> 0003)
+Создадим файл /etc/modprobe.d/vfio.conf:
+options vfio-pci ids=10de:11c6,10de:0e0b
+И подкорректируем /etc/mkinitcpio.conf:
+...
+MODULES="vfio vfio_iommu_type1 vfio_pci vfio_virqfd"
+...
+Применим mkinitcpio -p linux(linux изменить на имя вашего ядра)
+
+3. Настраиваем и создаем виртуалку.
+Подправим конфиг qemu
+/etc/libvirt/qemu.conf:
+...
+user = "root"
+group = "root"
+clear_emulator_capabilities = 0
+...
+cgroup_device_acl = [
+    "/dev/null", "/dev/full", "/dev/zero",
+    "/dev/random", "/dev/urandom",
+    "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
+    "/dev/rtc","/dev/hpet", "/dev/vfio/vfio",
+    "/dev/vfio/1"
+]
+...
+В принципе действия для того что бы использовать ovmf те же, так вот если вам повезло и у вас видеокарта поддерживает EFI, то следующий конфиг для вас:
+pacman -S ovmf
+qemu-system-x86_64 -enable-kvm -m 1024 -cpu host,kvm=off  \
+-smp 4,sockets=1,cores=4,threads=1 \
+-device virtio-scsi-pci,id=scsi \
+-drive file=/Win/windows.img,id=disk,format=raw,if=none -device scsi-hd,drive=disk \
+-drive file=/Win/virtio-win.iso.1,id=virtiocd,if=none -device ide-cd,bus=ide.1,drive=virtiocd \
+-drive file=/Win/ru_windows_7_3in1_x64_by_AG_09.2015.iso,id=isocd,if=none -device scsi-cd,drive=isocd \
+-drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/ovmf_x64.bin \
+-vga std \
+#-device vfio-pci,host=02:00.0,x-vga=on -device vfio-pci,host=02:00.1 \
+Если же нет, используем Seabios
+qemu-system-x86_64 -enable-kvm -m 1024 -cpu host,kvm=off \
+-smp 4,sockets=1,cores=4,threads=1 \
+-device virtio-scsi-pci,id=scsi \
+-drive file=/Win/windows.img,id=disk,format=raw,if=none -device scsi-hd,drive=disk \
+-drive file=/Win/virtio-win.iso.1,id=virtiocd,if=none -device ide-cd,bus=ide.1,drive=virtiocd \
+-drive file=/Win/windows.iso,id=isocd,if=none -device scsi-cd,drive=isocd \
+-vga std \
+#-device vfio-pci,host=02:00.0,x-vga=on -device vfio-pci,host=02:00.1 \
+windows.img — образ жесткого диска, создается командой dd if=/dev/zero of=windows.img bs=1M seek=60000 count=0seek=60000 размер диска в мегабайтах.
+virtio-win.iso — образ с драйверами, берется последующей ссылки [ https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso ]
+windows.iso — образ диска с Windows, сами разберетесь где его брать, если используете ovmf убедитесь, что образ поддерживает загрузку UEFI. и при загрузке системы скорее всего надо будет ввести команду следующего вида: PS0:/EFI/BOOT/bootx64.efi
+Данные конфиги для начальной установки Windows и все должно пройти на отлично.
+
+3. После окончания установки, настало время прокинуть видеокарту.
+Раскоментируем строку в конфиге
+-device vfio-pci,host=02:00.0,x-vga=on -device vfio-pci,host=02:00.1 \
+и запустим виртуалку.
+
+Если все прошло хорошо, должно определиться новое устройство, скачиваем и устанавливаем драйвера для видеокарты, я не ставил никакого лишнего софта, только драйвера, пишут что Catalyst control center да и nvidia experience загоняет в синий экран, не проверял.
+
+Нужно не забыть установить synergy, без этой программы управление(мышкой и клавиатурой) виртуалкой будет невозможно.
+Найдете ее на торрентах или прочих сайтах, там в настройках надо указать client: 10.0.2.2(дефолтный ip хоста) и имя экрана, допустим Windows. Теперь настроим synergy на хосте(компьютер с Linux), создадим конфиг следующего содержания:
+synergy.conf
+# Example config
+section: screens
+    Windows:
+	halfDuplexCapsLock = false
+	halfDuplexNumLock = false
+	halfDuplexScrollLock = false
+	xtestIsXineramaUnaware = false
+	switchCorners = none
+	switchCornerSize = 0
+    Linux:
+	halfDuplexCapsLock = false
+	halfDuplexNumLock = false
+	halfDuplexScrollLock = false
+	xtestIsXineramaUnaware = false
+	switchCorners = none
+	switchCornerSize = 0
+end
+
+section: aliases
+    Windows:
+	10.0.2.15 # default for vm
+    Linux:
+	10.0.2.2  # default for host
+end
+
+section: links
+    Windows:
+	right = Linux
+    Linux:
+	left = Windows
+end
+
+section: options
+    relativeMouseMoves = true
+    screenSaverSync = true
+    win32KeepForeground = false
+    switchCorners = none
+    switchCornerSize = 0
+    keystroke(f12) = lockCursorToScreen(toggle)
+end
+Windows и Linux это имена экранов, измените на ваши
+Запустим synergy synergys --config synergy.conf --debug INFO, и при передвижение мышки за левую часть экрана, она должна переходить на виртуалку.
+Если все получилось, выключаем виртуальную машину, в конфиге меняем строку -vga std на -vga none, подключаем к выходу проброшенной видеокарты кабель к монитору, запускаем виртуалку и у нас на экране должна появится картинка с процессом загрузки. Проверяем функциональность synergy, кнопка F12 блокирует курсор на текущем экране.
+
+4. Прокидываем звук, если вы используете pulseaudio просто укажите перед запуском quemu QEMU_AUDIO_DRV=pa если же ALSA, то предлагаю вам использовать утилиту apulse, она есть в AUR [ https://aur.archlinux.org/packages/apulse/ ] и запуск виртуалки будет следующим QEMU_AUDIO_DRV=pa apulse qemu-system-x86_64.....5. У меня 2 монитора, и при запуске виртуалки на главный монитор(центральный) через vga идет картинка с Windows. а правый становится главным Linux'овым монитором.
+К основной видеокарте правый монитор подключен через DVI, центральный монитор подключен к «виртуальной» видюхе через VGA, а к основной через HDMI.
+Команда xrandr --output DVI-I-1 --auto && xrandr --output HDMI-0 --offВаши подключенные мониторы и возможные режимы работы можно посмотреть командой xrandr
+
+Выклаываю полный скрипт запуска виртуалки
+xrandr --output DVI-I-1 --auto && xrandr --output HDMI-0 --off
+synergys --config synergy.conf -d INFO > synergy.log
+QEMU_AUDIO_DRV=pa \
+apulse qemu-system-x86_64 -enable-kvm -m 3048 -cpu host,kvm=off  \
+-smp 6,cores=6,threads=1,sockets=1 \
+-device virtio-scsi-pci,id=scsi \
+-drive file=/Win/windows.img,id=disk,format=raw,if=none -device scsi-hd,drive=disk \
+-drive file=/Win/virtio-win.iso.1,id=virtiocd,if=none -device ide-cd,bus=ide.1,drive=virtiocd \
+-localtime \
+-soundhw hda \
+-vga none \
+-device vfio-pci,host=02:00.0,multifunction=on,x-vga=on
+xrandr --output HDMI-0 --auto && xrandr --output DVI-I-1 --off
+kill -9 `pgrep synergys`
+Так же рекомендую отключить запрос на восстановление системы при загрузке после сбоев
+bcdedit /set {current} bootstatuspolicy ignoreallfailures
+bcdedit /set {current} recoveryenabled no
+В данную тему я нырнул лишь ради интереса и возможности поиграть в ММО Black Desert, отлично кстати работает.
+
+
+
+UPD 11.10.2016
+Сегодня вновь столкнулся с пробросом видеокарты, но теперь мне нужен был еще и звук по hdmi, немного погуглив нашел решение http://vfio.blogspot.ru/2014/09/vfio-interrupts-and-how-to-coax-windows.html?m=1
+Что бы нормально работал звук через HDMI проброшенный видюхи нужно включить Message Signaled Interrupts(MSI).
+Для этого в реестре Windows необходимо внести правки, а именно в разделе HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\ найти вашу видеокарту, там будет два устройства видео и звук, далее в Device Parameters\Interrupt Management создать(если его нет) раздел MessageSignaledInterruptProperties и в нем DWORD параметр MSISupported со значением 1, он включит MSI. После перезагрузки звук должен прекрасно заработать.
+Комментарии (2)
+ Snowkai 31 мая 2017, 19:58 # 0
+А есть инфа, по тому же самому, но прокидыванию видихи из Винды в гостевой Линукс?
+ответить
+ cloudsv 01 июня 2017, 11:16(Комментарий был изменён) # ↑ 0
+Про прокидывание видеокарты в виндах не слышал и гугл видимо тоже
+ответить

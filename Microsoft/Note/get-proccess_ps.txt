@@ -1,0 +1,19 @@
+
+<Вывести процессы с именами пользователей:>
+=======================================================
+Get-Process -IncludeUserName | ft -AutoSize
+
++ Сортировка
+
+Get-Process -IncludeUserName | Sort-Object CPU  | ft -AutoSize
+=======================================================</>
+
+<Вывести процессы пользователей>
+=======================================================
+2 колонки (процесс - имя пользователя)
+
+Get-WmiObject Win32_Process -Filter "name='calculator.exe'" | 
+Select Name, @{Name="UserName";Expression={$_.GetOwner().Domain+"\"+$_.GetOwner().User}} | 
+Sort-Object UserName, Name
+=======================================================</>
+

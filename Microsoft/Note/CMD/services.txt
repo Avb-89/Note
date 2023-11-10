@@ -1,0 +1,15 @@
+Working with services:
+SC config - nastroyka ychetnih zapisey registracii i zapusca slujb
+SC query - vivod spiska slyjb nastroennih na coputere
+SC qc - otobrajenie konfiguracii opredelennoy slyjbi
+SC start - zapusk slyjb
+SC stop - ostanovka slyjb
+SC pause - priostanovka slyjb
+SC continue - Vozobnovlenie raboti slyjb
+SC failure - zadanie deistviy vipolnyaemih pri sboe slyjbi
+SC qfailure - prosmotr deistviy vipolnyaemih pri sboe slyjbi.
+
+Examples:
+sc \\192.168.1.1 query spooler - vidast info o slyjbe pechati
+sc \\192.168.1.1 query type=service state all - info o vseh slyjbah na pc
+exit

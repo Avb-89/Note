@@ -1,0 +1,25 @@
+#********************************************************
+#* Created by Alexey Vadimovich
+#* avb-89@outlook.com
+#********************************************************
+
+
+# Версия docker-compose
+version: '2'
+# Список наших сервисов (контейнеров)
+services:
+    MSSQL2019:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        container_name: MSSQL2019
+        ports:
+            - "1433:1433"
+        # Выносим нужные нам папки
+        volumes:
+            - /dcenv/SQLsettings:/var/opt/mssql/.system
+            - /SQLBases/SQLlogs:/var/opt/mssql/log
+            - /dcenv/secrets:/var/opt/mssql/secrets
+            - /SQLBases/data:/var/opt/mssql/data
+        # задаем пароль для sa пользователя
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=password!

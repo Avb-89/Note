@@ -1,0 +1,234 @@
+Шпаргалка по MySQL
+<=======================================================================================================>
+В данной шпаргалке по MySQL мы расскажем про Сброс пароля mysql, Cкрипт для добавления пользователя, как показать всех пользователей и другое.
+
+Коннект к mysql по TCP
+mysql --user root --host localhost --port 3306 --protocol tcp
+
+Создать БД
+CREATE DATABASE $DB_NAME character set utf8;
+
+Добавить пользователя
+CREATE USER $DB_USER@localhost IDENTIFIED BY '$DB_PASSWORD';
+
+Дать права пользователю на БД
+GRANT ALL ON $DB_NAME.* TO $DB_USER@localhost;
+
+на удаленный доступ:
+
+GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD';
+
+на удаленный доступ на все таблицы:
+
+grant all privileges on *.* to DB_USER@'%';
+
+сменить пароль пользователю
+SET PASSWORD FOR логин@localhost = PASSWORD('пароль'); SET PASSWORD FOR логин@"%" = PASSWORD('пароль');
+
+что бы права вступили в силу:
+
+flush privileges;
+
+Посмотреть права пользователя
+SHOW GRANTS for $DB_USER@localhost;
+
+Если нужно залить большой дамп, то в /etc/my.cnf в секцию [mysqld] добавить:
+max_allowed_packet = 16M
+
+Работа с кластером мастер-слейв
+посмотреть состояние мастера:
+
+show master status;
+
+посмотреть состояние слейва:
+
+SHOW SLAVE STATUS\G
+
+Посмотреть структуры таблицы в БД
+describe <table_name>;
+или
+
+SHOW CREATE TABLE <table_name>;
+Посмотреть состояние таблиц в БД
+SHOW TABLE STATUS;
+
+Есть еще лучше способ:
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `tools`.`sp_status` $$
+CREATE PROCEDURE `tools`.`sp_status`(dbname VARCHAR(50))
+BEGIN 
+-- Obtaining tables and views
+(
+    SELECT 
+     TABLE_NAME AS `Table Name`, 
+     ENGINE AS `Engine`,
+     TABLE_ROWS AS `Rows`,
+     CONCAT(
+        (FORMAT((DATA_LENGTH + INDEX_LENGTH) / POWER(1024,2),2))
+        , ' Mb')
+       AS `Size`,
+     TABLE_COLLATION AS `Collation`
+    FROM information_schema.TABLES
+    WHERE TABLES.TABLE_SCHEMA = dbname
+          AND TABLES.TABLE_TYPE = 'BASE TABLE'
+)
+UNION
+(
+    SELECT 
+     TABLE_NAME AS `Table Name`, 
+     '[VIEW]' AS `Engine`,
+     '-' AS `Rows`,
+     '-' `Size`,
+     '-' AS `Collation`
+    FROM information_schema.TABLES
+    WHERE TABLES.TABLE_SCHEMA = dbname 
+          AND TABLES.TABLE_TYPE = 'VIEW'
+)
+ORDER BY 1;
+-- Obtaining functions, procedures and triggers
+(
+    SELECT ROUTINE_NAME AS `Routine Name`, 
+     ROUTINE_TYPE AS `Type`,
+     '' AS `Comment`
+    FROM information_schema.ROUTINES
+    WHERE ROUTINE_SCHEMA = dbname
+    ORDER BY ROUTINES.ROUTINE_TYPE, ROUTINES.ROUTINE_NAME
+)
+UNION
+(
+    SELECT TRIGGER_NAME,'TRIGGER' AS `Type`, 
+    concat('On ',EVENT_MANIPULATION,': ',EVENT_OBJECT_TABLE) AS `Comment`
+    FROM information_schema.TRIGGERS
+    WHERE EVENT_OBJECT_SCHEMA = dbname
+)
+ORDER BY 2,1;
+END$$
+DELIMITER ;
+To use in your place you must call as:
+
+mysql> call tools.sp_status(database()); Note the stored procedure has created in tools database (you can use another db), the goal of this is to call that useful procedure from any database, and it receives the name of database as parameter because is not possible obtain the current database from inside of stored procedure.
+
+Сброс пароля mysql
+1). В /etc/mycnf в секцию [mysqld] вставляем строку skip-grant-tables
+2). Перезапустить mysqld.
+
+После этого пароль будут сброшен и можно ввести любой другой.
+
+Cкрипт для добавления пользователя
+mysql-add_user:
+
+#!/bin/bash
+if [ $# -lt 3 ]; then
+    echo "Usage: mysql-add_user <user> <password> <database>"
+    exit
+fi
+USER=$1
+PASS=$2
+DB=$3
+echo "CREATE USER $USER@localhost IDENTIFIED BY '$PASS';"
+echo "CREATE USER $USER@localhost IDENTIFIED BY '$PASS';" | mysql
+echo "GRANT ALL ON $DB.* TO $USER@localhost"
+echo "GRANT ALL ON $DB.* TO $USER@localhost" | mysql
+echo "GRANT ALL ON  $DB.* TO $USER@'%' IDENTIFIED BY '$PASS';"
+echo "GRANT ALL ON  $DB.* TO $USER@'%' IDENTIFIED BY '$PASS';" | mysql
+echo "flush privileges;"
+echo "flush privileges;" | mysql
+echo "Done!"
+Добавить индекс в таблицу wp_options по полю autoload
+ALTER TABLE wp_options ADD INDEX (`autoload`);
+Показать индексы для таблицы
+SHOW INDEXES FROM wp_options;
+
+Узнать как выполняется запрос и какие индексы использует
+EXPLAIN SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes';
+
+Показать всех пользователей
+SELECT User,Host FROM mysql.user;
+
+То же самое, но сразу в формате, который можно использовать в DROP user:
+SELECT CONCAT(QUOTE(user),'@',QUOTE(host)) UserAccount FROM mysql.user;
+
+Удалить пользователя
+As of MySQL 5.0.2, you can remove an account and its privileges as follows: DROP USER user; The statement removes privilege rows for the account from all grant tables.
+
+Вывести результат в файл:
+mysql> SELECT * FROM passwd INTO OUTFILE '/tmp/passwd.txt'
+-> FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+-> LINES TERMINATED BY '\r\n';
+Запись лога всех запросов к БД
+вывод лога в таблицу ( в БД mysql):
+
+CREATE TABLE `general_log` (
+`event_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+                      ON UPDATE CURRENT_TIMESTAMP,
+`user_host` mediumtext NOT NULL,
+`thread_id` bigint(21) unsigned NOT NULL,
+`server_id` int(10) unsigned NOT NULL,
+`command_type` varchar(64) NOT NULL,
+`argument` mediumtext NOT NULL
+  ) ENGINE=CSV DEFAULT CHARSET=utf8 COMMENT='General log';
+Enable Query logging on the database
+
+SET global log_output = 'table';
+SET global general_log = 1;
+View the log
+
+select * from mysql.general_log
+Disable Query logging on the database
+
+SET global general_log = 0;
+Вывод лога в файл:
+
+SET global log_output = 'FILE';
+SET global general_log_file='/Applications/MAMP/logs/mysql_general.log';
+SET global general_log = 1;
+Определить размер базы MYSQL
+Команда:
+
+SELECT SUM( data_length + index_length ) AS 'size'
+FROM information_schema.TABLES
+WHERE table_schema = 'mydatabase'
+LIMIT 1;
+Или скрипт mysql-db_size:
+
+#!/bin/bash
+if [ $# -lt 1 ]; then
+    echo "Usage: mysql-db_lenth <database>"
+    exit
+fi
+DB=$1
+LENTH=`echo "SELECT SUM( data_length + index_length ) AS 'size' FROM information_schema.TABLES WHERE table_schema = '$DB' LIMIT 1;" | mysql | sed -n '2p;2q'`
+let LENTH_MB=$LENTH/1024/1024
+let LENTH_GB=$LENTH_MB/1024
+echo "$LENTH_GB Gb"
+echo "$LENTH_MB Mb"
+echo "$LENTH b"
+Показать размер таблиц в БД
+SELECT TABLE_NAME, (data_length+index_length)/1024/1024/1024 as "size, Gb" FROM information_schema.TABLES WHERE table_schema = '<database>' order by "size, Gb";
+скрипт table_sizes.sh
+
+#!/bin/bash
+if [ $# -lt 1 ]; then
+    echo "Usage: ./table_sizes.sh <database>"
+    exit
+fi
+DB=$1
+echo "SELECT TABLE_NAME, (data_length+index_length)/1024/1024/1024 as 'size, Gb' FROM information_schema.TABLES WHERE table_schema = '$DB'" | mysql
+Скрипт резервного копирования всех баз на сервере
+#!/bin/bash
+TIMESTAMP=`date +"%Y%m%d"`
+BACKUPSTORE=/root/backup/dumps
+FILENAME="mysql-full-dump.${TIMESTAMP}.bz2"
+BACKUP_OWNER=root
+RETENTION=90 # days
+/usr/bin/mysqldump --all-databases --flush-logs --force --add-drop-database | bzip2 -s > $BACKUPSTORE/$FILENAME
+chown $BACKUP_OWNER $BACKUPSTORE/$FILENAME
+find $BACKUPSTORE -ctime +$RETENTION -delete
+Убрать заголовки в выводе mysql
+mysql --skip-column-names
+Вывод всех запросов в лог
+SET GLOBAL general_log_file = "/tmp/sql.log";
+SET GLOBAL general_log = 'ON';
+SET GLOBAL general_log = 'OFF';
+источник

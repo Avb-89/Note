@@ -1,0 +1,12 @@
+﻿Посмотреть и Редактировать количство ОЗУ на виртуальной машине (Вводить надо на жертве)
+
+#Get-Counter -ListSet Memory 
+#Get-Counter -ListSet Memory | select -expand counter
+#Get-Counter "\memory\available mbytes" - выведет информацию о используемой в данной момент памяти
+
+#while ($true) { Get-Counter "\memory\available mbytes" } - выводить информацию о использовании памяти каждую секунду
+
+Посмотреть и Редактировать количство ОЗУ на виртуальной машине (вводить с любого хоста)
+
+#Get-VMMemory -ComputerName VM001 -VMName VM01 - скажет сколько ОЗУ используется, сколько дано, и сколько можно дать.
+#Set-VMMemory -ComputerName VM001 -VMName VM01 -StartupBytes 512MB - Изменить количество выдаваемой памяти виртуалке

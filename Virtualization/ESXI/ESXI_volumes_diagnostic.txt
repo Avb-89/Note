@@ -1,0 +1,15 @@
+Показать физические диски
+	 esxcfg-scsidevs -c 
+	
+Показать datastore 
+	 esxcli storage filesystem list
+	 
+Проверить какие хосты имеют открытые файлы в хранилище
+	 vmkfstools --activehosts /vmfs/volumes/657d8f61-6b7f8e91-504f-48df3700b7ac
+
+Проверить какие файлы открыты
+	 lsof | grep /vmfs/volumes/657d8f61-6b7f8e91-504f-48df3700b7ac
+
+Отмонтировать datastore
+	 esxcli storage filesystem unmount -p /vmfs/volumes/657d8f61-6b7f8e91-504f-48df3700b7ac
+	

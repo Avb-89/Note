@@ -1,0 +1,6 @@
+[<< Home](/README.md)
+
+# Introduction to Python Scripting
+* [Beginners Guide to Python](https://wiki.python.org/moin/BeginnersGuide/Programmers)
+* [The Python Tutorial](https://docs.python.org/2/tutorial/)
+* [Codecademy Python Course](https://www.codecademy.com/learn/learn-python)

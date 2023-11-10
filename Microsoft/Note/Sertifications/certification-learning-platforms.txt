@@ -1,0 +1,15 @@
+[<< Home](/README.md)
+
+# Certification Learning Platforms
+
+* [Lynda](lydna.com) - Free account available via CAMPUS
+* [Cybrary](cybrary.it) - Free resource
+* [Udemy](udemy.com) - Pay per course
+* [Pluralsight](pluralsight.com) - Subscription Required
+* [Microsoft Virtual Academy](http://www.microsoftvirtualacademy.com) - Free resource
+* [Code Academy](https://www.codecademy.com/) - Free Resource
+* [FreeCodeCamp](https://www.freecodecamp.org/) - Free resource
+* [EdX](https://www.edx.org/) - Free resource
+* [Harvard Online Learning](https://online-learning.harvard.edu/) - Free resource
+* [MIT Open Course Ware](https://ocw.mit.edu/index.htm) - Free resource
+* [Khan Academy](https://www.khanacademy.org/) - Free resource

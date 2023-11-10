@@ -1,0 +1,12 @@
+./hpssacli controller all show status - увидеть статус контроллера 
+./hpssacli controller slot=1 physicaldrive all show - увидеть все диски 
+./hpssacli ctrl slot=1 ld all show - Увидеть все logical drive 
+./hpssacli ctrl slot=1 pd all show detail - Увидеть полную информацию о всех дисках 
+./hpssacli ctrl slot=1 pd 1I:1:1 show detail - увидеть полную информацию на диске 1 
+./hpssacli ctrl all show config detail - показать всю информаци/
+
+ ./hpssacli ctrl slot=1 pd all show detail
+
+На 4 хосте 
+
+./ssacli 

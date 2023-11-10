@@ -1,0 +1,75 @@
+Установка Active Directory с помощью Powershell
+
+В данной статье мы рассмотрим установку AD на Windwows 2012 Core Server. Использовать для этого будем три основных командлета:
+
+install-windowsfeature
+import-module
+install-addsforest
+
+Первое, запускаем команду “get-windowsfeature”  из интерфейса Windows Poweshell
+
+# get-windowsfeature
+
+Выполнив данную команду, мы видим список ролей и параметров, которые мы можем установить. В данном случае нас интересует только один параметр - имя сервиса -  “AD-domain-services”.
+
+2. Установка доменных служб Active Directory
+Для установки AD из командной строки используем команду “install-windowsfeature”,
+
+# Install-windowsfeature AD-domain-services
+
+3. Импорт модуля ADDSDeployment
+Для увеличения производительности сервера все модули и команды по умолчанию не загружены на сервер. Мы должны импортировать нужные модули при необходимости.
+Для продолжения нашей установки AD нам необходим модуль  ADDSDeployment.
+
+# Import-Module ADDSDeployment
+
+5. Установка первого контроллера в лесу
+В данном примере, мы установим первый контроллер домена в лесу
+Для установки с параметрами по умолчанию, выполняме команду “Install-AddsForest”
+
+# Install-AddsForest
+
+Для установки Active Directory с выборочными параметрами, задайте необходимые параметры как показано ниже.
+$ Install-ADDSForest
+
+Установим time zone для нашего сервера:
+
+TZUTIL /l
+C:\Windows\system32\tzutil.exe /s "Russia time zone 3"
+
+Настраиваем сеть:
+# netsh interface ip show config
+или
+# ipconfig
+
+Меняем IP-адрес:
+  netsh interface ipv4 set address name=Ethernet source=static address=192.168.100.2/24 gateway=192.168.100.1 store=persistent
+  netsh dns set dnsservers name=Ethernet source=static address=127.0.0.1
+  netsh interface ip delete arpcache
+
+
+
+Dop.Info
+
+4. Команды для назначения сервера контроллером домена
+Далее, назначение Вашего сервера контроллером домена будут зависит от Ваших требований и соответственно могут быть использованы следующие типы команд:
+
+Add-ADDSReadOnlyDomainControllerAccount - Установка контроллера только для чтения
+
+Install-ADDSDomain - Установить первый контроллер домена в дочернем или дереве домена
+
+Install-ADDSDomainController - Установить дополнительный контроллер домена
+
+Install-ADDSForest - Установить первый контроллер в новом лесу
+
+Test-ADDSDomainControllerInstallation Verify - необходимые условия для установки дополнительного контроллера домена (проверка)
+
+Test-ADDSDomainControllerUninstallation - удаление сервиса AD c сервера (проверка)
+
+Test-ADDSDomainInstallation - Проверка необходимых условий для установки первого контроллера домена в дочернем или дереве домена.
+
+Test-ADDSForestInstallation Установка первого контроллера в новом лесу (проверка)
+
+Test-ADDSReadOnlyDomainControllerAccountCreation  - Проверка необходимых условий для установки контроллера только для чтения
+
+Uninstall-ADDSDomainController - Удаление контроллера домена с сервера

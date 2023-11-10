@@ -1,0 +1,9 @@
+[<< Home](/README.md)
+
+# Reverse Engineering
+* [x86 Instruction Set Reference](www.felixcloutier.com/x86/)
+* [x86 Assembly Guide](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
+* [C Programming Tutorial](http://www.learn-c.org/)
+* [Complete Tour of PE and ELF](http://resources.infosecinstitute.com/complete-tour-of-pe-and-elf-part-1/#gref)
+* [Malware Unicorn's Reverse Engineering Malware Workshops](https://securedorg.github.io/)
+* [Basic Reverse Engineering with Immunity Debugger](https://www.sans.org/reading-room/whitepapers/malicious/basic-reverse-engineering-immunity-debugger-36982)

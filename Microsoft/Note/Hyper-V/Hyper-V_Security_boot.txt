@@ -1,0 +1,8 @@
+Security boot нужна для подписи загрузочных файлов microsoft
+
+Посмотрть статус можно Confirm-SecureBootUEFI
+
+Это хорошо для установленной Windows на hyper-v но для LINUX систем эта настройка сильно мешает.
+Поэтому нужно ее отключить.
+
+Для хорошей интеграции с линуксом можно подгрузить Linux Integration Services Version 4.1 for Hyper-v с сайта Microsof

@@ -1,0 +1,46 @@
+Удобста:
+
+Создать пользователя
+# net user root password! /add
+
+Узнать имя пользователя
+# whoami
+
+Добавить его в группу администраторы
+# net localgroup администраторы root /add
+
+Узанть имя компьютера
+# Hostname
+
+Поменять имя (переименовать) ПК
+# Rename-Computer -NewName WINNOTE
+
+Отключить фаирвовл (брендмауер, Firewall)
+# Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+Фирвол, добавить разрешения на все
+# New-NetFirewallRule -Displayname "Allow all Traffic" -Direction Inbound -Action Allow
+# New-NetFirewallRule -Displayname "Allow all Traffic" -Direction Outbound -Action Allow
+
+Разрешить в файрволе (Брендмауер, Firewall) RDP подклчюение
+# Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+Войти в сессию на удаленном компе через PS
+# Enter-PSSession -ComputerName SRV4
+
+Включить RDP
+# set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+
+Enable secure RDP authentication
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+
+Настроить сеть, имя компа, домен, и прочее:
+# Sconfig
+
+Настройка сети:
+# netsh interface ip show config
+
+Меняем IP-адрес:
+#  netsh interface ipv4 set address name=Ethernet source=static address=192.168.100.2/24 gateway=192.168.100.1 store=persistent
+#  netsh dns set dnsservers name=Ethernet source=static address=127.0.0.1
+#  netsh interface ip delete arpcache

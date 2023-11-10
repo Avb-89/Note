@@ -1,0 +1,131 @@
+### === Для начала команды ESXi, которые вы можете выполнять через ssh доступ. Как включить ssh на ESXI читайте тут. ===
+ 
+    reboot — перезагрузить хост
+    poweroff — выключить хост
+    esxcli system version  get — узнать версию (номер) инсталлированной версии VMware ESXi
+    uname -a - так же узнать версию VMware ESXi
+
+### === Для перезапусках всех менеджмент агентов пользуйтесь в будущем командной ===
+
+    services.sh restart
+
+    "Это помогает когда слетают права рута для запуска VM или утечка"
+
+    !!! БЛЯ ОН ПЕРЕЗАГРУЖАЕТ службы ESXi !!!!
+    
+    и после этого ~ # vim-cmd vmsvc/getallvms
+
+    vim-cmd: error while loading shared libraries: libvmodlImpl.so: failed to map segment from shared object: Error 28
+
+    esxcli hardware pci list | more — полная информация об установленных PCI устройствах
+    
+    lspci — краткая информация обо всех установленных PCI устройствах
+    
+    esxtop — диспетчер процессов top для vmware esxi 
+    
+         ( быстрые клавиши для переключения дисплея: c:cpu, i:interrupt, m:memory, n:network, 
+           d:disk adapter, u:disk device, v:disk VM,p:power mgmt)
+    
+    vmkerrcode -l — расшифровка кодов ошибок
+    
+    esxcfg-nics -l — информация о сетевых картах
+    
+    esxcfg-vswitch -l — информация о виртуальных коммутаторах
+    
+    find . -name libstorelib.so - найти файл  libstorelib.so
+
+dcui — работа с консолью сервера через ssh сессию
+chkconfig -l — статус работы демонов
+esxcli hardware memory get — размер установленной памяти
+esxcli software vib list  — список установленных vib-пакетов
+esxcli network ip connection list — состояние активных соединений (аналог netstat)
+esxcli storage vmfs extent list — информация о примонтированных/подключенных томах VMFS
+esxcli hardware clock (get/set) — отображение/установка времени esxi-хоста
+Usage: esxcli system time set [cmd options]
+Description:
+set                   Set the system clock time. Any missing parameters will default to the current time
+Cmd options:
+-d|--day=<long>       Day
+-H|--hour=<long>      Hour
+-m|--min=<long>       Minute
+-M|--month=<long>     Month
+-s|--sec=<long>       Second
+-y|--year=<long>      Year
+cd #Смена текущей директории;
+ cp #Копирование файла.cp [файл 1] [файл2];
+ find #Поиск файлов по критериям;
+ ls #Список файлов и директорий в текущей или явно указанной директории.ls /vmfs/volumes/ ключи:-l подробная информация-a отображение скрытых файлов;
+ mkdir #Создание директории;
+ mv #Перемещение файла. Переименование файла.mv [путь и имя файла] [путь, куда перемещать];
+ ps #Информация о запущенных процессах.ps -ef;
+ rm #Удаление файлов;
+ shutdown #Выключение или перезагрузка сервера shutdown nowshutdown –r now;
+ vi #Текстовый редактор;
+ cat #Вывод содержимого файла на экран.cat /etc/hosts;
+ more #Вывод содержимого файла на экран, по странице за раз.more /etc/hosts;
+ man #Справка по командамman <команда, по которой есть вопрос>для некоторых команд помощь выводится при запуске самой команды без параметров;
+ useradd #Создание пользователя.useradd <имя пользователя>;
+ passwd #Задание пароля пользователю passwd <имя пользователя>;
+
+esxcli storage nfs list #список nfs-монтирований на хосте
+ esxcli software vib list #cписок установленных vib-пакетов
+ esxcli hardware memory get #информация о памяти на хосте ESXi, включая объем RAM
+ esxcli hardware cpu list #информация о количестве процессоров на хосте ESXi
+ esxli iscsi adapter list #список iSCSI-адаптеров и их имена
+ <code>esxcli network nic list #список сетевых адаптеров</code>
+ esxcli network ip interface list #Информация об IP-интерфейсах хоста
+ esxcli network ip dns search list <code>esxcli network ip dns server list  #Информация о настройках DNS</code>
+ esxcli network ip connection
+ist #Состояние активных соединений (аналог netstat)
+ network neighbors list #Вывод ARP-таблицы
+ esxcli network firewall get
+ <code>esxcli network firewall ruleset list #Состояние фаервола ESXi и активные разрешения для портов и сервисов</code>
+ esxcli storage vmfs extent list #Информация о томах VMFS, подключенных к хосту
+ esxcli storage filesystem list #Мапинг VMFS-томов к устройствам
+ esxcli system version list #Текущая версия ESXi
+
+в VMware 5.5 esxcli system version get
+
+
+ esxcli storage core path list
+ <code>esxcli storage core device list #Вывод информации о путях и устройствах FC</code>
+ esxcli storage core plugin list #Список плагинов NMP, загруженных в систему
+ esxcli storage core adapter rescan #Рескан HBA-адаптеров
+ <code>esxcli vm process list</code> #получаем ID<br clear="none" /><code>esxcli vm process kill --type=[soft,hard,force] --world-id=WorldID</code> #убиваем разными способами
+#Получить список ВМ с их World ID и убить их по этому ID (помогает от зависших и не отвечающих в vSphere Client ВМ)
+ esxcli system welcomemsg get
+ <code>esxcli system welcomemsg set #Узнать и изменить приветственное сообщение ESXi</code>
+ ~ # esxcli system welcomemsg set --message=Hello!
+
+ esxcli system settings advanced list | grep &lt;var&gt; #Поискать что-нибудь в Advanced Settings хоста
+ esxcli hardware clock get #Текущее аппаратное время хоста
+ esxcli hardware bootdevice list #Порядок загрузки с устройств
+ esxcli hardware pci list #Список PCI-устройств
+ esxcli iscsi adapter discovery rediscover -A &lt;adapter_name&gt;
+ <code>esxcli storage core adapter rescan [-A &lt;adapter_name&gt; | -all] #Рескан
+
+
+
+
+vim-cmd hostsvc/net/info #информация о сети гипервизора;
+vim-cmd hostsvc/maintenance_mode_enter #Переключить хост в режим обслуживания;
+vim-cmd hostsvc/maintenance_mode_exit #Выйти из режима обслуживания;
+
+chkconfig -l #Показать службы запущенные на гипервизоре;
+esxtop #Список процессов;
+vmkerrcode -l #посмотреть vmkernel ошибки;
+esxcfg-info #Посмотреть информацию о хосте;
+esxcfg-nics -l #Посмотреть информацию о сетевых адаптерах;
+esxcfg-vswitch -l #Посмотреть информацию о виртуальных сетевых адаптерах;
+dcui #Стартовая консоль ESXI по ssh;
+vsish #Vmware интерактивная консоль;
+cat /etc/chkconfig.db #посмотреть состояние сервисов на хосте;
+/sbin/services.sh restart #перезагрузить все сервисы на хосте;
+vmkload_mod --list #Показать загруженные драйвера;
+vmkload_mod -s /mod/your_driver #Показать параметры драйверов;
+vmkfstools -i /vmfs/volumes/san_vmfs/my_vm/large_disk.vmdk -d thin /vmfs/volumes/san_vmfs/my_vm/new_thin_disk.vmdk #Конвертировать существующий диск в thin формат;
+
+Скрипты Powercli:
+Получить список машин с тонкими и толстыми дисками в ESXI через Powercli
+Получить список всех дисков VM ESXI или vCenter через PowerCLi
+Вот такие вот полезные команды ESXI.

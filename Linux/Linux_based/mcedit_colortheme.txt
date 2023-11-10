@@ -1,0 +1,6 @@
+[Colors]
+base_color=editnormal=lightgray,black:editbold=yellow,black:editmarked=black,cyan
+или
+
+mcedit -C "editnormal=lightgray,black:editbold=yellow,black:editmarked=black,cyan"
+для разовой

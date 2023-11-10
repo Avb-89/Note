@@ -1,0 +1,1 @@
+$Results = Get-Disk | where-object Bustype -eq USB | Out-GridView -Title 'Select USB Drive o format' -OutputMode Single | Clear-Disk -RemoveData -RemoveOEM -Confirm:$false -PassThru | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32

@@ -1,0 +1,76 @@
+
+
+Скачать последнее go
+# apt-get update
+# apt-get install golang-go -y
+
+Скачать с оф сайта  https://dist.ipfs.io/#go-ipfs дистрибутив go-ipfs
+# wget https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz
+
+# tar xvfz go-ipfs_v0.4.17_linux-amd64.tar.gz
+# mv go-ipfs/ipfs /usr/local/bin/ipfs
+
+Проверим
+# ipfs version
+
+Инициализация
+
+# IPFS_PATH=~/.ipfs ipfs init
+
+Смотрим для проверки что все получилось ридми
+
+# ipfs cat /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv/readme
+
+Hello and Welcome to IPFS!
+
+██╗██████╗ ███████╗███████╗
+██║██╔══██╗██╔════╝██╔════╝
+██║██████╔╝█████╗  ███████╗
+██║██╔═══╝ ██╔══╝  ╚════██║
+██║██║     ██║     ███████║
+╚═╝╚═╝     ╚═╝     ╚══════╝
+
+If you're seeing this, you have successfully installed
+IPFS and are now interfacing with the ipfs merkledag!
+
+Смотрим чтобы появились все папки
+
+# ls ~/.ipfs*
+blocks  config  datastore  datastore_spec  keystore  version
+
+Getting Started
+If you haven’t done so, install IPFS.
+Install IPFS now
+During this tutorial, if you have any questions, feel free to ask them in https://discuss.ipfs.io/ or in #ipfs on chat.freenode.net.
+init the repo
+ipfs uses a global local object repository, added to ~/.ipfs:
+> ipfs init
+initializing ipfs node at /Users/jbenet/.go-ipfs
+generating 2048-bit RSA keypair...done
+peer identity: Qmcpo2iLBikrdf1d6QU6vXuNb6P7hwrbNPW9kLAH8eG67z
+to get started, enter:
+
+  ipfs cat /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv/readme
+
+Note the hash there may differ. If it does, use the one you got. 
+
+
+
+Going Online
+Once you’re ready to take things online, run the daemon in another terminal:
+> ipfs daemon
+Initializing daemon...
+Swarm listening on /ip6/fc23:6b87:47f8:d663:dbed:caac:eacb:e496/tcp/4001
+Swarm listening on /p2p-circuit/ipfs/QmSNJU23sQ3tfRFY1fRgHJ4NUceNsM5shme9i8ZjKS5s3F
+
+проверяем пиры 
+> ipfs swarm peers
+
+____________________________________________
+https://cluster.ipfs.io/documentation/download/
+https://cluster.ipfs.io/guides/quickstart/
+IPFS Claster...
+
+git clone https://github.com/ipfs/ipfs-cluster.git $GOPATH/src/github.com/ipfs/ipfs-cluster
+cd $GOPATH/src/github.com/ipfs/ipfs-cluster
+make install

@@ -1,0 +1,18 @@
+Ubuntu 18.04 LTS and 20.04 LTS
+
+Install gpg key
+wget -O - https://repo.fortinet.com/repo/6.4/ubuntu/DEB-GPG-KEY | sudo apt-key add -
+ 
+Add the following line in /etc/apt/sources.list
+deb [arch=amd64] https://repo.fortinet.com/repo/6.4/ubuntu/ /bionic multiverse
+ 
+Update package lists
+sudo apt-get update
+ 
+Install FortiClient
+sudo apt install forticlient
+ЭТО НЕ СРАБОТАЛО!!!!
+
+--------------------------------------------------------------------------------
+sudo apt install network-manager-fortisslvpn network-manager-fortisslvpn-gnome 
+ЭТО РАБОТАЕТ!

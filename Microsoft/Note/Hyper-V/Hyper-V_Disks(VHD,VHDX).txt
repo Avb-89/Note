@@ -1,0 +1,42 @@
+
+Создать виртуальный жесткий диск.
+# New-VHD -Path R:\LABARATORY\HDD\TEST.VHDX -SizeBytes 40GB -Dynamic
+
+Отмонтировать виртуальный жесткий диск
+# Dismount-VHD -Path R:\LABARATORY\HDD\HDD01.VHDX
+
+
+Скрипт на авто создание, разметку, форматирование
+New-VHD -Path R:\LABARATORY\HDD\HDD01.VHDX -Dynamic -SizeBytes 40GB | `	создает диск
+	Mount-VHD -Passthru | `	 											монтирует диск в твою систему
+    Initialize-Disk -PassThru | ` 						 				инициализирует диск
+    New-Partition -AssignDriveLetter -UseMaximumSize | `  				создает новый раздел, дает букву, использует все пространство
+    Format-Volume -FileSystem NTFS -Confirm:$false -Force				форматирует раздел в формате NTFS без подтверждения
+	
+	
+	
+Добавить жесткий диск в виртуальную машину
+# Add-VMHardDiskDrive -ComputerName VM001.mshome.net -VMName VM02 -Path C:\HDD\vm1.VHDX
+
+
+New-VHD -Differencing -ParentPath C:\LABARATORY\ETALON\HDD
+
+Команды для работы с VHD
+[VM001.mshome.net]: PS C:\> Get-Command | where Name -Like "*VHD*"
+
+CommandType     Name                                               Version    Source       
+-----------     ----                                               -------    ------       
+Cmdlet          Convert-VHD                                        2.0.0.0    Hyper-V      Конвертировать VHD в VHDX и наоборот
+Cmdlet          Dismount-VHD                                       2.0.0.0    Hyper-V      Отключить виртуальный диск от текущей ОС
+Cmdlet          Get-VHD                                            2.0.0.0    Hyper-V      Получить информацию о VHD
+Cmdlet          Get-VHDSet                                         2.0.0.0    Hyper-V      
+Cmdlet          Get-VHDSnapshot                                    2.0.0.0    Hyper-V      
+Cmdlet          Merge-VHD                                          2.0.0.0    Hyper-V      Слияние дисков, снапшотов.
+Cmdlet          Mount-VHD                                          2.0.0.0    Hyper-V      Присоединить диск к текущей ОС
+Cmdlet          New-VHD                                            2.0.0.0    Hyper-V      СОздать новый диск
+Cmdlet          Optimize-VHD                                       2.0.0.0    Hyper-V      Перераспределение пространства в нефиксированных VHD
+Cmdlet          Optimize-VHDSet                                    2.0.0.0    Hyper-V      
+Cmdlet          Remove-VHDSnapshot                                 2.0.0.0    Hyper-V      Удалить снапшоты 
+Cmdlet          Resize-VHD                                         2.0.0.0    Hyper-V      Изменить размер VHD
+Cmdlet          Set-VHD                                            2.0.0.0    Hyper-V      
+Cmdlet          Test-VHD                                           2.0.0.0    Hyper-V      Проверяет структурную целостность VHD

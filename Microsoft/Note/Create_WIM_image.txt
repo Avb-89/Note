@@ -1,0 +1,10 @@
+Create WIM Image:
+
+YOU MAST HAVE A WINDOWS PE!!!!!! (And check ImageX)
+
+1) Install WINDOWS
+2) boot in windows ISO and select recovery
+3) select comand line and input:
+# wpeinit
+# imageX /capture c:\ d:\IMAGE\myimage.wim "myimageName" 
+it`s disk which have windows(installed) and where we copy the WIM image

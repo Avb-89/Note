@@ -1,0 +1,14 @@
+
+nix-channel --list | grep nixos
+nixos https://nixos.org/channels/nixos-unstable
+To switch to a different NixOS channel, do
+# nix-channel --add https://nixos.org/channels/channel-name nixos
+(Be sure to include the nixos parameter at the end.) For instance, to use the NixOS 17.03 stable channel:
+# nix-channel --add https://nixos.org/channels/nixos-17.03 nixos
+If you have a server, you may want to use the “small” channel instead:
+# nix-channel --add https://nixos.org/channels/nixos-17.03-small nixos
+And if you want to live on the bleeding edge:
+# nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+
+You can then upgrade NixOS to the latest version in your chosen channel by running
+# nixos-rebuild switch --upgrade

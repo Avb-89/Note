@@ -1,0 +1,6 @@
+НОВЫЕ ДИСКИ 
+./hpssacli rescan -сканирование на новые диски 
+СОЗДАНИЕ 
+./hpssacli ctrl slot=1 create type=ld drives=1I:1:1,1I:1:2 raid=1 - создать рейд 1 из выбранных дисков 
+УДАЛЕНИЕ
+./hpssacli ctrl slot=1 ld all delete - удаление всех массивов 

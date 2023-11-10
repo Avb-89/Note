@@ -1,0 +1,7 @@
+[<< Home](/README.md)
+
+# Wireless Security
+* [Introduction to Kali Linux](https://kali.training/introduction/introduction-to-kali-linux/)
+* [Wireless Security Protocols: WEP, WPA, and WPA2](www.dummies.com/computers/computer-networking/wireless/wireless-security-protocols-wep-wpa-and-wpa2/)
+* [How To Hack WPA/WPA2 Wi-Fi With Kali Linux & Aircrack-ng](http://lewiscomputerhowto.blogspot.com.au/2014/06/how-to-hack-wpawpa2-wi-fi-with-kali.html)
+* [RTL-SDR.com](https://www.rtl-sdr.com/)

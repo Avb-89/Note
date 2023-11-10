@@ -1,0 +1,53 @@
+Управление групповыми политиками (GPO) в Active Directory с помощью PowerShell  
+https://winitpro.ru/index.php/2021/10/18/upravlenie-gpo-v-active-directory-powershell/
+
+Полный список PowerShell командлетов в модуле GroupPolicy:
+
+    Get-Command –Module GroupPolicy
+
+С помощью PowerShell модуля GroupPolicy вы можете:
+-Создать или удалить GPO
+-Привязать, отвязать GPO от OU
+-Создать резервную копию или восстановить политику
+-Задать разрешения на GPO, настроить наследование
+
+Управление GPO с помощью PowerShell:
+
+Чтобы создать новую пустую политику
+    
+    New-GPO -Name spbTestGPO -Comment "Testing GPO PowerShell"
+
+Если у вас в домене созданы стартовые групповые политики (Starter GPO), 
+вы можете создать новую политику на основе такого шаблона (например, 
+с определенными настройками Security Baseline):
+
+    New-GPO -Name spbTestGPO2 -StarterGPOName "Windows 10 Security Baseline"
+
+Чтобы назначить политику на определенную OU, используйте командлет New-GPLink:
+
+    Get-GPO spbTestGPO | New-GPLink -Target "ou=test,ou=spb,ou=ru,dc=winitpro,dc=loc"
+
+Чтобы отлинковать GPO от OU:
+
+    Remove-GPLink -Name spbTestGPO -Target "ou=test,ou=spb,ou=ru,dc=winitpro,dc=loc"
+
+Если нужно отключить применение GPO, но не удалять связь, используется командлет Set-GPLink:
+
+    Set-GPLink -name spbTestGPO -Target "ou=test,ou=spb,ou=ru, dc=winitpro,dc=loc" -linkenabled no
+
+GPO перестала применяться к OU, но осталась слинкованной.
+Если нужно применить GPO в принудительном режиме, добавьте параметр -Enforced Yes.
+
+Следующая однострочная команда PowerShell создаст новую GPO,
+которая меняет настройки одного параметра реестра (отключает автообновление драйверов), 
+ограничит применение политики определенной группой безопасности, и прилинкует к определенному OU:
+
+$key = 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching'
+New-GPO 'spbDisableDriverUpdate' | Set-GPRegistryValue -Key $key `
+-ValueName 'SearchOrderConfig' -Type DWORD -Value 0 | Set-GPPermissions -Replace `
+-PermissionLevel None -TargetName 'Authenticated Users' -TargetType group | `
+Set-GPPermissions -PermissionLevel gpoapply -TargetName 'spb_admins' `
+-TargetType group | New-GPLink -Target "ou=test,ou=spb,ou=ru,dc=winitpro,dc=loc" –Order 1
+
+Модуль PowerShell не позволяет изменить значение произвольного параметра GPO из административных admx шаблонов. Для редактирования доступны только параметры реестра, распространяющиеся через Group Policy Preferences.
+

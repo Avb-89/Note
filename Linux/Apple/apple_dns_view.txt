@@ -1,0 +1,6 @@
+There are several ways - here are two:
+
+cat /etc/resolv.conf
+-or-
+
+scutil --dns

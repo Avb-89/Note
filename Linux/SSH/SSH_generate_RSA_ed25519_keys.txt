@@ -1,0 +1,5 @@
+Создать ключ RSA
+ssh-keygen rsa
+
+Создать ключ ed25519
+ssh-keygen -o -a 100 -t ed25519

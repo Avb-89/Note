@@ -1,0 +1,55 @@
+Как установить Viber на Linux
+
+Alexey 09.10.2018 29 Сеть Viber, мессенджеры
+
+Viber — это ещё один мессенджер, в котором можно звонить как по телефону, а также делать видеозвонки. По функциям он очень похож на WhatsApp. На страницах сайта ZaLinux.ru уже рассказывалось, как установить WhatsApp на Linux. Среди пользователей Linux также есть желающие иметь Viber на настольном компьютере. Это особенно актуально в связи с тем, что для Viber нет веб-клиента. А также в комбайнах, совмещающих большое количество разнообразных мессенджеров Franz и Rambox, тоже нет поддержи Viber.
+
+Но для пользователей Linux разработчики Viber подготовили официальные клиенты для компьютеров и ноутбуков.
+
+Далее будет показано, как установить официальный клиент Viber на различные дистрибутивы Linux.
+
+Установка Viber в Ubuntu, Linux Mint, Kali Linux, Debian, а также в их производные
+
+Пакет, который распространяется с официального сайта, имеет зависимости (это другие пакеты, которые требуются для его работы и обязательно должны быть установлены), которые не могут быть разрешены. То есть при установке пакета некоторые зависимости не будут установлены. Это плохо и поэтому рекомендуется пойти чуть более длинным путём — сделать небольшой патч официального пакета.
+
+Откройте консоль и выполните там несколько команд.
+
+Первой командой мы устанавливаем зависимости:
+1
+	
+sudo apt install libxss1 `apt-cache search libssl1.1 | awk '{ print $1 }'` libpulse0 libasound2 libnss3 libxcomposite1 libxcursor1 libxdamage1 libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-pulseaudio gstreamer1.0-libav
+
+Скачиваем сам пакет:
+1
+	
+wget https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
+
+Распаковываем скаченный пакет deb:
+1
+	
+ar x viber.deb
+
+Распаковываем контрольный архив:
+1
+	
+tar xzf control.tar.gz
+
+Делаем крошечный патч: меняем libssl1.0.0 на libssl1.1 в файле control. Дело в том, что libssl1.0.0 — это устаревшая версия библиотеки и она больше недоступна в репозиториях, так как заменена версией libssl1.1.
+1
+	
+sed -i "s/libssl1.0.0/`apt-cache search libssl1.1 | awk '{ print $1 }'`/" ./control
+
+Вот и всё — мы пропатчили всё что нужно, теперь осталось собрать пакет обратно.
+1
+	
+tar --ignore-failed-read -cvzf control.tar.gz pre{inst,rm} postinst md5sums control
+
+Вновь собираем deb:
+1
+	
+ar rcs viber_fixed.deb debian-binary control.tar.gz data.tar.xz
+
+Устанавливаем наш пофиксенный пакет:
+1
+	
+sudo dpkg -i viber_fixed.deb

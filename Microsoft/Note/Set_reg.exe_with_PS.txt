@@ -1,0 +1,258 @@
+Внесение изменений в закрытую ветку реестра windows через powerhell
+PowerShell
+
+Была поставлена задача, внести измения в ветку ресстра windows пользовательских машин, с помощью GPO и скрипта powerhell.
+
+Закрытая ветка реестра
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs
+Тип данных реестра: String value
+Имя: UXTheme
+Значение: UXTheme.dll
+
+Открытая ветка реестра
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager
+Имя: CWDIllegalInDllSearch
+Значение: 0xffffffff
+Тип данных реестра: DWORD
+
+Открытая ветка реестра
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager
+Имя: SafeDllSearchMode
+Значение: 1
+Тип данных реестра: DWORD
+
+
+#Подключаем необходимые библиотеки системы для работы с реестром
+$code = @"
+using System;
+using System.Runtime.InteropServices;
+
+
+namespace CosmosKey.Utils
+{
+ public class TokenManipulator
+ {
+
+
+  [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
+  internal static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall,
+  ref TokPriv1Luid newst, int len, IntPtr prev, IntPtr relen);
+
+
+  [DllImport("kernel32.dll", ExactSpelling = true)]
+  internal static extern IntPtr GetCurrentProcess();
+
+
+  [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
+  internal static extern bool OpenProcessToken(IntPtr h, int acc, ref IntPtr
+  phtok);
+
+
+  [DllImport("advapi32.dll", SetLastError = true)]
+  internal static extern bool LookupPrivilegeValue(string host, string name,
+  ref long pluid);
+
+
+  [StructLayout(LayoutKind.Sequential, Pack = 1)]
+  internal struct TokPriv1Luid
+  {
+   public int Count;
+   public long Luid;
+   public int Attr;
+  }
+
+
+  internal const int SE_PRIVILEGE_DISABLED = 0x00000000;
+  internal const int SE_PRIVILEGE_ENABLED = 0x00000002;
+  internal const int TOKEN_QUERY = 0x00000008;
+  internal const int TOKEN_ADJUST_PRIVILEGES = 0x00000020;
+
+
+  public const string SE_ASSIGNPRIMARYTOKEN_NAME = "SeAssignPrimaryTokenPrivilege";
+  public const string SE_AUDIT_NAME = "SeAuditPrivilege";
+  public const string SE_BACKUP_NAME = "SeBackupPrivilege";
+  public const string SE_CHANGE_NOTIFY_NAME = "SeChangeNotifyPrivilege";
+  public const string SE_CREATE_GLOBAL_NAME = "SeCreateGlobalPrivilege";
+  public const string SE_CREATE_PAGEFILE_NAME = "SeCreatePagefilePrivilege";
+  public const string SE_CREATE_PERMANENT_NAME = "SeCreatePermanentPrivilege";
+  public const string SE_CREATE_SYMBOLIC_LINK_NAME = "SeCreateSymbolicLinkPrivilege";
+  public const string SE_CREATE_TOKEN_NAME = "SeCreateTokenPrivilege";
+  public const string SE_DEBUG_NAME = "SeDebugPrivilege";
+  public const string SE_ENABLE_DELEGATION_NAME = "SeEnableDelegationPrivilege";
+  public const string SE_IMPERSONATE_NAME = "SeImpersonatePrivilege";
+  public const string SE_INC_BASE_PRIORITY_NAME = "SeIncreaseBasePriorityPrivilege";
+  public const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
+  public const string SE_INC_WORKING_SET_NAME = "SeIncreaseWorkingSetPrivilege";
+  public const string SE_LOAD_DRIVER_NAME = "SeLoadDriverPrivilege";
+  public const string SE_LOCK_MEMORY_NAME = "SeLockMemoryPrivilege";
+  public const string SE_MACHINE_ACCOUNT_NAME = "SeMachineAccountPrivilege";
+  public const string SE_MANAGE_VOLUME_NAME = "SeManageVolumePrivilege";
+  public const string SE_PROF_SINGLE_PROCESS_NAME = "SeProfileSingleProcessPrivilege";
+  public const string SE_RELABEL_NAME = "SeRelabelPrivilege";
+  public const string SE_REMOTE_SHUTDOWN_NAME = "SeRemoteShutdownPrivilege";
+  public const string SE_RESTORE_NAME = "SeRestorePrivilege";
+  public const string SE_SECURITY_NAME = "SeSecurityPrivilege";
+  public const string SE_SHUTDOWN_NAME = "SeShutdownPrivilege";
+  public const string SE_SYNC_AGENT_NAME = "SeSyncAgentPrivilege";
+  public const string SE_SYSTEM_ENVIRONMENT_NAME = "SeSystemEnvironmentPrivilege";
+  public const string SE_SYSTEM_PROFILE_NAME = "SeSystemProfilePrivilege";
+  public const string SE_SYSTEMTIME_NAME = "SeSystemtimePrivilege";
+  public const string SE_TAKE_OWNERSHIP_NAME = "SeTakeOwnershipPrivilege";
+  public const string SE_TCB_NAME = "SeTcbPrivilege";
+  public const string SE_TIME_ZONE_NAME = "SeTimeZonePrivilege";
+  public const string SE_TRUSTED_CREDMAN_ACCESS_NAME = "SeTrustedCredManAccessPrivilege";
+  public const string SE_UNDOCK_NAME = "SeUndockPrivilege";
+  public const string SE_UNSOLICITED_INPUT_NAME = "SeUnsolicitedInputPrivilege";
+
+
+  public static bool AddPrivilege(string privilege)
+  {
+   try
+   {
+    bool retVal;
+    TokPriv1Luid tp;
+    IntPtr hproc = GetCurrentProcess();
+    IntPtr htok = IntPtr.Zero;
+    retVal = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
+    tp.Count = 1;
+    tp.Luid = 0;
+    tp.Attr = SE_PRIVILEGE_ENABLED;
+    retVal = LookupPrivilegeValue(null, privilege, ref tp.Luid);
+    retVal = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
+    return retVal;
+   }
+   catch (Exception ex)
+   {
+    throw ex;
+   }
+
+
+  }
+  public static bool RemovePrivilege(string privilege)
+  {
+   try
+   {
+    bool retVal;
+    TokPriv1Luid tp;
+    IntPtr hproc = GetCurrentProcess();
+    IntPtr htok = IntPtr.Zero;
+    retVal = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
+    tp.Count = 1;
+    tp.Luid = 0;
+    tp.Attr = SE_PRIVILEGE_DISABLED;
+    retVal = LookupPrivilegeValue(null, privilege, ref tp.Luid);
+    retVal = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
+    return retVal;
+   }
+   catch (Exception ex)
+   {
+    throw ex;
+   }
+
+
+  }
+ }
+}
+"@
+
+#Подключаем необходимые библиотеки системы для работы с реестром
+$definition = @"
+using System;
+using System.Runtime.InteropServices;
+
+namespace Win32Api
+{
+
+	public class NtDll
+	{
+		[DllImport("ntdll.dll", EntryPoint="RtlAdjustPrivilege")]
+		public static extern int RtlAdjustPrivilege(ulong Privilege, bool Enable, bool CurrentThread, ref bool Enabled);
+	}
+}
+"@
+
+#вносим значение в открытую ветку реестра
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
+$ValueName = "CWDIllegalInDllSearch"
+#$Value = "4294967295"
+$Value = "0xffffffff"
+$PropType = "DWORD"
+
+New-ItemProperty -Path $RegistryPath -Name $ValueName -Value $Value -PropertyType $PropType -Force | Out-Null
+
+#вносим значение в открытую ветку реестра
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
+$ValueName = "SafeDllSearchMode"
+$Value = "1"
+$PropType = "DWORD"
+
+New-ItemProperty -Path $RegistryPath -Name $ValueName -Value $Value -PropertyType $PropType -Force | Out-Null
+###########################
+
+
+# Подключаем библиотеки для работы с реестром
+Add-Type -TypeDefinition $definition -PassThru
+Add-Type -TypeDefinition $code -PassThru
+$bEnabled = $false
+
+# Включаем SeTakeOwnershipPrivilege
+$res = [Win32Api.NtDll]::RtlAdjustPrivilege(9, $true, $false, [ref]$bEnabled)
+
+#Обращаемся к закрытому ключу реестра
+$key = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey("SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs", [Microsoft.Win32.RegistryKeyPermissionCheck]::ReadWriteSubTree,[System.Security.AccessControl.RegistryRights]::takeownership)
+$acl = $key.GetAccessControl()
+
+
+<#
+SID: S-1-5-32-544
+Название: Администраторы
+Описание: Встроенная группа. После первоначальной установки операционной системы единственным членом этой группы
+является учетная запись «Администратор». Когда компьютер присоединяется к домену, группа «Администраторы домена»
+добавляется к группе «Администраторы». Когда сервер становится контроллером домена, группа «Администраторы предприятия»
+также добавляется к группе «Администраторы».
+#>
+
+#Устанавливаем значения переменных для раздачи прав на ключ реестра для локальной группы Администраторы
+$person = [System.Security.Principal.SecurityIdentifier]"S-1-5-32-544"
+$access = [System.Security.AccessControl.RegistryRights]"FullControl"
+$inheritance = [System.Security.AccessControl.InheritanceFlags]"ContainerInherit,ObjectInherit"
+$propagation = [System.Security.AccessControl.PropagationFlags]"None"
+$type = [System.Security.AccessControl.AccessControlType]"Allow"
+$rule = New-Object System.Security.AccessControl.RegistryAccessRule($person,$access,$inheritance,$propagation,$type)
+
+#Устанавливаем владельцем ключа реестра локальную группу Администраторы
+$acl.SetOwner([System.Security.Principal.SecurityIdentifier]"S-1-5-32-544")
+$key.SetAccessControl($acl)
+
+#Даем полные права на ключ реестра локальной группе Администраторы
+$acl.SetAccessRule($rule)
+$key.SetAccessControl($acl)
+
+#Добавляем ключ в закрытую ветку реестра
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs"
+$ValueName = "UXTheme"
+$Value = "UXTheme.dll"
+$PropType = "String"
+
+New-ItemProperty -Path $RegistryPath -Name $ValueName -Value $Value -PropertyType $PropType -Force | Out-Null
+###########################
+
+#Устанавливаем владельцем ключа реестра "NT SERVICE\TrustedInstaller" как было раньше до изменения
+[void][CosmosKey.Utils.TokenManipulator]::AddPrivilege([CosmosKey.Utils.TokenManipulator]::SE_RESTORE_NAME)
+
+[System.Security.Principal.NTAccount]$TrustedInstaller = "NT SERVICE\TrustedInstaller"
+
+$acl.SetOwner($TrustedInstaller)
+$key.SetAccessControl($acl)
+
+[void][CosmosKey.Utils.TokenManipulator]::RemovePrivilege([CosmosKey.Utils.TokenManipulator]::SE_RESTORE_NAME)
+
+
+#Даем права только на чтение, локальной группе Администраторы
+$access = [System.Security.AccessControl.RegistryRights]"ReadPermissions,QueryValues,EnumerateSubKeys,Notify"
+$rule = New-Object System.Security.AccessControl.RegistryAccessRule($person,$access,$inheritance,$propagation,$type)
+$acl.SetAccessRule($rule)
+$key.SetAccessControl($acl)

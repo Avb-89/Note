@@ -1,0 +1,25 @@
+<about program>
+==========================================================================
+website: https://web.archive.org/web/20131115171331/http://beatex.org/web/advancedcopy.html
+and      https://www.tecmint.com/advanced-copy-command-shows-progress-bar-while-copying-files/
+Advanced-Copy is a powerful command line program which is very much similar, but little modified version of original cp command. This modified version of cp command adds a progress bar along with total time taken to complete, while copying large files from one location to another. This additional feature is very useful especially while copying large files, and this gives an idea to user about the status of copy process and how long it takes to complete.
+==========================================================================</>
+<Download and Install Advanced-Copy>
+==========================================================================
+$ wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.21.tar.xz
+$ tar xvJf coreutils-8.21.tar.xz
+$ cd coreutils-8.21/
+$ wget https://raw.githubusercontent.com/atdt/advcpmv/master/advcpmv-0.5-8.21.patch
+$ patch -p1 -i advcpmv-0.5-8.21.patch
+$ ./configure
+you can have a problem if you root. - use "export FORCE_UNSAFE_CONFIGURE=1"
+$ make
+Для работы надо программа  "make" и "gcc" (Для справки GCC (GNU Compiler Collection) — стандартный компилятор используемый в unix подобных системах)
+
+$ sudo cp src/cp /usr/local/bin/cp
+$ sudo cp src/mv /usr/local/bin/mv
+
+alias cp='/home/bugakov/coreutils-8.21/src/cp -g'
+alias mv='/home/bugakov/coreutils-8.21/src/mv -g'
+
+==========================================================================</>

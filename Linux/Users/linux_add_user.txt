@@ -1,0 +1,14 @@
+Добавить пользователя (ubuntu):
+ $ sudo adduser admin2 
+===========================
+Добавить в группу:
+ $ sudo usermod -aG sudo admin2
+===========================
+Удалить пользователя:
+ $userdel -r -Z bugakov
+
+===========================
+Добавить пользователя (Gentoo):
+	useradd admin2
+===========================
+# useradd -m -G users,audio,wheel test

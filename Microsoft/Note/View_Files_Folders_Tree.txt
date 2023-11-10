@@ -1,0 +1,24 @@
+<Посмотреть_Содержимое_Папок_Рекурсивно>
+  ==============================================================================
+  PS C:\> tree R:LABARATORY
+  Folder PATH listing for volume DATA
+  Volume serial number is 2ACE-8A86
+  R:\LABARATORY
+  ├───ANDROID
+  │   ├───ANDROID
+  │   │   └───Virtual Machines
+  │   │       └───719E889D-FB61-4EF9-8EDA-BE3F17AD9254
+  │   └───HDD
+  ├───HDD
+  ├───NanoServer
+  │   ├───Logs
+  │   │   └───2018-09-04_20-50-37-00
+  │   ├───Nano
+  │   │   └───Virtual Machines
+  │   └───Packages
+  │       └───en-US
+  └───VMS
+    └───NixOS
+        └───Virtual Machines
+            └───4F7FC9AB-DAAB-4CD0-AEF9-11F57093443F
+=============================================================================</>

@@ -1,0 +1,32 @@
+Команды для работы с виртуальными машинами:
+
+
+vim-cmd vmsvc/power.getstate 1 — включена/выключена VM с Vmid 1
+vim-cmd vmsvc/power.on 1 — включить VM с Vmid 1
+vim-cmd vmsvc/power.off 1 — выключить (по питанию) VM с Vmid 1
+vim-cmd vmsvc/power.reset 1 — перезагрузка (аналогично нажатию клавиши RESET на реальном сервере) VM с Vmid 1
+vim-cmd vmsvc/power.shutdown 1 — корректное выключение VM с Vmid 1. Действует только, если установлены VMware Tools!
+vim-cmd vmsvc/power.reboot 1 — перезагрузка VM с Vmid 1. Действует только, если установлены VMware Tools!
+vim-cmd vmsvc/get.summary 1 — получение полной информации о  VM с Vmid 1.
+vim-cmd vmsvc/get.summary 1 | egrep ‘(name|power|ip)’ — получение отфильтрованной информации о  VM с Vmid 1. Выводится имя, состояние питания, IP-адрес
+
+esxcli vm process list — получить список ВМ с их World ID
+esxcli vm process kill —type=[soft,hard,force]—world-id=WorldID — убиваем разными способами ВМ с нужным WorldID (помогает от зависших и не отвечающих VM)
+
+vim-cmd vmsvc
+Набрав  эту команду, вы увидите  все возможные  варианты  ее использования.Ниже список команд, которые мне показались полезными:
+
+vim-cmd vmsvc/getallvms — вывод информации обо всех VM
+
+vim-cmd vmsvc/power.getstate <vmid> #вы узнаете статус питания виртуальной машины с указанным ID. Увидеть список ВМ и их ID вы можете при помощи команды;
+vim-cmd vmsvc/getallvms #Выключить питание виртуальной машины;
+vim-cmd vmsvc/power.off vmid #Включить питание виртуальной машины;
+vim-cmd vmsvc/power.on vmid #Перезагрузить виртуальную машину;
+vim-cmd vmsvc/power.reboot vmid #Удалить файлы виртуальной машины;
+vim-cmd vmsvc/destroy vmid #Удалить файлы виртуальной машины;
+vim-cmd vmsvc/power.shutdown <vmid> #Выключение виртуальной машины (shutdown guest);
+vim-cmd vmsvc/power.reset <vmid> #Перезагрузка виртуальной машины;
+vim-cmd vmsvc/get.summary <vmid> #Общая информация о виртуальной машине;
+vim-cmd solo/registervm /vmfs/vol/datastore/dir/vm.vmx #Подключить виртуальную машину;
+vim-cmd vmsvc/unregister vmid #Убрать виртуальную машину из гипервизора;
+vim-cmd vmsvc/tools.install vmid #Установка vmware tools;

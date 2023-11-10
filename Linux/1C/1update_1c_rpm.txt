@@ -1,0 +1,34 @@
+Обновление 1с 
+
+1) скачать дистрибутив с https://releases.1c.ru/ 
+2) скопировать дистрибутив в сервер
+    scp archive.tar root@1c-server.autostat.lan:/distrib/
+3) распаковать архив
+    sudo tar -xvf archive.tar
+4) остановить сервер 
+    sudo systemctl stop srv1cv8-8.3.23.1865@.services
+    sudo systemctl status -l srv1cv8-8.3.23.1865@.services
+5) Удаляем старые пакеты
+    sudo yum erase 1c-enterprise-8.3.18.1959-ws-nls.x86_64 -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-ws.x86_64 -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-server-nls.x86_64 -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-server.x86_64 -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-common-nls.x86_64  -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-common.x86_64 -y
+    sudo yum erase 1c-enterprise-8.3.18.1959-crs.x86_64 -y
+6) Устанавилваем пакеты
+    sudo yum install 1c-enterprise-8.3.23.1865-common-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-common-nls-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-server-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-server-nls-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-ws-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-ws-nls-8.3.23-1865.x86_64.rpm -y
+    sudo yum install 1c-enterprise-8.3.23.1865-crs-8.3.23-1865.x86_64.rpm -y
+
+7) перепрописать файл запуска:
+    sudo ln /opt/1cv8/x86_64/8.3.23.1865/srv1cv8-8.3.23.1865@.service /etc/systemd/system 
+
+8) Запуск сервера
+    sudo systemctl start srv1cv8-8.3.23.1865@.services 
+9) проверка статуса
+    sudo systemctl status -l srv1cv8-8.3.23.1865@.services

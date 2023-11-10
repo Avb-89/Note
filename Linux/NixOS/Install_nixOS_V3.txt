@@ -1,0 +1,138 @@
+Для установки NixOS
+
+Скачиваем образ
+Запускаемся
+Запускаем ssh
+
+# nano /etc/nixos/configuration.nix
+Прописываем:
+============================
+{ config, pkgs, ... }:
+
+{
+  imports = [ <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-kde.nix> ];
+  services.openssh = {
+        enable = true;
+#       permitRootLogin = "yes";
+  };
+}
+============================
+ИЛИ: (Это рабочий конфиг)
+============================
+# Enable the OpenSSH daemon.
+services.openssh.enable = true;
+services.openssh.permitRootLogin = "yes";
+
+# $ nix search wget
+environment.systemPackages = with pkgs; [
+  wget vim htop mc screen
+];
+
+============================
+Пересобираем сборку
+
+# nixos-rebuild switch
+
+Даем пароль root
+
+# passwd
+
+sshd сразу не запустится, поэтому стартуем вручную
+
+# systemctl start sshd
+# systemctl status sshd
+
+РАЗБИВКА ДИСКА
+создаём новую таблицу разделов GPT
+
+# gdisk /dev/sda
+====================================
+Command (? for help): o
+
+ создаём раздел для системного загрузчика grub2
+ 4 мегабайта должно хватить
+ но не забываем выставить правильный тип ef02
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-266338270, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-266338270, default = 266338270) or {+-}size{KMGTP}: +4M
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): ef02
+Changed type of partition to 'BIOS boot partition'
+
+ создаём раздел для менеджера томов LVM
+ используя всё оставшееся место
+
+Command (? for help): n
+Partition number (2-128, default 2):
+First sector (34-266338270, default = 10240) or {+-}size{KMGTP}:
+Last sector (10240-266338270, default = 266338270) or {+-}size{KMGTP}:
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): 8e00
+Changed type of partition to 'Linux LVM'
+
+ сохраняем изменения
+
+Command (? for help): w
+=======================================
+Создаем физический том sda2 используется потому что на sda1 сидит grub2
+
+# pvcreate /dev/sda2
+  Physical volume "/dev/sda2" successfully created.
+
+создаём группу томов с именем nixos
+
+# vgcreate nixos /dev/sda2
+
+создаем логический том с именем root в группе nixos и расширим его до 100%
+# lvcreate --extents 100%FREE --name root nixos
+
+Теперь можно отформатировать наш том и смонтировать для дальнейшей установки на него системы:
+
+# mkfs.ext4 /dev/nixos/root
+# mount /dev/nixos/root /mnt
+В FAT32 , затем форматировал командой , mkfs.vfat -F32 /dev/sda1 (boot/efi на первом разделе)
+
+
+УСТАНОВКА СИСТЕМЫ
+
+сгенерируем начальную конфигурацию
+опцией root мы указали куда смонтирован корневой каталог
+
+# nixos-generate-config  --root /mnt
+
+Теперь необходимо подшаманить файл /etc/nixos/configuration.nix в /mnt. Как минимум нужно правильно указать устройство для установки начального загрузчика grub2:
+
+раскомментируем строку и укажем правильное имя устройства
+
+# nano /mnt/etc/nixos/configuration.nix
+======
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+======
+
+Затем я включил сервер ssh, и добавил пользователя user, чтобы после установки можно было сразу логиниться в систему:
+======
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+    users.extraUsers.user = {
+        isNormalUser = true;
+        uid = 1000;
+        # я одмин ^_^
+        extraGroups = [
+          "wheel"
+  ];
+};
+ ## Потом я хотел бы, чтобы в новой системе уже были установлены некоторые программы
+
+  environment.systemPackages = with pkgs; [
+    wget vim htop mc screen
+  ];
+======
+/mnt/etc/nixos/configuration.nix:97:2
+# nixos-install

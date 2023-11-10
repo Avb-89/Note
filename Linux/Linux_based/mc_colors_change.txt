@@ -1,0 +1,55 @@
+Midnight Commander — меняем цветовую схему
+location: Пришел на работу
+mood: Бывало и хуже
+music: Off
+Не знаю почему, но стандартная цветовая схема MC на моем ноутбуке выглядит безобразно. Синий цвет панелей смотрится каким-то грязно-голубым. Читаемость просто ужасная. Решил копнуть в сторону замены стандартных цветов.
+Итак, за цвета отвечает секция [Colors] файла ~/.mc
+
+Синтаксис таков
+<элемент_интерфейса>=<цвет_текста>,<цвет_подложки>:<элемент_интерфейса>= ...
+
+Какие же элементы можно раскрасить?
+1. В панелях: normal, selected, marked, markselect, errors, input, reverse, gauge
+2. Пункты меню: menu, menusel, menuhot, menuhotsel
+3. В окне диалога: dnormal, dfocus, dhotnormal, dhotfocus
+4. В окне подсказки: helpnormal, helpitalic, helpbold, helplink, helpslink
+5. В окне программы просмотра: viewunderline
+6. Типов файлов: executable, directory, link, device, special, core
+7. В окне редактора: editnormal, editbold, editmarked
+
+В какие цвета можно раскрасить?
+black, gray, red, brightred, green, brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta, cyan, brightcyan, lightgray и white.
+Для прозрачного фона используются специальное ключевое слово default. Слово default можно использовать только при задании цвета подложки.
+
+Мне, например, понравились такие две темки:
+Тема 1
+ [Colors]
+base_color=lightgray,black:normal=lightgray,black:selected=black,cyan:marked=yellow,black:markselect=yellow,cyan:errors=white,red:menu=white,cyan:reverse=black,lightgray:dnormal=black,lightgray:dfocus=black,cyan:
+dhotnormal=yellow,lightgray:dhotfocus=yellow,cyan:viewunderline=brightred,blue:menuhot=yellow,cyan:menusel=lightgrey,black:menuhotsel=yellow,black:helpnormal=black,lightgray:helpitalic=red,lightgray:
+helpbold=yellow,lightgray:helplink=black,cyan:helpslink=yellow,black:gauge=white,black:input=black,cyan:directory=white,black:executable=brightgreen,black:link=lightgray,black:stalelink=brightred,black:
+device=brightmagenta,black:core=red,black:special=black,blue:editnormal=lightgray,black:editbold=yellow,black:editmarked=black,cyan:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray
+ Тема 2
+ [Colors]
+base_color=gray,black:normal=white,black:selected=black,green:marked=yellow,green:markselect=black,yellow:errors=white,red:menu=yellow,gray:reverse=brightmagenta,black:dnormal=black,lightgray:dfocus=black,cyan:
+dhotnormal=blue,lightgray:dhotfocus=blue,cyan:viewunderline=black,green:menuhot=red,gray:menusel=white,black:menuhotsel=yellow,black:helpnormal=black,lightgray:helpitalic=red,lightgray:helpbold=blue,lightgray:helplink=black,cyan:
+helpslink=yellow,blue:gauge=white,black:input=yellow,gray:directory=brightblue,gray:executable=brightgreen,gray:link=brightcyan,gray:stalelink=brightred,blue:device=magenta,gray:core=red,blue:special=black,blue:editnormal=white,black:
+editbold=yellow,blue:editmarked=black,white:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray
+
+Оставил себе первую из предложенных.
+
+
+
+Теперь еще: процесс смены темы можно существенно облегчить, использовав для замены темы скрипт, который лежит здесь: http://www.zagura.ro/download/mcthemes.tar.gz
+Его распаковал в папку ~./mc
+После распаковки переходим в папку mcthemes и выполняем команду
+./mc_change_theme.sh puthre.theme
+Ясно, что вместо puthre.theme  можно выбрать любую другую понравившуюся тему. Мне, напрмер, больше пнравилась тема  rottex.theme
+
+При написании этого материала были использованы такие ресурсы:
+http://www.zagura.ro/index.php/2008/01/09/midnight-commander-color-themes/
+http://habrahabr.ru/blogs/linux/28128/
+
+Хороший материал на русском языке по работе в МС, хоткеям, настройкам редактора
+находится здесь:
+http://www.intuit.ru/department/os/baselinuxwork/6/1.html
+***********************************************************************

@@ -1,0 +1,3 @@
+Unlock the volume Bitlocker
+
+# PS R:\> manage-bde.exe -unlock R: -password

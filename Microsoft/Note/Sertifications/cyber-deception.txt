@@ -1,0 +1,7 @@
+[<< Home](/README.md)
+
+# Cyber Deception
+* [Honeypots: The sweet spot in network security](https://www.computerworld.com/article/2573345/security0/honeypots--the-sweet-spot-in-network-security.html)
+* [Know your Enemy: Tracking Botnets](https://www.honeynet.org/papers/bots)
+* [The Honeynet Project](https://www.honeynet.org/)
+* [Best Tools to Perform Steganography](http://resources.infosecinstitute.com/steganography-and-tools-to-perform-steganography/#gref)

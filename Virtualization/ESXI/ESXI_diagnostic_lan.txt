@@ -1,0 +1,23 @@
+Не забываем, чтобы хост видедился:
+1) Добавить резервирование в DHCP 
+2) Добавить запись А в DNS
+3) Добавить запись PtR в DNS
+4) в файле /etc/hosts написать 192.168.x.x host.domain.lan MyHost
+
+ESXI проверить dns
+
+	~ # esxcli network ip dns server list
+	
+ESXI проверить какой домен ищет
+
+	~ # esxcli network ip dns search list
+	
+ESXI тестирование подключение к DC используя NetCat
+
+	~ # nc -z 192.168.0.238 53
+	Connection to 192.168.0.238 53 port [tcp/domain] succeeded!
+	
+ESXI проверка, что мы можем делать запросы к dns серверу
+
+	~ # nslookup esxi1.vmlab.loc
+

@@ -1,0 +1,32 @@
+To access the psql terminal as user “postgres”, run:
+<=====================================================>
+```
+	$ sudo -u postgres psql
+```
+</=====================================================>
+From within the psql terminal execute \l or \list meta-command to list all databases:
+<=====================================================>
+```
+	\l
+```
+</=====================================================>
+To list all the tables of a particular database first you need to connect to it using the \c or \connect meta-command. The user you are logged in as to the psql terminal must be able to connect to the database.
+For example, to connect to the database named “odoo” you would type:
+<=====================================================>
+```
+\c odoo
+\dt
+```
+</=====================================================>
+Backup base on file:
+<=====================================================>
+```
+	$ pg_dump -U postgres 06_Kamin -f 06_Kamin_bak.sql -h 1c-server -W
+```
+</=====================================================>
+Recover base from file:
+<=====================================================>
+```
+	$ psql -U postgres -d 06_Kamin_Copy -f 06_Kamin_bak.sql -h 1c-server -W
+```
+</=====================================================>

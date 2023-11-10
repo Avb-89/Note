@@ -1,0 +1,51 @@
+Online method for an ESXi upgrade
+
+1) List the current image profile and contained packages:
+
+		esxcli software profile get
+		
+2) Enter ESXi into maintenance mode:
+
+		vim-cmd /hostsvc/maintenance_mode_enter
+	or
+		esxcli system maintenanceMode set --enable true
+		
+3) Allow HTTP traffic by editing the settings in the built-in firewall on the ESXi host:
+
+		esxcli network firewall ruleset set -e true -r httpClient
+		
+4) List profiles provided by VMware for ESXi 7.0 Update 2 in VMware repositories:
+
+		esxcli software sources profile list -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml | grep ESXi-7.0U2
+		
+A software depot is a collection of VIBs and image profiles. It has a hierarchy of files and directories that can be accessed via HTTPS. Companies that have large VMware vSphere environments can create own depots and use vSphere auto-deploy to install updates on a number of ESXi hosts.
+
+Let’s use this profile: ESXi-7.0U2d-18538813-standard
+
+5) You can check which packages will be installed before running the ESXi upgrade command:
+
+		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-7.0U2d-18538813-standard --dry-run
+		
+		в моем случае я искал и использовал версию для 6.7 
+		
+		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-6.7.0-20221004001-standard --dry-run
+		
+6) Run the update process:
+
+esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-6.7.0-20221004001-standard
+
+7) Choose 
+		esxcli software profile update 
+	instead of 
+		esxcli software profile install 
+	to prevent overwriting existing packages, drivers, and configuration.
+	
+8) If everything is correct, reboot the ESXi host for the changes to take effect.
+
+	reboot
+	
+9) Exit maintenance mode with the command:
+
+		vim-cmd /hostsvc/maintenance_mode_enter
+	or
+		esxcli system maintenanceMode set --enable false

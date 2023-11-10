@@ -1,0 +1,15 @@
+Настройка RemoteFx на Windows Server 2012 r2 — гостевая ОС Windows 7
+ 
+Всем привет. На связи Александр Глебов. В очередной своей статье я рассказываю, как происходить настройка RemoteFX на Windows Server 2012 R2. Итак, для начала давайте разберемся, что такое remotefx...
+
+
+
+
+На этом заканчиваем предварительные настройки, переходим к основной настройке RemoteFX
+Настройка RemoteFX
+Выполним следующие простые шаги:
+
+- Убедиться, что Windows FireWall не блокирует TCP и UDP на порт 3389. Проверить, что включены следующие правила: 
+- Теперь можно подключаться к Windows 7 SP1 Enterprise на котором включен RemoteFX 3D video adapter. Есть правда особенность, при подключении надо указывать явную скорость канала: "Локальная сеть (10 Мбит/с и выше)": 
+Если этого не сделать, то можем получить ошибку: "The remote session was disconnected because there were network problems during the licensing protocol.
+Please try connecting to the remote computer again.".
