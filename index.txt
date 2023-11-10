@@ -60,7 +60,6 @@
 │   │   ├── ./Linux/Ansible/Hosts.txt
 │   │   ├── ./Linux/Ansible/Playbooks.txt
 │   │   └── ./Linux/Ansible/all.txt
-│   ├── ./Linux/Apache2.txt
 │   ├── ./Linux/Apple
 │   │   ├── ./Linux/Apple/Apple_auto_route_vpn.txt
 │   │   ├── ./Linux/Apple/TTL_change.txt
@@ -85,9 +84,6 @@
 │   │   │   └── ./Linux/Debian/IPFS_in_Debian/Install_IPFS_Cluster_Debian.txt
 │   │   └── ./Linux/Debian/WIFI
 │   │       └── ./Linux/Debian/WIFI/Debian_WIFI_HOTSPOT.txt
-│   ├── ./Linux/Edit_source_list_debian.txt
-│   ├── ./Linux/Find.txt
-│   ├── ./Linux/Get_serialnumber_notebook.txt
 │   ├── ./Linux/HDD
 │   │   ├── ./Linux/HDD/Btrfs_HDD_Filesystem.txt
 │   │   ├── ./Linux/HDD/Linux_free_space.txt
@@ -98,16 +94,38 @@
 │   ├── ./Linux/Information
 │   │   ├── ./Linux/Information/Linux_Cpu_information.txt
 │   │   └── ./Linux/Information/Linux_device_Information.txt
-│   ├── ./Linux/Install_ifconfig.txt
 │   ├── ./Linux/Kerberos
 │   │   └── ./Linux/Kerberos/�\222вод_комп�\214�\216�\202е�\200а_в_домен.txt
 │   ├── ./Linux/LAN
+│   │   ├── ./Linux/LAN/Apache2.txt
 │   │   ├── ./Linux/LAN/Linux_auto_route_vpn.txt
 │   │   ├── ./Linux/LAN/Linux_look_vpn.txt
 │   │   ├── ./Linux/LAN/Linux_route_to.txt
 │   │   └── ./Linux/LAN/Linux_vpn_operating.txt
-│   ├── ./Linux/Linux_Rename_files_extentions.txt
-│   ├── ./Linux/New_Workstation.txt
+│   ├── ./Linux/Linux_based
+│   │   ├── ./Linux/Linux_based/Find.txt
+│   │   ├── ./Linux/Linux_based/Get_serialnumber_notebook.txt
+│   │   ├── ./Linux/Linux_based/Install_ifconfig.txt
+│   │   ├── ./Linux/Linux_based/Linux_Rename_files_extentions.txt
+│   │   ├── ./Linux/Linux_based/New_Workstation.txt
+│   │   ├── ./Linux/Linux_based/Services_linux.txt
+│   │   ├── ./Linux/Linux_based/add_service_in_autorun.txt
+│   │   ├── ./Linux/Linux_based/advanced_copy_cp_move_mv_status_bar.txt
+│   │   ├── ./Linux/Linux_based/alias.txt
+│   │   ├── ./Linux/Linux_based/command_linux.txt
+│   │   ├── ./Linux/Linux_based/connect_videocard_in_vm.txt
+│   │   ├── ./Linux/Linux_based/cp_copy_command.txt
+│   │   ├── ./Linux/Linux_based/get_version_linux.txt
+│   │   ├── ./Linux/Linux_based/get_version_package_in_repo.txt
+│   │   ├── ./Linux/Linux_based/install_viber.txt
+│   │   ├── ./Linux/Linux_based/mc_colors_change.txt
+│   │   ├── ./Linux/Linux_based/mcedit_colortheme.txt
+│   │   ├── ./Linux/Linux_based/nfs_share_connect_fstab_mount.txt
+│   │   ├── ./Linux/Linux_based/taskwarrior.txt
+│   │   ├── ./Linux/Linux_based/tmux_command.txt
+│   │   ├── ./Linux/Linux_based/tree.txt
+│   │   ├── ./Linux/Linux_based/winscp_scp_for_linux.txt
+│   │   └── ./Linux/Linux_based/yadisk_connect.txt
 │   ├── ./Linux/Nginx
 │   │   └── ./Linux/Nginx/Php-fpm
 │   │       └── ./Linux/Nginx/Php-fpm/Config_for_php-fpm.txt
@@ -115,7 +133,7 @@
 │   │   ├── ./Linux/NixOS/Install_nixOS.txt
 │   │   ├── ./Linux/NixOS/Install_nixOS_01.txt
 │   │   ├── ./Linux/NixOS/Install_nixOS_Programms.txt
-│   │   ├── ./Linux/NixOS/Install_nixOS_V2.txt
+│   │   ├── ./Linux/NixOS/Install_nixOS_V3.txt
 │   │   ├── ./Linux/NixOS/Musorka.txt
 │   │   ├── ./Linux/NixOS/NixOPS
 │   │   │   └── ./Linux/NixOS/NixOPS/What_is_NixOPS.txt
@@ -144,7 +162,6 @@
 │   │   └── ./Linux/SSH/WinSCP_for_linux.txt
 │   ├── ./Linux/SSL
 │   │   └── ./Linux/SSL/Show_Certificate_Site_mail.txt
-│   ├── ./Linux/Services_linux.txt
 │   ├── ./Linux/Users
 │   │   ├── ./Linux/Users/linux_add_user.txt
 │   │   └── ./Linux/Users/sudo_nopassword.txt
@@ -153,29 +170,12 @@
 │   │       └── ./Linux/VNC/Problems/x11vnc_errors.txt
 │   ├── ./Linux/VPN
 │   │   ├── ./Linux/VPN/Cisco_connect_vpn_Linux.txt
-│   │   └── ./Linux/VPN/Forty_client_vpn_Linux.txt
-│   ├── ./Linux/Zabbix
-│   │   ├── ./Linux/Zabbix/Create_alerts.txt
-│   │   └── ./Linux/Zabbix/Install_and_settings.txt
-│   ├── ./Linux/add_service_in_autorun.txt
-│   ├── ./Linux/advanced_copy_cp_move_mv_status_bar.txt
-│   ├── ./Linux/alias.txt
-│   ├── ./Linux/command_linux.txt
-│   ├── ./Linux/connect_videocard_in_vm.txt
-│   ├── ./Linux/cp_copy_command.txt
-│   ├── ./Linux/get_version_linux.txt
-│   ├── ./Linux/get_version_package_in_repo.txt
-│   ├── ./Linux/install_viber.txt
-│   ├── ./Linux/mc_colors_change.txt
-│   ├── ./Linux/mcedit_colortheme.txt
-│   ├── ./Linux/nfs_share_connect_fstab_mount.txt
-│   ├── ./Linux/taskwarrior.txt
-│   ├── ./Linux/tmux_command.txt
-│   ├── ./Linux/tree.txt
-│   ├── ./Linux/vpn_pptp_not_use_remote_gateway.txt
-│   ├── ./Linux/winscp_scp_for_linux.txt
-│   ├── ./Linux/yadisk_connect.txt
-│   └── ./Linux/zabbix_certificate_available.txt
+│   │   ├── ./Linux/VPN/Forty_client_vpn_Linux.txt
+│   │   └── ./Linux/VPN/vpn_pptp_not_use_remote_gateway.txt
+│   └── ./Linux/Zabbix
+│       ├── ./Linux/Zabbix/Create_alerts.txt
+│       ├── ./Linux/Zabbix/Install_and_settings.txt
+│       └── ./Linux/Zabbix/zabbix_certificate_available.txt
 ├── ./Microsoft
 │   └── ./Microsoft/Note
 │       ├── ./Microsoft/Note/ActiveDirectory
@@ -383,11 +383,14 @@
 │   ├── ./SQL/SQL_Acces_table.txt
 │   ├── ./SQL/SQL_shrink_log.txt
 │   └── ./SQL/sqllite3.txt
+├── ./SSL
+│   └── ./SSL/SSL_disable_pass_in_key.txt
 ├── ./UEFI
 │   └── ./UEFI/Create_Boot_Flash.txt
 ├── ./Virtualization
 │   ├── ./Virtualization/ESXI
 │   │   ├── ./Virtualization/ESXI/ESXI_diagnostic_lan.txt
+│   │   ├── ./Virtualization/ESXI/ESXI_volumes_diagnostic.txt
 │   │   └── ./Virtualization/ESXI/Update_ESXI_online.txt
 │   ├── ./Virtualization/Note
 │   │   ├── ./Virtualization/Note/Commands_ESXI.txt
@@ -402,6 +405,7 @@
 │   │       └── ./Virtualization/Note/nppBackup/Hyper-V_on_VMware.txt
 │   └── ./Virtualization/Rename_ESXI_host.md
 ├── ./index.txt
-└── ./temp.txt
+├── ./temp.txt
+└── ./untitled.txt
 
-88 directories, 316 files
+90 directories, 318 files
