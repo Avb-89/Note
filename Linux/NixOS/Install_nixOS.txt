@@ -56,7 +56,24 @@ Prepare_volume:
 Generate configuration:
 
     # nixos-generate-config  --root /mnt
+	
+Modyfy configuration:
+
+	# nano /mnt/etc/nixos/configuration.nix
+
+look to ./Developnet/NixOs for example
+==============================================================================
+  
+Create bootloader
+
+   # mkdir /mnt/boot
+   # mount /dev/sda1 /mnt/boot
 
 ==============================================================================
+   
+   # nixos-install
+   
+==============================================================================
 
-    # nixos-install
+After installation if you change configuration, use this command for apply new configuration
+   # nixos-rebuild switch 
