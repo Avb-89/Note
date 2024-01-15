@@ -1,0 +1,3 @@
+пакетынй менеджер для suse это zypper
+
+sudo zypper refresh - обновить

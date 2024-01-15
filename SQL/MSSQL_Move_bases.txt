@@ -1,0 +1,18 @@
+1) выключаем базу
+2) альтер с новым диском
+
+USE ZPriceDW;
+GO
+ALTER DATABASE ZPriceDW SET OFFLINE;
+ALTER DATABASE ZPriceDW
+MODIFY FILE (name=ZPriceDW, filename='F:\ZPriceDW.mdf')
+ALTER DATABASE ZPriceDW
+MODIFY FILE (name=ZPriceDW_log, filename='F:\ZPriceDW_log.ldf')
+
+3) переносим физические файлы вручную
+
+4) включаем базу
+
+USE ZPriceDW;
+GO
+ALTER DATABASE ZPriceDW SET OFFLINE;

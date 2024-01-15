@@ -1,0 +1,15 @@
+Делаем цветной синтаксис в ZSH:
+
+1) скачаем пакет кооторый делает синтаксис цветным:
+	https://github.com/zsh-users/zsh-syntax-highlighting
+	
+2) копируем в папку с плагинами zsh
+	1.1 выясним где она
+		# echo $ZSH_CUSTOM 
+			/Users/sitis/.oh-my-zsh/custom
+	2.2 скопируем в директорию:
+		# cp -r zsh-syntax-highlighting-master ~/.oh-my-zsh/custom/plugins/
+
+3) Чтоб плагин заработал, его надо подключить
+	 # vi ~/.zshrc
+	 	plugins=(zsh-syntax-highlighting)

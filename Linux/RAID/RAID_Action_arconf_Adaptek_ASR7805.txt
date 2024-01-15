@@ -2,7 +2,7 @@
 ./arcconf delete 1 logicaldrive 0 - Удалить logicaldrive (в моем случае cheeta-10) 
   
 СОЗДАТЬ RAID 
-./arcconf create 1 logicaldrive max 1 0,0 0,1 - создать 1рый рейд из двух дисков 
+./arcconf create 1 logicaldrive name a1 max 1 0,0 0,1 - создать 1рый рейд из двух дисков 
 In our command line: arcconf create 1 logicaldrive max 1 0,3 0,4: 
 create – создать 
 1 – номер контроллера 
@@ -14,3 +14,14 @@ max – использовать весь диск
   
 ИЗМЕНИТЬ ИМЯ МАСИВА 
 ./arcconf SETNAME <Controller#> LOGICALDRIVE <LogicalDrive#> <New Name> 
+
+
+Теперь можно настроить новый RAID. Для этого состояние ваших дисков должно быть Готово . Если ваши диски все еще находятся в состоянии Raw (Pass Through) , вам необходимо инициализировать диски:
+
+Синтаксис:
+
+arcconf TASK START <Controller#> DEVICE <Channel# ID#> INITIALIZE
+
+Чтобы инициализировать сразу все ваши диски, подключенные к RAID-контроллеру, вы можете использовать ALL:
+
+arcconf TASK START 1 DEVICE ALL INITIALIZE

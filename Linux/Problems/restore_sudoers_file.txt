@@ -1,0 +1,58 @@
+/etc/sudoers - файл в котором содержатся разрешения для пользвоателей. 
+
+++++++++++++++++++++++++++++++++++++++++++++++Default File
+
+# /etc/sudoers
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# See the man page for details on how to write a sudoers file.
+#
+
+Defaults    env_reset
+
+# Uncomment to allow members of group sudo to not need a password
+# %sudo ALL=NOPASSWD: ALL
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+
+# User privilege specification
+root    ALL=(ALL) ALL
+
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo	ALL=(ALL:ALL) ALL
+
+++++++++++++++++++++++++++++++++++++++++++++++Default File
+
+или вариант без коментов
+
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+Defaults	use_pty
+root	ALL=(ALL:ALL) ALL
+%admin ALL=(ALL) ALL
+%sudo	ALL=(ALL:ALL) ALL
+@includedir /etc/sudoers.d
+
+если этот файл удалить - системой невозможно будет пользоваться. ввостановить можно или через livecd скопировать этот файл из другой системы, или есть лазейка через grub:
+
+1) При загрузке компа в меню GRUB нажимаем "e" ("edit" - "редактировать").
+2) С пом. клавиш стрелок выбираем строку, которая может иметь такой вид:
+Код: 
+kernel /boot/vmlinuz-(версия_ядра) ro root=/dev/(корневой_раздел_диска) ro quiet splash
+или такой:
+Код: 
+kernel /boot/vmlinuz-(версия_ядра) ro root=LABEL=/1 rhgb quiet
+3) Вновь нажимаем "e", - теперь чтобы отредактировать эту строку.
+4) Дописываем в конец строки:
+Код: 
+rw init=/bin/bash
++++++++++++++++++++++

@@ -24,15 +24,15 @@ Let’s use this profile: ESXi-7.0U2d-18538813-standard
 
 5) You can check which packages will be installed before running the ESXi upgrade command:
 
-		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-7.0U2d-18538813-standard --dry-run
+		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-7.0U3o-22348816-standard --dry-run
 		
 		в моем случае я искал и использовал версию для 6.7 
 		
-		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-6.7.0-20221004001-standard --dry-run
+		esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-7.0U3o-22348816-standard --dry-run
 		
 6) Run the update process:
 
-esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-6.7.0-20221004001-standard
+esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml -p ESXi-7.0U3o-22348816-standard 
 
 7) Choose 
 		esxcli software profile update 
@@ -49,3 +49,6 @@ esxcli software profile update -d https://hostupdate.vmware.com/software/VUM/PRO
 		vim-cmd /hostsvc/maintenance_mode_enter
 	or
 		esxcli system maintenanceMode set --enable false
+		
+		
+		

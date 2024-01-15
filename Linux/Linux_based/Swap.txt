@@ -1,0 +1,14 @@
+посмотреть размер swop и сколько занято:
+
+  # free -h
+  
+выяснить, файл это или раздел подкачки:
+  
+  #swapon --show
+
+Увеличение размера SwapFile
+
+sudo swapoff /swapfile - отключаем его
+sudo fallocate -l 2G /swapfile - увеличиваем размер до 2гб
+sudo mkswap /swapfile - форматируем его
+sudo swapon /swapfile - включаем его обратно

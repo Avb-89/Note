@@ -75,5 +75,4 @@ Create bootloader
    
 ==============================================================================
 
-After installation if you change configuration, use this command for apply new configuration
-   # nixos-rebuild switch 
+look .Configure_nixOS.txt

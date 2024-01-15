@@ -30,5 +30,6 @@
 
 8) Запуск сервера
     sudo systemctl start srv1cv8-8.3.23.1865@.services 
+9)  sudo systemctl enabble srv1cv8-8.3.23.1865@.services 
 9) проверка статуса
     sudo systemctl status -l srv1cv8-8.3.23.1865@.services
