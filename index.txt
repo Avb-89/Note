@@ -1,7 +1,11 @@
 .
 ├── ./C++
 │   └── ./C++/type_data.txt
-├── ./DevOps_Learning.txt
+├── ./DevOPS
+│   ├── ./DevOPS/DevOps_Learning.txt
+│   └── ./DevOPS/GIT
+│       ├── ./DevOPS/GIT/git_lab_1.pdf
+│       └── ./DevOPS/GIT/git_lab_2.pdf
 ├── ./Docker
 │   └── ./Docker/Note
 │       ├── ./Docker/Note/For_Linux
@@ -42,7 +46,7 @@
 │   │   ├── ./Git/GitHub/README.rst
 │   │   ├── ./Git/GitHub/_config.yml
 │   │   ├── ./Git/GitHub/emoji.md
-│   │   └── ./Git/GitHub/�\224ополнени�\217.md
+│   │   └── ./Git/GitHub/Дополнения.md
 │   ├── ./Git/GitLab
 │   │   ├── ./Git/GitLab/GitLab_Issue.txt
 │   │   └── ./Git/GitLab/How_to_install.txt
@@ -62,14 +66,21 @@
 │   │   └── ./Linux/Ansible/all.txt
 │   ├── ./Linux/Apple
 │   │   ├── ./Linux/Apple/Apple_auto_route_vpn.txt
+│   │   ├── ./Linux/Apple/Apple_package_manager.txt
 │   │   ├── ./Linux/Apple/TTL_change.txt
+│   │   ├── ./Linux/Apple/Zsh
+│   │   │   └── ./Linux/Apple/Zsh/Zsh_color_syntaxis.txt
 │   │   ├── ./Linux/Apple/apple_dns_view.txt
 │   │   └── ./Linux/Apple/apple_route_to.txt
 │   ├── ./Linux/Archive
 │   │   ├── ./Linux/Archive/Exctract_tar.txt
 │   │   └── ./Linux/Archive/Extract_files.txt
+│   ├── ./Linux/Bash
+│   │   ├── ./Linux/Bash/DPKG.txt
+│   │   ├── ./Linux/Bash/scripting.txt
+│   │   └── ./Linux/Bash/сравнение_файлов_diff.txt
 │   ├── ./Linux/CentOS
-│   │   ├── ./Linux/CentOS/Disable_Protection\ policy_CentOS.txt
+│   │   ├── ./Linux/CentOS/Disable_Protection policy_CentOS.txt
 │   │   ├── ./Linux/CentOS/IOSTAT.txt
 │   │   ├── ./Linux/CentOS/LAN
 │   │   │   └── ./Linux/CentOS/LAN/Network_Configure.txt
@@ -82,6 +93,7 @@
 │   │   ├── ./Linux/Debian/Edit_source_list_debian.txt
 │   │   ├── ./Linux/Debian/IPFS_in_Debian
 │   │   │   └── ./Linux/Debian/IPFS_in_Debian/Install_IPFS_Cluster_Debian.txt
+│   │   ├── ./Linux/Debian/Locale_language_change.txt
 │   │   └── ./Linux/Debian/WIFI
 │   │       └── ./Linux/Debian/WIFI/Debian_WIFI_HOTSPOT.txt
 │   ├── ./Linux/HDD
@@ -95,13 +107,14 @@
 │   │   ├── ./Linux/Information/Linux_Cpu_information.txt
 │   │   └── ./Linux/Information/Linux_device_Information.txt
 │   ├── ./Linux/Kerberos
-│   │   └── ./Linux/Kerberos/�\222вод_комп�\214�\216�\202е�\200а_в_домен.txt
+│   │   └── ./Linux/Kerberos/Ввод_компьютера_в_домен.txt
 │   ├── ./Linux/LAN
 │   │   ├── ./Linux/LAN/Apache2.txt
 │   │   ├── ./Linux/LAN/Linux_auto_route_vpn.txt
 │   │   ├── ./Linux/LAN/Linux_look_vpn.txt
 │   │   ├── ./Linux/LAN/Linux_route_to.txt
-│   │   └── ./Linux/LAN/Linux_vpn_operating.txt
+│   │   ├── ./Linux/LAN/Linux_vpn_operating.txt
+│   │   └── ./Linux/LAN/SS.txt
 │   ├── ./Linux/Linux_based
 │   │   ├── ./Linux/Linux_based/Find.txt
 │   │   ├── ./Linux/Linux_based/Get_serialnumber_notebook.txt
@@ -109,10 +122,16 @@
 │   │   ├── ./Linux/Linux_based/Linux_Rename_files_extentions.txt
 │   │   ├── ./Linux/Linux_based/New_Workstation.txt
 │   │   ├── ./Linux/Linux_based/Services_linux.txt
+│   │   ├── ./Linux/Linux_based/Swap.txt
+│   │   ├── ./Linux/Linux_based/Text_cat_grep
+│   │   │   ├── ./Linux/Linux_based/Text_cat_grep/grep.txt
+│   │   │   ├── ./Linux/Linux_based/Text_cat_grep/grep_no_comments.txt
+│   │   │   └── ./Linux/Linux_based/Text_cat_grep/grep_regular.txt
 │   │   ├── ./Linux/Linux_based/add_service_in_autorun.txt
 │   │   ├── ./Linux/Linux_based/advanced_copy_cp_move_mv_status_bar.txt
 │   │   ├── ./Linux/Linux_based/alias.txt
 │   │   ├── ./Linux/Linux_based/command_linux.txt
+│   │   ├── ./Linux/Linux_based/command_linux2.txt
 │   │   ├── ./Linux/Linux_based/connect_videocard_in_vm.txt
 │   │   ├── ./Linux/Linux_based/cp_copy_command.txt
 │   │   ├── ./Linux/Linux_based/get_version_linux.txt
@@ -130,18 +149,21 @@
 │   │   └── ./Linux/Nginx/Php-fpm
 │   │       └── ./Linux/Nginx/Php-fpm/Config_for_php-fpm.txt
 │   ├── ./Linux/NixOS
+│   │   ├── ./Linux/NixOS/Configure_nixOS.txt
 │   │   ├── ./Linux/NixOS/Install_nixOS.txt
-│   │   ├── ./Linux/NixOS/Install_nixOS_01.txt
-│   │   ├── ./Linux/NixOS/Install_nixOS_Programms.txt
-│   │   ├── ./Linux/NixOS/Install_nixOS_V3.txt
-│   │   ├── ./Linux/NixOS/Musorka.txt
 │   │   ├── ./Linux/NixOS/NixOPS
 │   │   │   └── ./Linux/NixOS/NixOPS/What_is_NixOPS.txt
-│   │   ├── ./Linux/NixOS/NixOS_Repository.txt
-│   │   ├── ./Linux/NixOS/NixOS_Upgrade_ver.up.txt
-│   │   └── ./Linux/NixOS/linksnixos.txt
+│   │   └── ./Linux/NixOS/etc
+│   │       ├── ./Linux/NixOS/etc/Install_nixOS_01.txt
+│   │       ├── ./Linux/NixOS/etc/Install_nixOS_Programms.txt
+│   │       ├── ./Linux/NixOS/etc/Install_nixOS_V3.txt
+│   │       ├── ./Linux/NixOS/etc/Musorka.txt
+│   │       ├── ./Linux/NixOS/etc/NixOS_Repository.txt
+│   │       ├── ./Linux/NixOS/etc/NixOS_Upgrade_ver.up.txt
+│   │       └── ./Linux/NixOS/etc/linksnixos.txt
 │   ├── ./Linux/Problems
-│   │   └── ./Linux/Problems/bad_interpreter_No_such_file_or_directory.txt
+│   │   ├── ./Linux/Problems/bad_interpreter_No_such_file_or_directory.txt
+│   │   └── ./Linux/Problems/restore_sudoers_file.txt
 │   ├── ./Linux/RAID
 │   │   ├── ./Linux/RAID/RAID_Action_arconf_Adaptek_ASR7805.txt
 │   │   ├── ./Linux/RAID/RAID_Action_hpssacli_SmartArrayP410.txt
@@ -159,10 +181,16 @@
 │   │   ├── ./Linux/SSH/SSH_generate_RSA_ed25519_keys.txt
 │   │   ├── ./Linux/SSH/SSH_non_Password_auth.txt
 │   │   ├── ./Linux/SSH/SSH_tunel.txt
-│   │   └── ./Linux/SSH/WinSCP_for_linux.txt
+│   │   ├── ./Linux/SSH/Screen.txt
+│   │   ├── ./Linux/SSH/WinSCP_for_linux.txt
+│   │   └── ./Linux/SSH/ssh_copy_key.txt
 │   ├── ./Linux/SSL
 │   │   └── ./Linux/SSL/Show_Certificate_Site_mail.txt
+│   ├── ./Linux/Suse
+│   │   ├── ./Linux/Suse/install_remove.txt
+│   │   └── ./Linux/Suse/rpm_suse_search.txt
 │   ├── ./Linux/Users
+│   │   ├── ./Linux/Users/delete_remove_password_user.txt
 │   │   ├── ./Linux/Users/linux_add_user.txt
 │   │   └── ./Linux/Users/sudo_nopassword.txt
 │   ├── ./Linux/VNC
@@ -172,10 +200,11 @@
 │   │   ├── ./Linux/VPN/Cisco_connect_vpn_Linux.txt
 │   │   ├── ./Linux/VPN/Forty_client_vpn_Linux.txt
 │   │   └── ./Linux/VPN/vpn_pptp_not_use_remote_gateway.txt
-│   └── ./Linux/Zabbix
-│       ├── ./Linux/Zabbix/Create_alerts.txt
-│       ├── ./Linux/Zabbix/Install_and_settings.txt
-│       └── ./Linux/Zabbix/zabbix_certificate_available.txt
+│   ├── ./Linux/Zabbix
+│   │   ├── ./Linux/Zabbix/Create_alerts.txt
+│   │   ├── ./Linux/Zabbix/Install_and_settings.txt
+│   │   └── ./Linux/Zabbix/zabbix_certificate_available.txt
+│   └── ./Linux/Заметки.txt
 ├── ./Microsoft
 │   └── ./Microsoft/Note
 │       ├── ./Microsoft/Note/ActiveDirectory
@@ -194,7 +223,7 @@
 │       │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/new_domain_autoscript.txt
 │       │   ├── ./Microsoft/Note/ActiveDirectory/get-adgroup_ad_group.txt
 │       │   ├── ./Microsoft/Note/ActiveDirectory/get-aduser.txt
-│       │   └── ./Microsoft/Note/ActiveDirectory/�\222вод\ комп�\214�\216�\202е�\200а\ в\ домен\ Windows.ini
+│       │   └── ./Microsoft/Note/ActiveDirectory/Ввод компьютера в домен Windows.ini
 │       ├── ./Microsoft/Note/BitLocker
 │       │   └── ./Microsoft/Note/BitLocker/Unlock.txt
 │       ├── ./Microsoft/Note/CMD
@@ -252,15 +281,15 @@
 │       ├── ./Microsoft/Note/Linux_first_commands.txt
 │       ├── ./Microsoft/Note/NOW_INSTALL_INFRASTRUCTURE_PS
 │       │   └── ./Microsoft/Note/NOW_INSTALL_INFRASTRUCTURE_PS/Install_AD_PS.txt
-│       ├── ./Microsoft/Note/New-ADUser_Создание_пол�\214зова�\202ел�\217_в_AD.txt
+│       ├── ./Microsoft/Note/New-ADUser_Создание_пользователя_в_AD.txt
 │       ├── ./Microsoft/Note/Office
-│       │   └── ./Microsoft/Note/Office/ODT_Office\ Deployment\ Tool_C2R.txt
+│       │   └── ./Microsoft/Note/Office/ODT_Office Deployment Tool_C2R.txt
 │       ├── ./Microsoft/Note/PSGallery.txt
 │       ├── ./Microsoft/Note/PowerShell
 │       │   ├── ./Microsoft/Note/PowerShell/DSC
 │       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_Install_DHCP.txt
 │       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_insall_AD_DNS_USERS_ETC.txt
-│       │   │   └── ./Microsoft/Note/PowerShell/DSC/Description\ for\ xModules.txt
+│       │   │   └── ./Microsoft/Note/PowerShell/DSC/Description for xModules.txt
 │       │   ├── ./Microsoft/Note/PowerShell/JEA
 │       │   │   ├── ./Microsoft/Note/PowerShell/JEA/Archive
 │       │   │   │   └── ./Microsoft/Note/PowerShell/JEA/Archive/01.txt
@@ -283,7 +312,7 @@
 │       │   │   ├── ./Microsoft/Note/RDP/Problems/RDP_Error_CredSSP_encrypt_Oracle.txt
 │       │   │   ├── ./Microsoft/Note/RDP/Problems/RDP_not_connecting_on_server.txt
 │       │   │   ├── ./Microsoft/Note/RDP/Problems/Rdp_not_server_licence.txt
-│       │   │   └── ./Microsoft/Note/RDP/Problems/�\237�\200опадае�\202_�\217з�\213кова�\217_панел�\214_в_RDP_�\201еан�\201е.txt
+│       │   │   └── ./Microsoft/Note/RDP/Problems/Пропадает_языковая_панель_в_RDP_сеансе.txt
 │       │   ├── ./Microsoft/Note/RDP/RDP_Forwarding_audio_device.txt
 │       │   ├── ./Microsoft/Note/RDP/RDP_Proccrss_users.txt
 │       │   ├── ./Microsoft/Note/RDP/RDP_connect_shadow_to_users.txt
@@ -333,8 +362,8 @@
 │       ├── ./Microsoft/Note/Set_reg.exe_with_PS.txt
 │       ├── ./Microsoft/Note/Take_off_acces_for_use_Profile_PS1.txt
 │       ├── ./Microsoft/Note/UPS
-│       │   └── ./Microsoft/Note/UPS/APS\ SMART\ UPS\ 5000
-│       │       └── ./Microsoft/Note/UPS/APS\ SMART\ UPS\ 5000/UPS_Network_configuration.txt
+│       │   └── ./Microsoft/Note/UPS/APS SMART UPS 5000
+│       │       └── ./Microsoft/Note/UPS/APS SMART UPS 5000/UPS_Network_configuration.txt
 │       ├── ./Microsoft/Note/Use_Windows_without_GUI.txt
 │       ├── ./Microsoft/Note/User_profile_remove_delete_get.txt
 │       ├── ./Microsoft/Note/User_profile_remove_delete_get1.txt
@@ -361,7 +390,7 @@
 │       │   └── ./Microsoft/Note/nppBackup/Create_WIM_image.MD.2018-04-03_021256.txt
 │       ├── ./Microsoft/Note/time_sync_resync.txt
 │       ├── ./Microsoft/Note/windows_update_cool_preset_view.txt
-│       └── ./Microsoft/Note/Ч�\202о_должен_зна�\202�\214_WindowsSYSADMIN.txt
+│       └── ./Microsoft/Note/Что_должен_знать_WindowsSYSADMIN.txt
 ├── ./Mikrotik
 │   ├── ./Mikrotik/Config_home.txt
 │   ├── ./Mikrotik/Configure_Microtik_L2tp_Beeline.md
@@ -379,6 +408,7 @@
 ├── ./README.md
 ├── ./SQL
 │   ├── ./SQL/Access_to_create_table_for_user.txt
+│   ├── ./SQL/MSSQL_Move_bases.txt
 │   ├── ./SQL/MySQL_shpargalka.txt
 │   ├── ./SQL/SQL_Acces_table.txt
 │   ├── ./SQL/SQL_shrink_log.txt
@@ -405,7 +435,7 @@
 │   │       └── ./Virtualization/Note/nppBackup/Hyper-V_on_VMware.txt
 │   └── ./Virtualization/Rename_ESXI_host.md
 ├── ./index.txt
-├── ./temp.txt
-└── ./untitled.txt
+├── ./note
+└── ./temp.txt
 
-90 directories, 318 files
+98 directories, 341 files
