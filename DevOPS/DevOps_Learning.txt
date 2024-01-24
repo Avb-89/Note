@@ -1430,6 +1430,8 @@ ssh-copy-id ubns1 - скопироть ключи в машину ubns1
     git log - показывает все камиты в  текущей ветке
     git log --oneline --decorate - показывает красиво
             --all --graph - добавит информацию о всех ветках
+    git log --stat  --pretty="online"
+
     git checkout - переключает на другую ветку
 
     git diff - показывает отличия между коммитами
@@ -1463,9 +1465,13 @@ ssh-copy-id ubns1 - скопироть ключи в машину ubns1
 
    git remote add gitea http://localhost:3000/sitis/REPO.git - указываем репу
      git push -u gitea master - пушим в ветку
-11
 
 
+git tag -a v_1.0 -m 'Release testpro 1.0' - создать метку(тег) для того чтобы можно было обращаться по тегу к тому или иному коммиту.
+
+git commit --amend  - склеит комит с последним.
+git restore --staged <file>..." - убрать файл из add
+git reset --hard ввостанавливает файлы которые были на определенным комите, он вернет прям как было в состоянии на тот момент
 
 
-
+https://git-scm.com/book/ru/v2
