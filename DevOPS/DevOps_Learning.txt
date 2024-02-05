@@ -1485,5 +1485,5 @@ https://coderbooks.ru/books/
 создать виртуальное окружение.
     # python -m venv venv
 
-
+1
 
