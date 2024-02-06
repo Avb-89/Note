@@ -12,7 +12,7 @@ sudo ip route add 172.20.31.0/24 dev ppp0
 ЕМНИП, в дебиане/убунту должен быть каталог ″/etc/ppp/ip-up.d/″,
  если он есть, создаёте там файл: ″/etc/ppp/ip-up.d/routes-up″ такого содержания:
 
- #!/bin/sh
+#!/bin/sh
 /sbin/ip route add 1.1.1.1/24 dev  $1
 
 и делаете его исполняемым: chmod a+x /etc/ppp/ip-up.d/routes-up.
