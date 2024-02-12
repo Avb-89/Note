@@ -1,11 +1,19 @@
 =========================================
+подключиться к удаленной машине:
+Enter-PSSession -ComputerName dc-2.domain.lan -Credential user@domain.lan (имена с маленькой буквы)
+
 **создать новую учетную запись в определенном контейнере (OU) домена с паролем и сразу включить ее:**
+
+
 
 New-ADUser -Name "Test User2" -GivenName "Test" -Surname "User2" -SamAccountName "testuser2" 
 -UserPrincipalName "testuser2@winitpro.ru" -Path "OU=Users,OU=Accounts,OU=SPB,DC=winitpro,DC=loc" 
 -AccountPassword(Read-Host -AsSecureString "Input Password") -Enabled $true
 
-New-ADUser -Name "Test User1" -GivenName "Test" -Surname "User1" -SamAccountName "testuser1" -UserPrincipalName "testuser1@autostat.lan" -path "CN=Разработчики,OU=autostat,DC=autostat,DC=lan" -AccountPassword(Read-Host -AsSecureString "435887") -Enable $true 
+New-ADUser -Name "Test User1" -GivenName "Test" -Surname "User1" -SamAccountName "testuser1" \
+-UserPrincipalName "testuser1@autostat.lan" -path "CN=Разработчики,OU=autostat,DC=autostat,DC=lan" \
+-AccountPassword(Read-Host -AsSecureString "435887") -Enable $true
+
 
 =========================================
 **Для изменения пароля пользователя:**
