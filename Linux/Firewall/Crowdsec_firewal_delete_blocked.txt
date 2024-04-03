@@ -1,0 +1,1 @@
+sudo cscli decisions delete --ip 172.20.11.19
