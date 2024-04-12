@@ -7,3 +7,5 @@
 #sudo route add 172.20.31.0/24 dev ppp0
 
 sudo route add 172.20.31.0/24 -interface ppp0
+
+sudo route add 192.168.10.0/24 -interface ppp0
