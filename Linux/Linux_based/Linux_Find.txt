@@ -1,0 +1,5 @@
+Поиск файлов
+
+find . -name "имя файла или папки"
+
+2>&1 | grep -v 'Operation not permitted'
