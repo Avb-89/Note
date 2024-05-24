@@ -2,10 +2,10 @@
 ******************************************************************************
     Этот файл ансибл запрашивает когда применяется плейбук.
     В нем прописаны все машины с которыми мы планируем работать.
-    НАПОМНЮ, что по умолчанию  ansible ищет файл hosts в /etc/ansible/hosts
-    Для того чтобы он искал его, там где надо, можно поправить файл ansible.cfg
-    который находится в /etc/ansible/ansible.cfg
-    или создать свой в папке с проектом.
+
+    НАПОМНЮ, что по умолчанию  ansible сначала ищет файл hosts папке с проектом смотря в ansible.cfg
+    Если не находит, ищет в /etc/ansible/hosts (/etc/ansible/ansible.cfg)
+
     примерный текст:
     ==================
     [defaults]
@@ -19,11 +19,16 @@
 <Что_писать_hosts>
 ******************************************************************************
     Принцип написание хостов как файле hosts linux.
-    можно описать:
-    # по netbios имени
-    ubuntu001.autostat.lan
-    # по ip
-    192.168.10.37
+    [VM1]
+   #название ноды | netbios name    |  пользователь таргета| порт по какому подключаться (умолчание 22)
+    localhost1 ansible_host=localhost ansible_user=root ansible_port=2222
+
+    [VM2]
+    localhost2 ansible_host=localhost ansible_user=root ansible_port=2223
+
+    [UBNS3-4]
+    ubns03 ansible_host=localhost ansible_user=root ansible_port=2223
+    ubns04 ansible_host=localhost ansible_user=root ansible_port=2224
 ******************************************************************************
 
 <Варианты_кастомизации>

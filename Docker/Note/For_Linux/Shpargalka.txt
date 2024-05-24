@@ -127,7 +127,7 @@ docker attach nginx
 
 docker ps
 
-docker ps -a
+docker ps -
 
 Логи контейнера
 

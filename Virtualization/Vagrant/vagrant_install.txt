@@ -1,0 +1,11 @@
+### Как установить Vagrant
+Первым делом необходимо поставить систему виртуализации, например VirtualBox.
+Скачать его под вашу операционную систему
+можно [здесь](https://www.virtualbox.org/wiki/Downloads).
+
+Затем скачайте установщик Vagrant под вашу
+операционную систему на странице [Download](https://developer.hashicorp.com/vagrant/install).
+
+Откройте терминал и убедитесь, что Vagrant работает:
+ vagrant -v
+

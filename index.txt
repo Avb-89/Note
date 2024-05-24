@@ -2,10 +2,1215 @@
 ├── ./C++
 │   └── ./C++/type_data.txt
 ├── ./DevOPS
+│   ├── ./DevOPS/DevOps
+│   │   ├── ./DevOPS/DevOps/Books
+│   │   │   ├── ./DevOPS/DevOps/Books/Chistaya_arkhitektura_2021_robert_martin.pdf
+│   │   │   ├── ./DevOPS/DevOps/Books/DevOps_read_stamped.pdf
+│   │   │   └── ./DevOPS/DevOps/Books/The DevOps Handbook - How to Create World-Class Agility, Reliability, and Security in Technology Organizations.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L01-Intro.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L02-Git.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L03-Dev_Methods.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L04-Virtualization.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L05-Containers.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L06-CM_AnsibleVault.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L07-CI_Jenkins.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L08-CICD_Gitlab.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_L09-QA_Nexus_SonarQube.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L02-Git.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L04-Virtualization.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L05-Containers.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L06-CM_AnsibleVault v7.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L06-CM_AnsibleVault.md
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L07-CI_Jenkins.pdf
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L08-CI_Gitlab.md
+│   │   ├── ./DevOPS/DevOps/DevOps_Practice_L09-QA_Nexus_SonarQube.pdf
+│   │   └── ./DevOPS/DevOps/Homework
+│   │       ├── ./DevOPS/DevOps/Homework/DevOps_Exercise_Minikube.md
+│   │       ├── ./DevOPS/DevOps/Homework/DevOps_Workout_VotingApp_01_Docker.docx
+│   │       ├── ./DevOPS/DevOps/Homework/DevOps_Workout_VotingApp_02_Ansible.docx
+│   │       ├── ./DevOPS/DevOps/Homework/DevOps_Workout_VotingApp_03_Jenkins.docx
+│   │       └── ./DevOPS/DevOps/Homework/DevOps_Workout_VotingApp_04_Gitlab.docx
 │   ├── ./DevOPS/DevOps_Learning.txt
-│   └── ./DevOPS/GIT
-│       ├── ./DevOPS/GIT/git_lab_1.pdf
-│       └── ./DevOPS/GIT/git_lab_2.pdf
+│   ├── ./DevOPS/GIT
+│   │   ├── ./DevOPS/GIT/git_lab_1.pdf
+│   │   ├── ./DevOPS/GIT/git_lab_2.pdf
+│   │   └── ./DevOPS/GIT/git_lab_3.pdf
+│   └── ./DevOPS/PG
+│       ├── ./DevOPS/PG/DBA1-handouts-13
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/catalogs.pdf
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_00_introduction.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_01_tools_install.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_02_tools_psql.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_03_tools_configuration.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_04_arch_general.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_05_arch_mvcc_overview.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_06_arch_vacuum_overview.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_07_arch_wal_overview.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_08_data_databases.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_09_data_catalog.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_10_data_tablespaces.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_11_data_lowlevel.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_12_admin_monitoring.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_13_access_roles.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_14_access_privileges.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_15_access_rls.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_16_access_authentication.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_17_backup_overview.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_18_replica_overview.html
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/dba1_student_guide.pdf
+│       │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_00_introduction.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_01_tools_install.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_02_tools_psql.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_03_tools_configuration.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_04_arch_general.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_05_arch_mvcc_overview.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_06_arch_vacuum_overview.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_07_arch_wal_overview.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_08_data_databases.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_09_data_catalog.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_10_data_tablespaces.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_11_data_lowlevel.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_12_admin_monitoring.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_13_access_roles.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_14_access_privileges.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_15_access_rls.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_16_access_authentication.pdf
+│       │   │   ├── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_17_backup_overview.pdf
+│       │   │   └── ./DevOPS/PG/DBA1-handouts-13/pdf/dba1_18_replica_overview.pdf
+│       │   └── ./DevOPS/PG/DBA1-handouts-13/unix_commands.pdf
+│       └── ./DevOPS/PG/doc
+│           ├── ./DevOPS/PG/doc/acronyms.html
+│           ├── ./DevOPS/PG/doc/admin.html
+│           ├── ./DevOPS/PG/doc/adminpack.html
+│           ├── ./DevOPS/PG/doc/amcheck.html
+│           ├── ./DevOPS/PG/doc/app-clusterdb.html
+│           ├── ./DevOPS/PG/doc/app-createdb.html
+│           ├── ./DevOPS/PG/doc/app-createuser.html
+│           ├── ./DevOPS/PG/doc/app-dropdb.html
+│           ├── ./DevOPS/PG/doc/app-dropuser.html
+│           ├── ./DevOPS/PG/doc/app-ecpg.html
+│           ├── ./DevOPS/PG/doc/app-initdb.html
+│           ├── ./DevOPS/PG/doc/app-pg-ctl.html
+│           ├── ./DevOPS/PG/doc/app-pg-dumpall.html
+│           ├── ./DevOPS/PG/doc/app-pg-isready.html
+│           ├── ./DevOPS/PG/doc/app-pgbasebackup.html
+│           ├── ./DevOPS/PG/doc/app-pgchecksums.html
+│           ├── ./DevOPS/PG/doc/app-pgconfig.html
+│           ├── ./DevOPS/PG/doc/app-pgcontroldata.html
+│           ├── ./DevOPS/PG/doc/app-pgdump.html
+│           ├── ./DevOPS/PG/doc/app-pgreceivewal.html
+│           ├── ./DevOPS/PG/doc/app-pgreceivexlog.html
+│           ├── ./DevOPS/PG/doc/app-pgrecvlogical.html
+│           ├── ./DevOPS/PG/doc/app-pgresetwal.html
+│           ├── ./DevOPS/PG/doc/app-pgresetxlog.html
+│           ├── ./DevOPS/PG/doc/app-pgrestore.html
+│           ├── ./DevOPS/PG/doc/app-pgrewind.html
+│           ├── ./DevOPS/PG/doc/app-pgverifybackup.html
+│           ├── ./DevOPS/PG/doc/app-postgres.html
+│           ├── ./DevOPS/PG/doc/app-postmaster.html
+│           ├── ./DevOPS/PG/doc/app-psql.html
+│           ├── ./DevOPS/PG/doc/app-reindexdb.html
+│           ├── ./DevOPS/PG/doc/app-vacuumdb.html
+│           ├── ./DevOPS/PG/doc/appendix-obsolete.html
+│           ├── ./DevOPS/PG/doc/appendixes.html
+│           ├── ./DevOPS/PG/doc/applevel-consistency.html
+│           ├── ./DevOPS/PG/doc/arrays.html
+│           ├── ./DevOPS/PG/doc/auth-bsd.html
+│           ├── ./DevOPS/PG/doc/auth-cert.html
+│           ├── ./DevOPS/PG/doc/auth-delay.html
+│           ├── ./DevOPS/PG/doc/auth-ident.html
+│           ├── ./DevOPS/PG/doc/auth-ldap.html
+│           ├── ./DevOPS/PG/doc/auth-methods.html
+│           ├── ./DevOPS/PG/doc/auth-pam.html
+│           ├── ./DevOPS/PG/doc/auth-password.html
+│           ├── ./DevOPS/PG/doc/auth-peer.html
+│           ├── ./DevOPS/PG/doc/auth-pg-hba-conf.html
+│           ├── ./DevOPS/PG/doc/auth-radius.html
+│           ├── ./DevOPS/PG/doc/auth-trust.html
+│           ├── ./DevOPS/PG/doc/auth-username-maps.html
+│           ├── ./DevOPS/PG/doc/auto-explain.html
+│           ├── ./DevOPS/PG/doc/backup-dump.html
+│           ├── ./DevOPS/PG/doc/backup-file.html
+│           ├── ./DevOPS/PG/doc/backup-manifest-files.html
+│           ├── ./DevOPS/PG/doc/backup-manifest-format.html
+│           ├── ./DevOPS/PG/doc/backup-manifest-toplevel.html
+│           ├── ./DevOPS/PG/doc/backup-manifest-wal-ranges.html
+│           ├── ./DevOPS/PG/doc/backup.html
+│           ├── ./DevOPS/PG/doc/bgworker.html
+│           ├── ./DevOPS/PG/doc/biblio.html
+│           ├── ./DevOPS/PG/doc/bki-commands.html
+│           ├── ./DevOPS/PG/doc/bki-example.html
+│           ├── ./DevOPS/PG/doc/bki-format.html
+│           ├── ./DevOPS/PG/doc/bki-structure.html
+│           ├── ./DevOPS/PG/doc/bki.html
+│           ├── ./DevOPS/PG/doc/bloom.html
+│           ├── ./DevOPS/PG/doc/bookindex.html
+│           ├── ./DevOPS/PG/doc/brin-builtin-opclasses.html
+│           ├── ./DevOPS/PG/doc/brin-extensibility.html
+│           ├── ./DevOPS/PG/doc/brin-intro.html
+│           ├── ./DevOPS/PG/doc/brin.html
+│           ├── ./DevOPS/PG/doc/btree-behavior.html
+│           ├── ./DevOPS/PG/doc/btree-gin.html
+│           ├── ./DevOPS/PG/doc/btree-gist.html
+│           ├── ./DevOPS/PG/doc/btree-implementation.html
+│           ├── ./DevOPS/PG/doc/btree-intro.html
+│           ├── ./DevOPS/PG/doc/btree-support-funcs.html
+│           ├── ./DevOPS/PG/doc/btree.html
+│           ├── ./DevOPS/PG/doc/bug-reporting.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-aggregate.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-am.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-amop.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-amproc.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-attrdef.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-attribute.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-auth-members.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-authid.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-cast.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-class.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-collation.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-constraint.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-conversion.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-database.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-db-role-setting.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-default-acl.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-depend.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-description.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-enum.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-event-trigger.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-extension.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-foreign-data-wrapper.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-foreign-server.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-foreign-table.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-index.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-inherits.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-init-privs.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-language.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-largeobject-metadata.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-largeobject.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-namespace.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-opclass.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-operator.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-opfamily.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-partitioned-table.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-policy.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-proc.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-publication-rel.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-publication.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-range.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-replication-origin.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-rewrite.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-seclabel.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-sequence.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-shdepend.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-shdescription.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-shseclabel.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-statistic-ext-data.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-statistic-ext.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-statistic.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-subscription-rel.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-subscription.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-tablespace.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-transform.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-trigger.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-ts-config-map.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-ts-config.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-ts-dict.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-ts-parser.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-ts-template.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-type.html
+│           ├── ./DevOPS/PG/doc/catalog-pg-user-mapping.html
+│           ├── ./DevOPS/PG/doc/catalogs-overview.html
+│           ├── ./DevOPS/PG/doc/catalogs.html
+│           ├── ./DevOPS/PG/doc/charset.html
+│           ├── ./DevOPS/PG/doc/citext.html
+│           ├── ./DevOPS/PG/doc/client-authentication-problems.html
+│           ├── ./DevOPS/PG/doc/client-authentication.html
+│           ├── ./DevOPS/PG/doc/client-interfaces.html
+│           ├── ./DevOPS/PG/doc/collation.html
+│           ├── ./DevOPS/PG/doc/color-when.html
+│           ├── ./DevOPS/PG/doc/color-which.html
+│           ├── ./DevOPS/PG/doc/color.html
+│           ├── ./DevOPS/PG/doc/config-setting.html
+│           ├── ./DevOPS/PG/doc/connect-estab.html
+│           ├── ./DevOPS/PG/doc/continuous-archiving.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-build-sql-delete.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-build-sql-insert.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-build-sql-update.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-cancel-query.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-close.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-connect-u.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-connect.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-disconnect.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-error-message.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-exec.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-fetch.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-function.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-get-connections.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-get-notify.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-get-pkey.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-get-result.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-is-busy.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-open.html
+│           ├── ./DevOPS/PG/doc/contrib-dblink-send-query.html
+│           ├── ./DevOPS/PG/doc/contrib-prog-client.html
+│           ├── ./DevOPS/PG/doc/contrib-prog-server.html
+│           ├── ./DevOPS/PG/doc/contrib-prog.html
+│           ├── ./DevOPS/PG/doc/contrib-spi.html
+│           ├── ./DevOPS/PG/doc/contrib.html
+│           ├── ./DevOPS/PG/doc/creating-cluster.html
+│           ├── ./DevOPS/PG/doc/cube.html
+│           ├── ./DevOPS/PG/doc/custom-scan-execution.html
+│           ├── ./DevOPS/PG/doc/custom-scan-path.html
+│           ├── ./DevOPS/PG/doc/custom-scan-plan.html
+│           ├── ./DevOPS/PG/doc/custom-scan.html
+│           ├── ./DevOPS/PG/doc/database-roles.html
+│           ├── ./DevOPS/PG/doc/datatype-binary.html
+│           ├── ./DevOPS/PG/doc/datatype-bit.html
+│           ├── ./DevOPS/PG/doc/datatype-boolean.html
+│           ├── ./DevOPS/PG/doc/datatype-character.html
+│           ├── ./DevOPS/PG/doc/datatype-datetime.html
+│           ├── ./DevOPS/PG/doc/datatype-enum.html
+│           ├── ./DevOPS/PG/doc/datatype-geometric.html
+│           ├── ./DevOPS/PG/doc/datatype-json.html
+│           ├── ./DevOPS/PG/doc/datatype-money.html
+│           ├── ./DevOPS/PG/doc/datatype-net-types.html
+│           ├── ./DevOPS/PG/doc/datatype-numeric.html
+│           ├── ./DevOPS/PG/doc/datatype-oid.html
+│           ├── ./DevOPS/PG/doc/datatype-pg-lsn.html
+│           ├── ./DevOPS/PG/doc/datatype-pseudo.html
+│           ├── ./DevOPS/PG/doc/datatype-textsearch.html
+│           ├── ./DevOPS/PG/doc/datatype-uuid.html
+│           ├── ./DevOPS/PG/doc/datatype-xml.html
+│           ├── ./DevOPS/PG/doc/datatype.html
+│           ├── ./DevOPS/PG/doc/datetime-appendix.html
+│           ├── ./DevOPS/PG/doc/datetime-config-files.html
+│           ├── ./DevOPS/PG/doc/datetime-input-rules.html
+│           ├── ./DevOPS/PG/doc/datetime-invalid-input.html
+│           ├── ./DevOPS/PG/doc/datetime-julian-dates.html
+│           ├── ./DevOPS/PG/doc/datetime-keywords.html
+│           ├── ./DevOPS/PG/doc/datetime-posix-timezone-specs.html
+│           ├── ./DevOPS/PG/doc/datetime-units-history.html
+│           ├── ./DevOPS/PG/doc/dblink.html
+│           ├── ./DevOPS/PG/doc/ddl-alter.html
+│           ├── ./DevOPS/PG/doc/ddl-basics.html
+│           ├── ./DevOPS/PG/doc/ddl-constraints.html
+│           ├── ./DevOPS/PG/doc/ddl-default.html
+│           ├── ./DevOPS/PG/doc/ddl-depend.html
+│           ├── ./DevOPS/PG/doc/ddl-foreign-data.html
+│           ├── ./DevOPS/PG/doc/ddl-generated-columns.html
+│           ├── ./DevOPS/PG/doc/ddl-inherit.html
+│           ├── ./DevOPS/PG/doc/ddl-others.html
+│           ├── ./DevOPS/PG/doc/ddl-partitioning.html
+│           ├── ./DevOPS/PG/doc/ddl-priv.html
+│           ├── ./DevOPS/PG/doc/ddl-rowsecurity.html
+│           ├── ./DevOPS/PG/doc/ddl-schemas.html
+│           ├── ./DevOPS/PG/doc/ddl-system-columns.html
+│           ├── ./DevOPS/PG/doc/ddl.html
+│           ├── ./DevOPS/PG/doc/default-roles.html
+│           ├── ./DevOPS/PG/doc/dict-int.html
+│           ├── ./DevOPS/PG/doc/dict-xsyn.html
+│           ├── ./DevOPS/PG/doc/different-replication-solutions.html
+│           ├── ./DevOPS/PG/doc/disk-full.html
+│           ├── ./DevOPS/PG/doc/disk-usage.html
+│           ├── ./DevOPS/PG/doc/diskusage.html
+│           ├── ./DevOPS/PG/doc/dml-delete.html
+│           ├── ./DevOPS/PG/doc/dml-insert.html
+│           ├── ./DevOPS/PG/doc/dml-returning.html
+│           ├── ./DevOPS/PG/doc/dml-update.html
+│           ├── ./DevOPS/PG/doc/dml.html
+│           ├── ./DevOPS/PG/doc/docguide-authoring.html
+│           ├── ./DevOPS/PG/doc/docguide-build.html
+│           ├── ./DevOPS/PG/doc/docguide-docbook.html
+│           ├── ./DevOPS/PG/doc/docguide-style.html
+│           ├── ./DevOPS/PG/doc/docguide-toolsets.html
+│           ├── ./DevOPS/PG/doc/docguide.html
+│           ├── ./DevOPS/PG/doc/domains.html
+│           ├── ./DevOPS/PG/doc/dynamic-trace.html
+│           ├── ./DevOPS/PG/doc/earthdistance.html
+│           ├── ./DevOPS/PG/doc/ecpg-commands.html
+│           ├── ./DevOPS/PG/doc/ecpg-concept.html
+│           ├── ./DevOPS/PG/doc/ecpg-connect.html
+│           ├── ./DevOPS/PG/doc/ecpg-cpp.html
+│           ├── ./DevOPS/PG/doc/ecpg-descriptors.html
+│           ├── ./DevOPS/PG/doc/ecpg-develop.html
+│           ├── ./DevOPS/PG/doc/ecpg-dynamic.html
+│           ├── ./DevOPS/PG/doc/ecpg-errors.html
+│           ├── ./DevOPS/PG/doc/ecpg-informix-compat.html
+│           ├── ./DevOPS/PG/doc/ecpg-library.html
+│           ├── ./DevOPS/PG/doc/ecpg-lo.html
+│           ├── ./DevOPS/PG/doc/ecpg-oracle-compat.html
+│           ├── ./DevOPS/PG/doc/ecpg-pgtypes.html
+│           ├── ./DevOPS/PG/doc/ecpg-preproc.html
+│           ├── ./DevOPS/PG/doc/ecpg-process.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-allocate-descriptor.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-commands.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-connect.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-deallocate-descriptor.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-declare.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-describe.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-disconnect.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-execute-immediate.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-get-descriptor.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-open.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-prepare.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-set-autocommit.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-set-connection.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-set-descriptor.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-type.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-var.html
+│           ├── ./DevOPS/PG/doc/ecpg-sql-whenever.html
+│           ├── ./DevOPS/PG/doc/ecpg-variables.html
+│           ├── ./DevOPS/PG/doc/ecpg.html
+│           ├── ./DevOPS/PG/doc/encryption-options.html
+│           ├── ./DevOPS/PG/doc/errcodes-appendix.html
+│           ├── ./DevOPS/PG/doc/error-message-reporting.html
+│           ├── ./DevOPS/PG/doc/error-style-guide.html
+│           ├── ./DevOPS/PG/doc/event-log-registration.html
+│           ├── ./DevOPS/PG/doc/event-trigger-definition.html
+│           ├── ./DevOPS/PG/doc/event-trigger-example.html
+│           ├── ./DevOPS/PG/doc/event-trigger-interface.html
+│           ├── ./DevOPS/PG/doc/event-trigger-matrix.html
+│           ├── ./DevOPS/PG/doc/event-trigger-table-rewrite-example.html
+│           ├── ./DevOPS/PG/doc/event-triggers.html
+│           ├── ./DevOPS/PG/doc/executor.html
+│           ├── ./DevOPS/PG/doc/explicit-joins.html
+│           ├── ./DevOPS/PG/doc/explicit-locking.html
+│           ├── ./DevOPS/PG/doc/extend-extensions.html
+│           ├── ./DevOPS/PG/doc/extend-how.html
+│           ├── ./DevOPS/PG/doc/extend-pgxs.html
+│           ├── ./DevOPS/PG/doc/extend-type-system.html
+│           ├── ./DevOPS/PG/doc/extend.html
+│           ├── ./DevOPS/PG/doc/external-admin-tools.html
+│           ├── ./DevOPS/PG/doc/external-extensions.html
+│           ├── ./DevOPS/PG/doc/external-interfaces.html
+│           ├── ./DevOPS/PG/doc/external-pl.html
+│           ├── ./DevOPS/PG/doc/external-projects.html
+│           ├── ./DevOPS/PG/doc/fdw-callbacks.html
+│           ├── ./DevOPS/PG/doc/fdw-functions.html
+│           ├── ./DevOPS/PG/doc/fdw-helpers.html
+│           ├── ./DevOPS/PG/doc/fdw-planning.html
+│           ├── ./DevOPS/PG/doc/fdw-row-locking.html
+│           ├── ./DevOPS/PG/doc/fdwhandler.html
+│           ├── ./DevOPS/PG/doc/features-sql-standard.html
+│           ├── ./DevOPS/PG/doc/features.html
+│           ├── ./DevOPS/PG/doc/file-fdw.html
+│           ├── ./DevOPS/PG/doc/functions-admin.html
+│           ├── ./DevOPS/PG/doc/functions-aggregate.html
+│           ├── ./DevOPS/PG/doc/functions-array.html
+│           ├── ./DevOPS/PG/doc/functions-binarystring.html
+│           ├── ./DevOPS/PG/doc/functions-bitstring.html
+│           ├── ./DevOPS/PG/doc/functions-comparison.html
+│           ├── ./DevOPS/PG/doc/functions-comparisons.html
+│           ├── ./DevOPS/PG/doc/functions-conditional.html
+│           ├── ./DevOPS/PG/doc/functions-datetime.html
+│           ├── ./DevOPS/PG/doc/functions-enum.html
+│           ├── ./DevOPS/PG/doc/functions-event-triggers.html
+│           ├── ./DevOPS/PG/doc/functions-formatting.html
+│           ├── ./DevOPS/PG/doc/functions-geometry.html
+│           ├── ./DevOPS/PG/doc/functions-info.html
+│           ├── ./DevOPS/PG/doc/functions-json.html
+│           ├── ./DevOPS/PG/doc/functions-logical.html
+│           ├── ./DevOPS/PG/doc/functions-matching.html
+│           ├── ./DevOPS/PG/doc/functions-math.html
+│           ├── ./DevOPS/PG/doc/functions-net.html
+│           ├── ./DevOPS/PG/doc/functions-range.html
+│           ├── ./DevOPS/PG/doc/functions-sequence.html
+│           ├── ./DevOPS/PG/doc/functions-srf.html
+│           ├── ./DevOPS/PG/doc/functions-statistics.html
+│           ├── ./DevOPS/PG/doc/functions-string.html
+│           ├── ./DevOPS/PG/doc/functions-subquery.html
+│           ├── ./DevOPS/PG/doc/functions-textsearch.html
+│           ├── ./DevOPS/PG/doc/functions-trigger.html
+│           ├── ./DevOPS/PG/doc/functions-uuid.html
+│           ├── ./DevOPS/PG/doc/functions-window.html
+│           ├── ./DevOPS/PG/doc/functions-xml.html
+│           ├── ./DevOPS/PG/doc/functions.html
+│           ├── ./DevOPS/PG/doc/fuzzystrmatch.html
+│           ├── ./DevOPS/PG/doc/generic-wal.html
+│           ├── ./DevOPS/PG/doc/genetic-algorithm.svg
+│           ├── ./DevOPS/PG/doc/geqo-biblio.html
+│           ├── ./DevOPS/PG/doc/geqo-intro.html
+│           ├── ./DevOPS/PG/doc/geqo-intro2.html
+│           ├── ./DevOPS/PG/doc/geqo-pg-intro.html
+│           ├── ./DevOPS/PG/doc/geqo.html
+│           ├── ./DevOPS/PG/doc/gin-builtin-opclasses.html
+│           ├── ./DevOPS/PG/doc/gin-examples.html
+│           ├── ./DevOPS/PG/doc/gin-extensibility.html
+│           ├── ./DevOPS/PG/doc/gin-implementation.html
+│           ├── ./DevOPS/PG/doc/gin-intro.html
+│           ├── ./DevOPS/PG/doc/gin-limit.html
+│           ├── ./DevOPS/PG/doc/gin-tips.html
+│           ├── ./DevOPS/PG/doc/gin.html
+│           ├── ./DevOPS/PG/doc/gin.svg
+│           ├── ./DevOPS/PG/doc/gist-builtin-opclasses.html
+│           ├── ./DevOPS/PG/doc/gist-examples.html
+│           ├── ./DevOPS/PG/doc/gist-extensibility.html
+│           ├── ./DevOPS/PG/doc/gist-implementation.html
+│           ├── ./DevOPS/PG/doc/gist-intro.html
+│           ├── ./DevOPS/PG/doc/gist.html
+│           ├── ./DevOPS/PG/doc/git.html
+│           ├── ./DevOPS/PG/doc/glossary.html
+│           ├── ./DevOPS/PG/doc/gssapi-auth.html
+│           ├── ./DevOPS/PG/doc/gssapi-enc.html
+│           ├── ./DevOPS/PG/doc/hash-implementation.html
+│           ├── ./DevOPS/PG/doc/hash-index.html
+│           ├── ./DevOPS/PG/doc/hash-intro.html
+│           ├── ./DevOPS/PG/doc/high-availability.html
+│           ├── ./DevOPS/PG/doc/history.html
+│           ├── ./DevOPS/PG/doc/hot-standby.html
+│           ├── ./DevOPS/PG/doc/how-parallel-query-works.html
+│           ├── ./DevOPS/PG/doc/hstore.html
+│           ├── ./DevOPS/PG/doc/index-api.html
+│           ├── ./DevOPS/PG/doc/index-cost-estimation.html
+│           ├── ./DevOPS/PG/doc/index-functions.html
+│           ├── ./DevOPS/PG/doc/index-locking.html
+│           ├── ./DevOPS/PG/doc/index-scanning.html
+│           ├── ./DevOPS/PG/doc/index-unique-checks.html
+│           ├── ./DevOPS/PG/doc/index.html
+│           ├── ./DevOPS/PG/doc/indexam.html
+│           ├── ./DevOPS/PG/doc/indexes-bitmap-scans.html
+│           ├── ./DevOPS/PG/doc/indexes-collations.html
+│           ├── ./DevOPS/PG/doc/indexes-examine.html
+│           ├── ./DevOPS/PG/doc/indexes-expressional.html
+│           ├── ./DevOPS/PG/doc/indexes-index-only-scans.html
+│           ├── ./DevOPS/PG/doc/indexes-intro.html
+│           ├── ./DevOPS/PG/doc/indexes-multicolumn.html
+│           ├── ./DevOPS/PG/doc/indexes-opclass.html
+│           ├── ./DevOPS/PG/doc/indexes-ordering.html
+│           ├── ./DevOPS/PG/doc/indexes-partial.html
+│           ├── ./DevOPS/PG/doc/indexes-types.html
+│           ├── ./DevOPS/PG/doc/indexes-unique.html
+│           ├── ./DevOPS/PG/doc/indexes.html
+│           ├── ./DevOPS/PG/doc/information-schema.html
+│           ├── ./DevOPS/PG/doc/infoschema-administrable-role-authorizations.html
+│           ├── ./DevOPS/PG/doc/infoschema-applicable-roles.html
+│           ├── ./DevOPS/PG/doc/infoschema-attributes.html
+│           ├── ./DevOPS/PG/doc/infoschema-character-sets.html
+│           ├── ./DevOPS/PG/doc/infoschema-check-constraint-routine-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-check-constraints.html
+│           ├── ./DevOPS/PG/doc/infoschema-collation-character-set-applicab.html
+│           ├── ./DevOPS/PG/doc/infoschema-collations.html
+│           ├── ./DevOPS/PG/doc/infoschema-column-column-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-column-domain-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-column-options.html
+│           ├── ./DevOPS/PG/doc/infoschema-column-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-column-udt-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-columns.html
+│           ├── ./DevOPS/PG/doc/infoschema-constraint-column-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-constraint-table-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-data-type-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-datatypes.html
+│           ├── ./DevOPS/PG/doc/infoschema-domain-constraints.html
+│           ├── ./DevOPS/PG/doc/infoschema-domain-udt-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-domains.html
+│           ├── ./DevOPS/PG/doc/infoschema-element-types.html
+│           ├── ./DevOPS/PG/doc/infoschema-enabled-roles.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-data-wrapper-options.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-data-wrappers.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-server-options.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-servers.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-table-options.html
+│           ├── ./DevOPS/PG/doc/infoschema-foreign-tables.html
+│           ├── ./DevOPS/PG/doc/infoschema-information-schema-catalog-name.html
+│           ├── ./DevOPS/PG/doc/infoschema-key-column-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-parameters.html
+│           ├── ./DevOPS/PG/doc/infoschema-referential-constraints.html
+│           ├── ./DevOPS/PG/doc/infoschema-role-column-grants.html
+│           ├── ./DevOPS/PG/doc/infoschema-role-routine-grants.html
+│           ├── ./DevOPS/PG/doc/infoschema-role-table-grants.html
+│           ├── ./DevOPS/PG/doc/infoschema-role-udt-grants.html
+│           ├── ./DevOPS/PG/doc/infoschema-role-usage-grants.html
+│           ├── ./DevOPS/PG/doc/infoschema-routine-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-routines.html
+│           ├── ./DevOPS/PG/doc/infoschema-schema.html
+│           ├── ./DevOPS/PG/doc/infoschema-schemata.html
+│           ├── ./DevOPS/PG/doc/infoschema-sequences.html
+│           ├── ./DevOPS/PG/doc/infoschema-sql-features.html
+│           ├── ./DevOPS/PG/doc/infoschema-sql-implementation-info.html
+│           ├── ./DevOPS/PG/doc/infoschema-sql-parts.html
+│           ├── ./DevOPS/PG/doc/infoschema-sql-sizing.html
+│           ├── ./DevOPS/PG/doc/infoschema-table-constraints.html
+│           ├── ./DevOPS/PG/doc/infoschema-table-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-tables.html
+│           ├── ./DevOPS/PG/doc/infoschema-transforms.html
+│           ├── ./DevOPS/PG/doc/infoschema-triggered-update-columns.html
+│           ├── ./DevOPS/PG/doc/infoschema-triggers.html
+│           ├── ./DevOPS/PG/doc/infoschema-udt-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-usage-privileges.html
+│           ├── ./DevOPS/PG/doc/infoschema-user-defined-types.html
+│           ├── ./DevOPS/PG/doc/infoschema-user-mapping-options.html
+│           ├── ./DevOPS/PG/doc/infoschema-user-mappings.html
+│           ├── ./DevOPS/PG/doc/infoschema-view-column-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-view-routine-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-view-table-usage.html
+│           ├── ./DevOPS/PG/doc/infoschema-views.html
+│           ├── ./DevOPS/PG/doc/install-getsource.html
+│           ├── ./DevOPS/PG/doc/install-post.html
+│           ├── ./DevOPS/PG/doc/install-procedure.html
+│           ├── ./DevOPS/PG/doc/install-requirements.html
+│           ├── ./DevOPS/PG/doc/install-short.html
+│           ├── ./DevOPS/PG/doc/install-windows-full.html
+│           ├── ./DevOPS/PG/doc/install-windows.html
+│           ├── ./DevOPS/PG/doc/installation-platform-notes.html
+│           ├── ./DevOPS/PG/doc/installation.html
+│           ├── ./DevOPS/PG/doc/intagg.html
+│           ├── ./DevOPS/PG/doc/intarray.html
+│           ├── ./DevOPS/PG/doc/internals.html
+│           ├── ./DevOPS/PG/doc/intro-whatis.html
+│           ├── ./DevOPS/PG/doc/isn.html
+│           ├── ./DevOPS/PG/doc/jit-configuration.html
+│           ├── ./DevOPS/PG/doc/jit-decision.html
+│           ├── ./DevOPS/PG/doc/jit-extensibility.html
+│           ├── ./DevOPS/PG/doc/jit-reason.html
+│           ├── ./DevOPS/PG/doc/jit.html
+│           ├── ./DevOPS/PG/doc/kernel-resources.html
+│           ├── ./DevOPS/PG/doc/largeobjects.html
+│           ├── ./DevOPS/PG/doc/legalnotice.html
+│           ├── ./DevOPS/PG/doc/libpq-async.html
+│           ├── ./DevOPS/PG/doc/libpq-build.html
+│           ├── ./DevOPS/PG/doc/libpq-cancel.html
+│           ├── ./DevOPS/PG/doc/libpq-connect.html
+│           ├── ./DevOPS/PG/doc/libpq-control.html
+│           ├── ./DevOPS/PG/doc/libpq-copy.html
+│           ├── ./DevOPS/PG/doc/libpq-envars.html
+│           ├── ./DevOPS/PG/doc/libpq-events.html
+│           ├── ./DevOPS/PG/doc/libpq-example.html
+│           ├── ./DevOPS/PG/doc/libpq-exec.html
+│           ├── ./DevOPS/PG/doc/libpq-fastpath.html
+│           ├── ./DevOPS/PG/doc/libpq-ldap.html
+│           ├── ./DevOPS/PG/doc/libpq-misc.html
+│           ├── ./DevOPS/PG/doc/libpq-notice-processing.html
+│           ├── ./DevOPS/PG/doc/libpq-notify.html
+│           ├── ./DevOPS/PG/doc/libpq-pgpass.html
+│           ├── ./DevOPS/PG/doc/libpq-pgservice.html
+│           ├── ./DevOPS/PG/doc/libpq-single-row-mode.html
+│           ├── ./DevOPS/PG/doc/libpq-ssl.html
+│           ├── ./DevOPS/PG/doc/libpq-status.html
+│           ├── ./DevOPS/PG/doc/libpq-threading.html
+│           ├── ./DevOPS/PG/doc/libpq.html
+│           ├── ./DevOPS/PG/doc/limits.html
+│           ├── ./DevOPS/PG/doc/lo-examplesect.html
+│           ├── ./DevOPS/PG/doc/lo-funcs.html
+│           ├── ./DevOPS/PG/doc/lo-implementation.html
+│           ├── ./DevOPS/PG/doc/lo-interfaces.html
+│           ├── ./DevOPS/PG/doc/lo-intro.html
+│           ├── ./DevOPS/PG/doc/lo.html
+│           ├── ./DevOPS/PG/doc/locale.html
+│           ├── ./DevOPS/PG/doc/locking-indexes.html
+│           ├── ./DevOPS/PG/doc/log-shipping-alternative.html
+│           ├── ./DevOPS/PG/doc/logfile-maintenance.html
+│           ├── ./DevOPS/PG/doc/logical-replication-architecture.html
+│           ├── ./DevOPS/PG/doc/logical-replication-config.html
+│           ├── ./DevOPS/PG/doc/logical-replication-conflicts.html
+│           ├── ./DevOPS/PG/doc/logical-replication-monitoring.html
+│           ├── ./DevOPS/PG/doc/logical-replication-publication.html
+│           ├── ./DevOPS/PG/doc/logical-replication-quick-setup.html
+│           ├── ./DevOPS/PG/doc/logical-replication-restrictions.html
+│           ├── ./DevOPS/PG/doc/logical-replication-security.html
+│           ├── ./DevOPS/PG/doc/logical-replication-subscription.html
+│           ├── ./DevOPS/PG/doc/logical-replication.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-catalogs.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-example.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-explanation.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-output-plugin.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-sql.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-synchronous.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-walsender.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding-writer.html
+│           ├── ./DevOPS/PG/doc/logicaldecoding.html
+│           ├── ./DevOPS/PG/doc/ltree.html
+│           ├── ./DevOPS/PG/doc/maintenance.html
+│           ├── ./DevOPS/PG/doc/manage-ag-config.html
+│           ├── ./DevOPS/PG/doc/manage-ag-createdb.html
+│           ├── ./DevOPS/PG/doc/manage-ag-dropdb.html
+│           ├── ./DevOPS/PG/doc/manage-ag-overview.html
+│           ├── ./DevOPS/PG/doc/manage-ag-tablespaces.html
+│           ├── ./DevOPS/PG/doc/manage-ag-templatedbs.html
+│           ├── ./DevOPS/PG/doc/managing-databases.html
+│           ├── ./DevOPS/PG/doc/monitoring-locks.html
+│           ├── ./DevOPS/PG/doc/monitoring-ps.html
+│           ├── ./DevOPS/PG/doc/monitoring-stats.html
+│           ├── ./DevOPS/PG/doc/monitoring.html
+│           ├── ./DevOPS/PG/doc/multibyte.html
+│           ├── ./DevOPS/PG/doc/multivariate-statistics-examples.html
+│           ├── ./DevOPS/PG/doc/mvcc-caveats.html
+│           ├── ./DevOPS/PG/doc/mvcc-intro.html
+│           ├── ./DevOPS/PG/doc/mvcc.html
+│           ├── ./DevOPS/PG/doc/nls-programmer.html
+│           ├── ./DevOPS/PG/doc/nls-translator.html
+│           ├── ./DevOPS/PG/doc/nls.html
+│           ├── ./DevOPS/PG/doc/non-durability.html
+│           ├── ./DevOPS/PG/doc/notation.html
+│           ├── ./DevOPS/PG/doc/oid2name.html
+│           ├── ./DevOPS/PG/doc/overview.html
+│           ├── ./DevOPS/PG/doc/pageinspect.html
+│           ├── ./DevOPS/PG/doc/pagelayout.svg
+│           ├── ./DevOPS/PG/doc/parallel-plans.html
+│           ├── ./DevOPS/PG/doc/parallel-query.html
+│           ├── ./DevOPS/PG/doc/parallel-safety.html
+│           ├── ./DevOPS/PG/doc/parser-stage.html
+│           ├── ./DevOPS/PG/doc/passwordcheck.html
+│           ├── ./DevOPS/PG/doc/performance-tips.html
+│           ├── ./DevOPS/PG/doc/perm-functions.html
+│           ├── ./DevOPS/PG/doc/pgarchivecleanup.html
+│           ├── ./DevOPS/PG/doc/pgbench.html
+│           ├── ./DevOPS/PG/doc/pgbuffercache.html
+│           ├── ./DevOPS/PG/doc/pgcrypto.html
+│           ├── ./DevOPS/PG/doc/pgfreespacemap.html
+│           ├── ./DevOPS/PG/doc/pgprewarm.html
+│           ├── ./DevOPS/PG/doc/pgrowlocks.html
+│           ├── ./DevOPS/PG/doc/pgstandby.html
+│           ├── ./DevOPS/PG/doc/pgstatstatements.html
+│           ├── ./DevOPS/PG/doc/pgstattuple.html
+│           ├── ./DevOPS/PG/doc/pgtestfsync.html
+│           ├── ./DevOPS/PG/doc/pgtesttiming.html
+│           ├── ./DevOPS/PG/doc/pgtrgm.html
+│           ├── ./DevOPS/PG/doc/pgupgrade.html
+│           ├── ./DevOPS/PG/doc/pgvisibility.html
+│           ├── ./DevOPS/PG/doc/pgwaldump.html
+│           ├── ./DevOPS/PG/doc/pgxlogdump.html
+│           ├── ./DevOPS/PG/doc/planner-optimizer.html
+│           ├── ./DevOPS/PG/doc/planner-stats-details.html
+│           ├── ./DevOPS/PG/doc/planner-stats-security.html
+│           ├── ./DevOPS/PG/doc/planner-stats.html
+│           ├── ./DevOPS/PG/doc/plhandler.html
+│           ├── ./DevOPS/PG/doc/plperl-builtins.html
+│           ├── ./DevOPS/PG/doc/plperl-data.html
+│           ├── ./DevOPS/PG/doc/plperl-event-triggers.html
+│           ├── ./DevOPS/PG/doc/plperl-funcs.html
+│           ├── ./DevOPS/PG/doc/plperl-global.html
+│           ├── ./DevOPS/PG/doc/plperl-triggers.html
+│           ├── ./DevOPS/PG/doc/plperl-trusted.html
+│           ├── ./DevOPS/PG/doc/plperl-under-the-hood.html
+│           ├── ./DevOPS/PG/doc/plperl.html
+│           ├── ./DevOPS/PG/doc/plpgsql-control-structures.html
+│           ├── ./DevOPS/PG/doc/plpgsql-cursors.html
+│           ├── ./DevOPS/PG/doc/plpgsql-declarations.html
+│           ├── ./DevOPS/PG/doc/plpgsql-development-tips.html
+│           ├── ./DevOPS/PG/doc/plpgsql-errors-and-messages.html
+│           ├── ./DevOPS/PG/doc/plpgsql-expressions.html
+│           ├── ./DevOPS/PG/doc/plpgsql-implementation.html
+│           ├── ./DevOPS/PG/doc/plpgsql-overview.html
+│           ├── ./DevOPS/PG/doc/plpgsql-porting.html
+│           ├── ./DevOPS/PG/doc/plpgsql-statements.html
+│           ├── ./DevOPS/PG/doc/plpgsql-structure.html
+│           ├── ./DevOPS/PG/doc/plpgsql-transactions.html
+│           ├── ./DevOPS/PG/doc/plpgsql-trigger.html
+│           ├── ./DevOPS/PG/doc/plpgsql.html
+│           ├── ./DevOPS/PG/doc/plpython-data.html
+│           ├── ./DevOPS/PG/doc/plpython-database.html
+│           ├── ./DevOPS/PG/doc/plpython-do.html
+│           ├── ./DevOPS/PG/doc/plpython-envar.html
+│           ├── ./DevOPS/PG/doc/plpython-funcs.html
+│           ├── ./DevOPS/PG/doc/plpython-python23.html
+│           ├── ./DevOPS/PG/doc/plpython-sharing.html
+│           ├── ./DevOPS/PG/doc/plpython-subtransaction.html
+│           ├── ./DevOPS/PG/doc/plpython-transactions.html
+│           ├── ./DevOPS/PG/doc/plpython-trigger.html
+│           ├── ./DevOPS/PG/doc/plpython-util.html
+│           ├── ./DevOPS/PG/doc/plpython.html
+│           ├── ./DevOPS/PG/doc/pltcl-config.html
+│           ├── ./DevOPS/PG/doc/pltcl-data.html
+│           ├── ./DevOPS/PG/doc/pltcl-dbaccess.html
+│           ├── ./DevOPS/PG/doc/pltcl-error-handling.html
+│           ├── ./DevOPS/PG/doc/pltcl-event-trigger.html
+│           ├── ./DevOPS/PG/doc/pltcl-functions.html
+│           ├── ./DevOPS/PG/doc/pltcl-global.html
+│           ├── ./DevOPS/PG/doc/pltcl-overview.html
+│           ├── ./DevOPS/PG/doc/pltcl-procnames.html
+│           ├── ./DevOPS/PG/doc/pltcl-subtransactions.html
+│           ├── ./DevOPS/PG/doc/pltcl-transactions.html
+│           ├── ./DevOPS/PG/doc/pltcl-trigger.html
+│           ├── ./DevOPS/PG/doc/pltcl.html
+│           ├── ./DevOPS/PG/doc/populate.html
+│           ├── ./DevOPS/PG/doc/postgres-fdw.html
+│           ├── ./DevOPS/PG/doc/postgres-user.html
+│           ├── ./DevOPS/PG/doc/preface.html
+│           ├── ./DevOPS/PG/doc/preventing-server-spoofing.html
+│           ├── ./DevOPS/PG/doc/progress-reporting.html
+│           ├── ./DevOPS/PG/doc/protocol-changes.html
+│           ├── ./DevOPS/PG/doc/protocol-error-fields.html
+│           ├── ./DevOPS/PG/doc/protocol-flow.html
+│           ├── ./DevOPS/PG/doc/protocol-logical-replication.html
+│           ├── ./DevOPS/PG/doc/protocol-logicalrep-message-formats.html
+│           ├── ./DevOPS/PG/doc/protocol-message-formats.html
+│           ├── ./DevOPS/PG/doc/protocol-message-types.html
+│           ├── ./DevOPS/PG/doc/protocol-overview.html
+│           ├── ./DevOPS/PG/doc/protocol-replication.html
+│           ├── ./DevOPS/PG/doc/protocol.html
+│           ├── ./DevOPS/PG/doc/queries-limit.html
+│           ├── ./DevOPS/PG/doc/queries-order.html
+│           ├── ./DevOPS/PG/doc/queries-overview.html
+│           ├── ./DevOPS/PG/doc/queries-select-lists.html
+│           ├── ./DevOPS/PG/doc/queries-table-expressions.html
+│           ├── ./DevOPS/PG/doc/queries-union.html
+│           ├── ./DevOPS/PG/doc/queries-values.html
+│           ├── ./DevOPS/PG/doc/queries-with.html
+│           ├── ./DevOPS/PG/doc/queries.html
+│           ├── ./DevOPS/PG/doc/query-path.html
+│           ├── ./DevOPS/PG/doc/querytree.html
+│           ├── ./DevOPS/PG/doc/rangetypes.html
+│           ├── ./DevOPS/PG/doc/recovery-config.html
+│           ├── ./DevOPS/PG/doc/reference-client.html
+│           ├── ./DevOPS/PG/doc/reference-server.html
+│           ├── ./DevOPS/PG/doc/reference.html
+│           ├── ./DevOPS/PG/doc/regress-coverage.html
+│           ├── ./DevOPS/PG/doc/regress-evaluation.html
+│           ├── ./DevOPS/PG/doc/regress-run.html
+│           ├── ./DevOPS/PG/doc/regress-tap.html
+│           ├── ./DevOPS/PG/doc/regress-variant.html
+│           ├── ./DevOPS/PG/doc/regress.html
+│           ├── ./DevOPS/PG/doc/release-13-1.html
+│           ├── ./DevOPS/PG/doc/release-13-10.html
+│           ├── ./DevOPS/PG/doc/release-13-11.html
+│           ├── ./DevOPS/PG/doc/release-13-2.html
+│           ├── ./DevOPS/PG/doc/release-13-3.html
+│           ├── ./DevOPS/PG/doc/release-13-4.html
+│           ├── ./DevOPS/PG/doc/release-13-5.html
+│           ├── ./DevOPS/PG/doc/release-13-6.html
+│           ├── ./DevOPS/PG/doc/release-13-7.html
+│           ├── ./DevOPS/PG/doc/release-13-8.html
+│           ├── ./DevOPS/PG/doc/release-13-9.html
+│           ├── ./DevOPS/PG/doc/release-13.html
+│           ├── ./DevOPS/PG/doc/release-prior.html
+│           ├── ./DevOPS/PG/doc/release.html
+│           ├── ./DevOPS/PG/doc/replication-origins.html
+│           ├── ./DevOPS/PG/doc/resources.html
+│           ├── ./DevOPS/PG/doc/role-attributes.html
+│           ├── ./DevOPS/PG/doc/role-membership.html
+│           ├── ./DevOPS/PG/doc/role-removal.html
+│           ├── ./DevOPS/PG/doc/routine-reindex.html
+│           ├── ./DevOPS/PG/doc/routine-vacuuming.html
+│           ├── ./DevOPS/PG/doc/row-estimation-examples.html
+│           ├── ./DevOPS/PG/doc/rowtypes.html
+│           ├── ./DevOPS/PG/doc/rule-system.html
+│           ├── ./DevOPS/PG/doc/rules-materializedviews.html
+│           ├── ./DevOPS/PG/doc/rules-privileges.html
+│           ├── ./DevOPS/PG/doc/rules-status.html
+│           ├── ./DevOPS/PG/doc/rules-triggers.html
+│           ├── ./DevOPS/PG/doc/rules-update.html
+│           ├── ./DevOPS/PG/doc/rules-views.html
+│           ├── ./DevOPS/PG/doc/rules.html
+│           ├── ./DevOPS/PG/doc/runtime-config-autovacuum.html
+│           ├── ./DevOPS/PG/doc/runtime-config-client.html
+│           ├── ./DevOPS/PG/doc/runtime-config-compatible.html
+│           ├── ./DevOPS/PG/doc/runtime-config-connection.html
+│           ├── ./DevOPS/PG/doc/runtime-config-custom.html
+│           ├── ./DevOPS/PG/doc/runtime-config-developer.html
+│           ├── ./DevOPS/PG/doc/runtime-config-error-handling.html
+│           ├── ./DevOPS/PG/doc/runtime-config-file-locations.html
+│           ├── ./DevOPS/PG/doc/runtime-config-locks.html
+│           ├── ./DevOPS/PG/doc/runtime-config-logging.html
+│           ├── ./DevOPS/PG/doc/runtime-config-preset.html
+│           ├── ./DevOPS/PG/doc/runtime-config-query.html
+│           ├── ./DevOPS/PG/doc/runtime-config-replication.html
+│           ├── ./DevOPS/PG/doc/runtime-config-resource.html
+│           ├── ./DevOPS/PG/doc/runtime-config-short.html
+│           ├── ./DevOPS/PG/doc/runtime-config-statistics.html
+│           ├── ./DevOPS/PG/doc/runtime-config-wal.html
+│           ├── ./DevOPS/PG/doc/runtime-config.html
+│           ├── ./DevOPS/PG/doc/runtime.html
+│           ├── ./DevOPS/PG/doc/sasl-authentication.html
+│           ├── ./DevOPS/PG/doc/seg.html
+│           ├── ./DevOPS/PG/doc/sepgsql.html
+│           ├── ./DevOPS/PG/doc/server-programming.html
+│           ├── ./DevOPS/PG/doc/server-shutdown.html
+│           ├── ./DevOPS/PG/doc/server-start.html
+│           ├── ./DevOPS/PG/doc/source-conventions.html
+│           ├── ./DevOPS/PG/doc/source-format.html
+│           ├── ./DevOPS/PG/doc/source.html
+│           ├── ./DevOPS/PG/doc/sourcerepo.html
+│           ├── ./DevOPS/PG/doc/spgist-builtin-opclasses.html
+│           ├── ./DevOPS/PG/doc/spgist-examples.html
+│           ├── ./DevOPS/PG/doc/spgist-extensibility.html
+│           ├── ./DevOPS/PG/doc/spgist-implementation.html
+│           ├── ./DevOPS/PG/doc/spgist-intro.html
+│           ├── ./DevOPS/PG/doc/spgist.html
+│           ├── ./DevOPS/PG/doc/spi-examples.html
+│           ├── ./DevOPS/PG/doc/spi-interface-support.html
+│           ├── ./DevOPS/PG/doc/spi-interface.html
+│           ├── ./DevOPS/PG/doc/spi-memory.html
+│           ├── ./DevOPS/PG/doc/spi-realloc.html
+│           ├── ./DevOPS/PG/doc/spi-spi-commit.html
+│           ├── ./DevOPS/PG/doc/spi-spi-connect.html
+│           ├── ./DevOPS/PG/doc/spi-spi-copytuple.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-close.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-fetch.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-find.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-move.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-open-with-args.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-open-with-paramlist.html
+│           ├── ./DevOPS/PG/doc/spi-spi-cursor-open.html
+│           ├── ./DevOPS/PG/doc/spi-spi-exec.html
+│           ├── ./DevOPS/PG/doc/spi-spi-execp.html
+│           ├── ./DevOPS/PG/doc/spi-spi-execute-plan-with-paramlist.html
+│           ├── ./DevOPS/PG/doc/spi-spi-execute-plan.html
+│           ├── ./DevOPS/PG/doc/spi-spi-execute-with-args.html
+│           ├── ./DevOPS/PG/doc/spi-spi-execute.html
+│           ├── ./DevOPS/PG/doc/spi-spi-finish.html
+│           ├── ./DevOPS/PG/doc/spi-spi-fname.html
+│           ├── ./DevOPS/PG/doc/spi-spi-fnumber.html
+│           ├── ./DevOPS/PG/doc/spi-spi-freeplan.html
+│           ├── ./DevOPS/PG/doc/spi-spi-freetuple.html
+│           ├── ./DevOPS/PG/doc/spi-spi-freetupletable.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getargcount.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getargtypeid.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getbinval.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getnspname.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getrelname.html
+│           ├── ./DevOPS/PG/doc/spi-spi-gettype.html
+│           ├── ./DevOPS/PG/doc/spi-spi-gettypeid.html
+│           ├── ./DevOPS/PG/doc/spi-spi-getvalue.html
+│           ├── ./DevOPS/PG/doc/spi-spi-is-cursor-plan.html
+│           ├── ./DevOPS/PG/doc/spi-spi-keepplan.html
+│           ├── ./DevOPS/PG/doc/spi-spi-modifytuple.html
+│           ├── ./DevOPS/PG/doc/spi-spi-palloc.html
+│           ├── ./DevOPS/PG/doc/spi-spi-pfree.html
+│           ├── ./DevOPS/PG/doc/spi-spi-prepare-cursor.html
+│           ├── ./DevOPS/PG/doc/spi-spi-prepare-params.html
+│           ├── ./DevOPS/PG/doc/spi-spi-prepare.html
+│           ├── ./DevOPS/PG/doc/spi-spi-register-relation.html
+│           ├── ./DevOPS/PG/doc/spi-spi-register-trigger-data.html
+│           ├── ./DevOPS/PG/doc/spi-spi-result-code-string.html
+│           ├── ./DevOPS/PG/doc/spi-spi-returntuple.html
+│           ├── ./DevOPS/PG/doc/spi-spi-rollback.html
+│           ├── ./DevOPS/PG/doc/spi-spi-saveplan.html
+│           ├── ./DevOPS/PG/doc/spi-spi-scroll-cursor-fetch.html
+│           ├── ./DevOPS/PG/doc/spi-spi-scroll-cursor-move.html
+│           ├── ./DevOPS/PG/doc/spi-spi-start-transaction.html
+│           ├── ./DevOPS/PG/doc/spi-spi-unregister-relation.html
+│           ├── ./DevOPS/PG/doc/spi-transaction.html
+│           ├── ./DevOPS/PG/doc/spi-visibility.html
+│           ├── ./DevOPS/PG/doc/spi.html
+│           ├── ./DevOPS/PG/doc/sql-abort.html
+│           ├── ./DevOPS/PG/doc/sql-alteraggregate.html
+│           ├── ./DevOPS/PG/doc/sql-altercollation.html
+│           ├── ./DevOPS/PG/doc/sql-alterconversion.html
+│           ├── ./DevOPS/PG/doc/sql-alterdatabase.html
+│           ├── ./DevOPS/PG/doc/sql-alterdefaultprivileges.html
+│           ├── ./DevOPS/PG/doc/sql-alterdomain.html
+│           ├── ./DevOPS/PG/doc/sql-altereventtrigger.html
+│           ├── ./DevOPS/PG/doc/sql-alterextension.html
+│           ├── ./DevOPS/PG/doc/sql-alterforeigndatawrapper.html
+│           ├── ./DevOPS/PG/doc/sql-alterforeigntable.html
+│           ├── ./DevOPS/PG/doc/sql-alterfunction.html
+│           ├── ./DevOPS/PG/doc/sql-altergroup.html
+│           ├── ./DevOPS/PG/doc/sql-alterindex.html
+│           ├── ./DevOPS/PG/doc/sql-alterlanguage.html
+│           ├── ./DevOPS/PG/doc/sql-alterlargeobject.html
+│           ├── ./DevOPS/PG/doc/sql-altermaterializedview.html
+│           ├── ./DevOPS/PG/doc/sql-alteropclass.html
+│           ├── ./DevOPS/PG/doc/sql-alteroperator.html
+│           ├── ./DevOPS/PG/doc/sql-alteropfamily.html
+│           ├── ./DevOPS/PG/doc/sql-alterpolicy.html
+│           ├── ./DevOPS/PG/doc/sql-alterprocedure.html
+│           ├── ./DevOPS/PG/doc/sql-alterpublication.html
+│           ├── ./DevOPS/PG/doc/sql-alterrole.html
+│           ├── ./DevOPS/PG/doc/sql-alterroutine.html
+│           ├── ./DevOPS/PG/doc/sql-alterrule.html
+│           ├── ./DevOPS/PG/doc/sql-alterschema.html
+│           ├── ./DevOPS/PG/doc/sql-altersequence.html
+│           ├── ./DevOPS/PG/doc/sql-alterserver.html
+│           ├── ./DevOPS/PG/doc/sql-alterstatistics.html
+│           ├── ./DevOPS/PG/doc/sql-altersubscription.html
+│           ├── ./DevOPS/PG/doc/sql-altersystem.html
+│           ├── ./DevOPS/PG/doc/sql-altertable.html
+│           ├── ./DevOPS/PG/doc/sql-altertablespace.html
+│           ├── ./DevOPS/PG/doc/sql-altertrigger.html
+│           ├── ./DevOPS/PG/doc/sql-altertsconfig.html
+│           ├── ./DevOPS/PG/doc/sql-altertsdictionary.html
+│           ├── ./DevOPS/PG/doc/sql-altertsparser.html
+│           ├── ./DevOPS/PG/doc/sql-altertstemplate.html
+│           ├── ./DevOPS/PG/doc/sql-altertype.html
+│           ├── ./DevOPS/PG/doc/sql-alteruser.html
+│           ├── ./DevOPS/PG/doc/sql-alterusermapping.html
+│           ├── ./DevOPS/PG/doc/sql-alterview.html
+│           ├── ./DevOPS/PG/doc/sql-analyze.html
+│           ├── ./DevOPS/PG/doc/sql-begin.html
+│           ├── ./DevOPS/PG/doc/sql-call.html
+│           ├── ./DevOPS/PG/doc/sql-checkpoint.html
+│           ├── ./DevOPS/PG/doc/sql-close.html
+│           ├── ./DevOPS/PG/doc/sql-cluster.html
+│           ├── ./DevOPS/PG/doc/sql-commands.html
+│           ├── ./DevOPS/PG/doc/sql-comment.html
+│           ├── ./DevOPS/PG/doc/sql-commit-prepared.html
+│           ├── ./DevOPS/PG/doc/sql-commit.html
+│           ├── ./DevOPS/PG/doc/sql-copy.html
+│           ├── ./DevOPS/PG/doc/sql-create-access-method.html
+│           ├── ./DevOPS/PG/doc/sql-createaggregate.html
+│           ├── ./DevOPS/PG/doc/sql-createcast.html
+│           ├── ./DevOPS/PG/doc/sql-createcollation.html
+│           ├── ./DevOPS/PG/doc/sql-createconversion.html
+│           ├── ./DevOPS/PG/doc/sql-createdatabase.html
+│           ├── ./DevOPS/PG/doc/sql-createdomain.html
+│           ├── ./DevOPS/PG/doc/sql-createeventtrigger.html
+│           ├── ./DevOPS/PG/doc/sql-createextension.html
+│           ├── ./DevOPS/PG/doc/sql-createforeigndatawrapper.html
+│           ├── ./DevOPS/PG/doc/sql-createforeigntable.html
+│           ├── ./DevOPS/PG/doc/sql-createfunction.html
+│           ├── ./DevOPS/PG/doc/sql-creategroup.html
+│           ├── ./DevOPS/PG/doc/sql-createindex.html
+│           ├── ./DevOPS/PG/doc/sql-createlanguage.html
+│           ├── ./DevOPS/PG/doc/sql-creatematerializedview.html
+│           ├── ./DevOPS/PG/doc/sql-createopclass.html
+│           ├── ./DevOPS/PG/doc/sql-createoperator.html
+│           ├── ./DevOPS/PG/doc/sql-createopfamily.html
+│           ├── ./DevOPS/PG/doc/sql-createpolicy.html
+│           ├── ./DevOPS/PG/doc/sql-createprocedure.html
+│           ├── ./DevOPS/PG/doc/sql-createpublication.html
+│           ├── ./DevOPS/PG/doc/sql-createrole.html
+│           ├── ./DevOPS/PG/doc/sql-createrule.html
+│           ├── ./DevOPS/PG/doc/sql-createschema.html
+│           ├── ./DevOPS/PG/doc/sql-createsequence.html
+│           ├── ./DevOPS/PG/doc/sql-createserver.html
+│           ├── ./DevOPS/PG/doc/sql-createstatistics.html
+│           ├── ./DevOPS/PG/doc/sql-createsubscription.html
+│           ├── ./DevOPS/PG/doc/sql-createtable.html
+│           ├── ./DevOPS/PG/doc/sql-createtableas.html
+│           ├── ./DevOPS/PG/doc/sql-createtablespace.html
+│           ├── ./DevOPS/PG/doc/sql-createtransform.html
+│           ├── ./DevOPS/PG/doc/sql-createtrigger.html
+│           ├── ./DevOPS/PG/doc/sql-createtsconfig.html
+│           ├── ./DevOPS/PG/doc/sql-createtsdictionary.html
+│           ├── ./DevOPS/PG/doc/sql-createtsparser.html
+│           ├── ./DevOPS/PG/doc/sql-createtstemplate.html
+│           ├── ./DevOPS/PG/doc/sql-createtype.html
+│           ├── ./DevOPS/PG/doc/sql-createuser.html
+│           ├── ./DevOPS/PG/doc/sql-createusermapping.html
+│           ├── ./DevOPS/PG/doc/sql-createview.html
+│           ├── ./DevOPS/PG/doc/sql-deallocate.html
+│           ├── ./DevOPS/PG/doc/sql-declare.html
+│           ├── ./DevOPS/PG/doc/sql-delete.html
+│           ├── ./DevOPS/PG/doc/sql-discard.html
+│           ├── ./DevOPS/PG/doc/sql-do.html
+│           ├── ./DevOPS/PG/doc/sql-drop-access-method.html
+│           ├── ./DevOPS/PG/doc/sql-drop-owned.html
+│           ├── ./DevOPS/PG/doc/sql-dropaggregate.html
+│           ├── ./DevOPS/PG/doc/sql-dropcast.html
+│           ├── ./DevOPS/PG/doc/sql-dropcollation.html
+│           ├── ./DevOPS/PG/doc/sql-dropconversion.html
+│           ├── ./DevOPS/PG/doc/sql-dropdatabase.html
+│           ├── ./DevOPS/PG/doc/sql-dropdomain.html
+│           ├── ./DevOPS/PG/doc/sql-dropeventtrigger.html
+│           ├── ./DevOPS/PG/doc/sql-dropextension.html
+│           ├── ./DevOPS/PG/doc/sql-dropforeigndatawrapper.html
+│           ├── ./DevOPS/PG/doc/sql-dropforeigntable.html
+│           ├── ./DevOPS/PG/doc/sql-dropfunction.html
+│           ├── ./DevOPS/PG/doc/sql-dropgroup.html
+│           ├── ./DevOPS/PG/doc/sql-dropindex.html
+│           ├── ./DevOPS/PG/doc/sql-droplanguage.html
+│           ├── ./DevOPS/PG/doc/sql-dropmaterializedview.html
+│           ├── ./DevOPS/PG/doc/sql-dropopclass.html
+│           ├── ./DevOPS/PG/doc/sql-dropoperator.html
+│           ├── ./DevOPS/PG/doc/sql-dropopfamily.html
+│           ├── ./DevOPS/PG/doc/sql-droppolicy.html
+│           ├── ./DevOPS/PG/doc/sql-dropprocedure.html
+│           ├── ./DevOPS/PG/doc/sql-droppublication.html
+│           ├── ./DevOPS/PG/doc/sql-droprole.html
+│           ├── ./DevOPS/PG/doc/sql-droproutine.html
+│           ├── ./DevOPS/PG/doc/sql-droprule.html
+│           ├── ./DevOPS/PG/doc/sql-dropschema.html
+│           ├── ./DevOPS/PG/doc/sql-dropsequence.html
+│           ├── ./DevOPS/PG/doc/sql-dropserver.html
+│           ├── ./DevOPS/PG/doc/sql-dropstatistics.html
+│           ├── ./DevOPS/PG/doc/sql-dropsubscription.html
+│           ├── ./DevOPS/PG/doc/sql-droptable.html
+│           ├── ./DevOPS/PG/doc/sql-droptablespace.html
+│           ├── ./DevOPS/PG/doc/sql-droptransform.html
+│           ├── ./DevOPS/PG/doc/sql-droptrigger.html
+│           ├── ./DevOPS/PG/doc/sql-droptsconfig.html
+│           ├── ./DevOPS/PG/doc/sql-droptsdictionary.html
+│           ├── ./DevOPS/PG/doc/sql-droptsparser.html
+│           ├── ./DevOPS/PG/doc/sql-droptstemplate.html
+│           ├── ./DevOPS/PG/doc/sql-droptype.html
+│           ├── ./DevOPS/PG/doc/sql-dropuser.html
+│           ├── ./DevOPS/PG/doc/sql-dropusermapping.html
+│           ├── ./DevOPS/PG/doc/sql-dropview.html
+│           ├── ./DevOPS/PG/doc/sql-end.html
+│           ├── ./DevOPS/PG/doc/sql-execute.html
+│           ├── ./DevOPS/PG/doc/sql-explain.html
+│           ├── ./DevOPS/PG/doc/sql-expressions.html
+│           ├── ./DevOPS/PG/doc/sql-fetch.html
+│           ├── ./DevOPS/PG/doc/sql-grant.html
+│           ├── ./DevOPS/PG/doc/sql-importforeignschema.html
+│           ├── ./DevOPS/PG/doc/sql-insert.html
+│           ├── ./DevOPS/PG/doc/sql-keywords-appendix.html
+│           ├── ./DevOPS/PG/doc/sql-listen.html
+│           ├── ./DevOPS/PG/doc/sql-load.html
+│           ├── ./DevOPS/PG/doc/sql-lock.html
+│           ├── ./DevOPS/PG/doc/sql-move.html
+│           ├── ./DevOPS/PG/doc/sql-notify.html
+│           ├── ./DevOPS/PG/doc/sql-prepare-transaction.html
+│           ├── ./DevOPS/PG/doc/sql-prepare.html
+│           ├── ./DevOPS/PG/doc/sql-reassign-owned.html
+│           ├── ./DevOPS/PG/doc/sql-refreshmaterializedview.html
+│           ├── ./DevOPS/PG/doc/sql-reindex.html
+│           ├── ./DevOPS/PG/doc/sql-release-savepoint.html
+│           ├── ./DevOPS/PG/doc/sql-reset.html
+│           ├── ./DevOPS/PG/doc/sql-revoke.html
+│           ├── ./DevOPS/PG/doc/sql-rollback-prepared.html
+│           ├── ./DevOPS/PG/doc/sql-rollback-to.html
+│           ├── ./DevOPS/PG/doc/sql-rollback.html
+│           ├── ./DevOPS/PG/doc/sql-savepoint.html
+│           ├── ./DevOPS/PG/doc/sql-security-label.html
+│           ├── ./DevOPS/PG/doc/sql-select.html
+│           ├── ./DevOPS/PG/doc/sql-selectinto.html
+│           ├── ./DevOPS/PG/doc/sql-set-constraints.html
+│           ├── ./DevOPS/PG/doc/sql-set-role.html
+│           ├── ./DevOPS/PG/doc/sql-set-session-authorization.html
+│           ├── ./DevOPS/PG/doc/sql-set-transaction.html
+│           ├── ./DevOPS/PG/doc/sql-set.html
+│           ├── ./DevOPS/PG/doc/sql-show.html
+│           ├── ./DevOPS/PG/doc/sql-start-transaction.html
+│           ├── ./DevOPS/PG/doc/sql-syntax-calling-funcs.html
+│           ├── ./DevOPS/PG/doc/sql-syntax-lexical.html
+│           ├── ./DevOPS/PG/doc/sql-syntax.html
+│           ├── ./DevOPS/PG/doc/sql-truncate.html
+│           ├── ./DevOPS/PG/doc/sql-unlisten.html
+│           ├── ./DevOPS/PG/doc/sql-update.html
+│           ├── ./DevOPS/PG/doc/sql-vacuum.html
+│           ├── ./DevOPS/PG/doc/sql-values.html
+│           ├── ./DevOPS/PG/doc/sql.html
+│           ├── ./DevOPS/PG/doc/ssh-tunnels.html
+│           ├── ./DevOPS/PG/doc/ssl-tcp.html
+│           ├── ./DevOPS/PG/doc/sslinfo.html
+│           ├── ./DevOPS/PG/doc/sspi-auth.html
+│           ├── ./DevOPS/PG/doc/storage-file-layout.html
+│           ├── ./DevOPS/PG/doc/storage-fsm.html
+│           ├── ./DevOPS/PG/doc/storage-hot.html
+│           ├── ./DevOPS/PG/doc/storage-init.html
+│           ├── ./DevOPS/PG/doc/storage-page-layout.html
+│           ├── ./DevOPS/PG/doc/storage-toast.html
+│           ├── ./DevOPS/PG/doc/storage-vm.html
+│           ├── ./DevOPS/PG/doc/storage.html
+│           ├── ./DevOPS/PG/doc/stylesheet.css
+│           ├── ./DevOPS/PG/doc/supported-platforms.html
+│           ├── ./DevOPS/PG/doc/system-catalog-declarations.html
+│           ├── ./DevOPS/PG/doc/system-catalog-initial-data.html
+│           ├── ./DevOPS/PG/doc/tableam.html
+│           ├── ./DevOPS/PG/doc/tablefunc.html
+│           ├── ./DevOPS/PG/doc/tablesample-method.html
+│           ├── ./DevOPS/PG/doc/tablesample-support-functions.html
+│           ├── ./DevOPS/PG/doc/tcn.html
+│           ├── ./DevOPS/PG/doc/test-decoding.html
+│           ├── ./DevOPS/PG/doc/textsearch-configuration.html
+│           ├── ./DevOPS/PG/doc/textsearch-controls.html
+│           ├── ./DevOPS/PG/doc/textsearch-debugging.html
+│           ├── ./DevOPS/PG/doc/textsearch-dictionaries.html
+│           ├── ./DevOPS/PG/doc/textsearch-features.html
+│           ├── ./DevOPS/PG/doc/textsearch-indexes.html
+│           ├── ./DevOPS/PG/doc/textsearch-intro.html
+│           ├── ./DevOPS/PG/doc/textsearch-limitations.html
+│           ├── ./DevOPS/PG/doc/textsearch-parsers.html
+│           ├── ./DevOPS/PG/doc/textsearch-psql.html
+│           ├── ./DevOPS/PG/doc/textsearch-tables.html
+│           ├── ./DevOPS/PG/doc/textsearch.html
+│           ├── ./DevOPS/PG/doc/transaction-iso.html
+│           ├── ./DevOPS/PG/doc/trigger-datachanges.html
+│           ├── ./DevOPS/PG/doc/trigger-definition.html
+│           ├── ./DevOPS/PG/doc/trigger-example.html
+│           ├── ./DevOPS/PG/doc/trigger-interface.html
+│           ├── ./DevOPS/PG/doc/triggers.html
+│           ├── ./DevOPS/PG/doc/tsm-system-rows.html
+│           ├── ./DevOPS/PG/doc/tsm-system-time.html
+│           ├── ./DevOPS/PG/doc/tutorial-accessdb.html
+│           ├── ./DevOPS/PG/doc/tutorial-advanced-intro.html
+│           ├── ./DevOPS/PG/doc/tutorial-advanced.html
+│           ├── ./DevOPS/PG/doc/tutorial-agg.html
+│           ├── ./DevOPS/PG/doc/tutorial-arch.html
+│           ├── ./DevOPS/PG/doc/tutorial-concepts.html
+│           ├── ./DevOPS/PG/doc/tutorial-conclusion.html
+│           ├── ./DevOPS/PG/doc/tutorial-createdb.html
+│           ├── ./DevOPS/PG/doc/tutorial-delete.html
+│           ├── ./DevOPS/PG/doc/tutorial-fk.html
+│           ├── ./DevOPS/PG/doc/tutorial-inheritance.html
+│           ├── ./DevOPS/PG/doc/tutorial-install.html
+│           ├── ./DevOPS/PG/doc/tutorial-join.html
+│           ├── ./DevOPS/PG/doc/tutorial-populate.html
+│           ├── ./DevOPS/PG/doc/tutorial-select.html
+│           ├── ./DevOPS/PG/doc/tutorial-sql-intro.html
+│           ├── ./DevOPS/PG/doc/tutorial-sql.html
+│           ├── ./DevOPS/PG/doc/tutorial-start.html
+│           ├── ./DevOPS/PG/doc/tutorial-table.html
+│           ├── ./DevOPS/PG/doc/tutorial-transactions.html
+│           ├── ./DevOPS/PG/doc/tutorial-update.html
+│           ├── ./DevOPS/PG/doc/tutorial-views.html
+│           ├── ./DevOPS/PG/doc/tutorial-window.html
+│           ├── ./DevOPS/PG/doc/tutorial.html
+│           ├── ./DevOPS/PG/doc/typeconv-func.html
+│           ├── ./DevOPS/PG/doc/typeconv-oper.html
+│           ├── ./DevOPS/PG/doc/typeconv-overview.html
+│           ├── ./DevOPS/PG/doc/typeconv-query.html
+│           ├── ./DevOPS/PG/doc/typeconv-select.html
+│           ├── ./DevOPS/PG/doc/typeconv-union-case.html
+│           ├── ./DevOPS/PG/doc/typeconv.html
+│           ├── ./DevOPS/PG/doc/unaccent.html
+│           ├── ./DevOPS/PG/doc/unsupported-features-sql-standard.html
+│           ├── ./DevOPS/PG/doc/upgrading.html
+│           ├── ./DevOPS/PG/doc/user-manag.html
+│           ├── ./DevOPS/PG/doc/using-explain.html
+│           ├── ./DevOPS/PG/doc/uuid-ossp.html
+│           ├── ./DevOPS/PG/doc/vacuumlo.html
+│           ├── ./DevOPS/PG/doc/view-pg-available-extension-versions.html
+│           ├── ./DevOPS/PG/doc/view-pg-available-extensions.html
+│           ├── ./DevOPS/PG/doc/view-pg-config.html
+│           ├── ./DevOPS/PG/doc/view-pg-cursors.html
+│           ├── ./DevOPS/PG/doc/view-pg-file-settings.html
+│           ├── ./DevOPS/PG/doc/view-pg-group.html
+│           ├── ./DevOPS/PG/doc/view-pg-hba-file-rules.html
+│           ├── ./DevOPS/PG/doc/view-pg-indexes.html
+│           ├── ./DevOPS/PG/doc/view-pg-locks.html
+│           ├── ./DevOPS/PG/doc/view-pg-matviews.html
+│           ├── ./DevOPS/PG/doc/view-pg-policies.html
+│           ├── ./DevOPS/PG/doc/view-pg-prepared-statements.html
+│           ├── ./DevOPS/PG/doc/view-pg-prepared-xacts.html
+│           ├── ./DevOPS/PG/doc/view-pg-publication-tables.html
+│           ├── ./DevOPS/PG/doc/view-pg-replication-origin-status.html
+│           ├── ./DevOPS/PG/doc/view-pg-replication-slots.html
+│           ├── ./DevOPS/PG/doc/view-pg-roles.html
+│           ├── ./DevOPS/PG/doc/view-pg-rules.html
+│           ├── ./DevOPS/PG/doc/view-pg-seclabels.html
+│           ├── ./DevOPS/PG/doc/view-pg-sequences.html
+│           ├── ./DevOPS/PG/doc/view-pg-settings.html
+│           ├── ./DevOPS/PG/doc/view-pg-shadow.html
+│           ├── ./DevOPS/PG/doc/view-pg-shmem-allocations.html
+│           ├── ./DevOPS/PG/doc/view-pg-stats-ext.html
+│           ├── ./DevOPS/PG/doc/view-pg-stats.html
+│           ├── ./DevOPS/PG/doc/view-pg-tables.html
+│           ├── ./DevOPS/PG/doc/view-pg-timezone-abbrevs.html
+│           ├── ./DevOPS/PG/doc/view-pg-timezone-names.html
+│           ├── ./DevOPS/PG/doc/view-pg-user-mappings.html
+│           ├── ./DevOPS/PG/doc/view-pg-user.html
+│           ├── ./DevOPS/PG/doc/view-pg-views.html
+│           ├── ./DevOPS/PG/doc/views-overview.html
+│           ├── ./DevOPS/PG/doc/wal-async-commit.html
+│           ├── ./DevOPS/PG/doc/wal-configuration.html
+│           ├── ./DevOPS/PG/doc/wal-internals.html
+│           ├── ./DevOPS/PG/doc/wal-intro.html
+│           ├── ./DevOPS/PG/doc/wal-reliability.html
+│           ├── ./DevOPS/PG/doc/wal.html
+│           ├── ./DevOPS/PG/doc/warm-standby-failover.html
+│           ├── ./DevOPS/PG/doc/warm-standby.html
+│           ├── ./DevOPS/PG/doc/when-can-parallel-query-be-used.html
+│           ├── ./DevOPS/PG/doc/xaggr.html
+│           ├── ./DevOPS/PG/doc/xfunc-c.html
+│           ├── ./DevOPS/PG/doc/xfunc-internal.html
+│           ├── ./DevOPS/PG/doc/xfunc-optimization.html
+│           ├── ./DevOPS/PG/doc/xfunc-overload.html
+│           ├── ./DevOPS/PG/doc/xfunc-pl.html
+│           ├── ./DevOPS/PG/doc/xfunc-sql.html
+│           ├── ./DevOPS/PG/doc/xfunc-volatility.html
+│           ├── ./DevOPS/PG/doc/xfunc.html
+│           ├── ./DevOPS/PG/doc/xindex.html
+│           ├── ./DevOPS/PG/doc/xml-limits-conformance.html
+│           ├── ./DevOPS/PG/doc/xml2.html
+│           ├── ./DevOPS/PG/doc/xoper-optimization.html
+│           ├── ./DevOPS/PG/doc/xoper.html
+│           ├── ./DevOPS/PG/doc/xplang-install.html
+│           ├── ./DevOPS/PG/doc/xplang.html
+│           ├── ./DevOPS/PG/doc/xproc.html
+│           └── ./DevOPS/PG/doc/xtypes.html
 ├── ./Docker
 │   └── ./Docker/Note
 │       ├── ./Docker/Note/For_Linux
@@ -18,13 +1223,15 @@
 │       │   │   └── ./Docker/Note/For_Linux/Command/Docker_View_started_conteiners.txt
 │       │   ├── ./Docker/Note/For_Linux/Docker_Compose
 │       │   │   ├── ./Docker/Note/For_Linux/Docker_Compose/General_comands.txt
-│       │   │   └── ./Docker/Note/For_Linux/Docker_Compose/SQLserverFile.txt
+│       │   │   ├── ./Docker/Note/For_Linux/Docker_Compose/SQLserverFile.txt
+│       │   │   └── ./Docker/Note/For_Linux/Docker_Compose/Update_version_docker-compose.txt
 │       │   ├── ./Docker/Note/For_Linux/General_notions.txt
 │       │   ├── ./Docker/Note/For_Linux/Install
 │       │   │   └── ./Docker/Note/For_Linux/Install/Docker-Compose.txt
 │       │   ├── ./Docker/Note/For_Linux/Setup_conteiners.txt
 │       │   ├── ./Docker/Note/For_Linux/Setup_conteiners_2.txt
-│       │   └── ./Docker/Note/For_Linux/Shpargalka.txt
+│       │   ├── ./Docker/Note/For_Linux/Shpargalka.txt
+│       │   └── ./Docker/Note/For_Linux/docker-login-denied.txt
 │       └── ./Docker/Note/For_Windows
 │           ├── ./Docker/Note/For_Windows/Docker_install_Nanoserver_image.txt
 │           ├── ./Docker/Note/For_Windows/Docker_windows_command_Statya.txt
@@ -51,7 +1258,8 @@
 │   │   ├── ./Git/GitLab/GitLab_Issue.txt
 │   │   └── ./Git/GitLab/How_to_install.txt
 │   ├── ./Git/Git_Usage.txt
-│   └── ./Git/Git_gitignore.txt
+│   ├── ./Git/Git_gitignore.txt
+│   └── ./Git/Markdown.txt
 ├── ./Linux
 │   ├── ./Linux/1C
 │   │   ├── ./Linux/1C/1update_1c_rpm.txt
@@ -59,13 +1267,22 @@
 │   │   ├── ./Linux/1C/update_1c_deb.txt
 │   │   ├── ./Linux/1C/update_1c_rpm.txt
 │   │   └── ./Linux/1C/ustanovka-i-nastrojka-1s-na-centos-8.txt
+│   ├── ./Linux/ActiveDirectory
+│   │   └── ./Linux/ActiveDirectory/Ввод компьютера в домен Windows.ini
 │   ├── ./Linux/Ansible
 │   │   ├── ./Linux/Ansible/Begin.txt
 │   │   ├── ./Linux/Ansible/Hosts.txt
+│   │   ├── ./Linux/Ansible/Playbooks
+│   │   │   ├── ./Linux/Ansible/Playbooks/Install_package.txt
+│   │   │   ├── ./Linux/Ansible/Playbooks/Remove_package.txt
+│   │   │   ├── ./Linux/Ansible/Playbooks/Service_start
+│   │   │   ├── ./Linux/Ansible/Playbooks/Services_stop.txt
+│   │   │   └── ./Linux/Ansible/Playbooks/UpdateOS.txt
 │   │   ├── ./Linux/Ansible/Playbooks.txt
 │   │   └── ./Linux/Ansible/all.txt
 │   ├── ./Linux/Apple
 │   │   ├── ./Linux/Apple/Apple_auto_route_vpn.txt
+│   │   ├── ./Linux/Apple/Apple_damaged_app.txt
 │   │   ├── ./Linux/Apple/Apple_package_manager.txt
 │   │   ├── ./Linux/Apple/TTL_change.txt
 │   │   ├── ./Linux/Apple/Zsh
@@ -78,7 +1295,7 @@
 │   ├── ./Linux/Bash
 │   │   ├── ./Linux/Bash/DPKG.txt
 │   │   ├── ./Linux/Bash/scripting.txt
-│   │   └── ./Linux/Bash/сравнение_файлов_diff.txt
+│   │   └── ./Linux/Bash/сравнение_файлов_diff.txt
 │   ├── ./Linux/CentOS
 │   │   ├── ./Linux/CentOS/Disable_Protection policy_CentOS.txt
 │   │   ├── ./Linux/CentOS/IOSTAT.txt
@@ -96,6 +1313,8 @@
 │   │   ├── ./Linux/Debian/Locale_language_change.txt
 │   │   └── ./Linux/Debian/WIFI
 │   │       └── ./Linux/Debian/WIFI/Debian_WIFI_HOTSPOT.txt
+│   ├── ./Linux/Firewall
+│   │   └── ./Linux/Firewall/Crowdsec_firewal_delete_blocked.txt
 │   ├── ./Linux/HDD
 │   │   ├── ./Linux/HDD/Btrfs_HDD_Filesystem.txt
 │   │   ├── ./Linux/HDD/Linux_free_space.txt
@@ -116,9 +1335,10 @@
 │   │   ├── ./Linux/LAN/Linux_vpn_operating.txt
 │   │   └── ./Linux/LAN/SS.txt
 │   ├── ./Linux/Linux_based
-│   │   ├── ./Linux/Linux_based/Find.txt
+│   │   ├── ./Linux/Linux_based/Add_text_to_multiple_files.txt
 │   │   ├── ./Linux/Linux_based/Get_serialnumber_notebook.txt
 │   │   ├── ./Linux/Linux_based/Install_ifconfig.txt
+│   │   ├── ./Linux/Linux_based/Linux_Find.txt
 │   │   ├── ./Linux/Linux_based/Linux_Rename_files_extentions.txt
 │   │   ├── ./Linux/Linux_based/New_Workstation.txt
 │   │   ├── ./Linux/Linux_based/Services_linux.txt
@@ -134,6 +1354,7 @@
 │   │   ├── ./Linux/Linux_based/command_linux2.txt
 │   │   ├── ./Linux/Linux_based/connect_videocard_in_vm.txt
 │   │   ├── ./Linux/Linux_based/cp_copy_command.txt
+│   │   ├── ./Linux/Linux_based/create_files_in_folders.txt
 │   │   ├── ./Linux/Linux_based/get_version_linux.txt
 │   │   ├── ./Linux/Linux_based/get_version_package_in_repo.txt
 │   │   ├── ./Linux/Linux_based/install_viber.txt
@@ -222,8 +1443,7 @@
 │       │   │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/Configure_Domain/prepDomainController.ps1
 │       │   │   └── ./Microsoft/Note/ActiveDirectory/Generated_Scripts/new_domain_autoscript.txt
 │       │   ├── ./Microsoft/Note/ActiveDirectory/get-adgroup_ad_group.txt
-│       │   ├── ./Microsoft/Note/ActiveDirectory/get-aduser.txt
-│       │   └── ./Microsoft/Note/ActiveDirectory/Ввод компьютера в домен Windows.ini
+│       │   └── ./Microsoft/Note/ActiveDirectory/get-aduser.txt
 │       ├── ./Microsoft/Note/BitLocker
 │       │   └── ./Microsoft/Note/BitLocker/Unlock.txt
 │       ├── ./Microsoft/Note/CMD
@@ -234,7 +1454,6 @@
 │       ├── ./Microsoft/Note/Configure_computer.txt
 │       ├── ./Microsoft/Note/Connect_Server_to_Domain.txt
 │       ├── ./Microsoft/Note/Connect_to_domain_Nanoserver.txt
-│       ├── ./Microsoft/Note/Create_WIM_image
 │       ├── ./Microsoft/Note/Create_WIM_image.txt
 │       ├── ./Microsoft/Note/Create_file_PowerShell.txt
 │       ├── ./Microsoft/Note/DFSR_txtlet.txt
@@ -255,7 +1474,7 @@
 │       ├── ./Microsoft/Note/Firewall_allow_all_Traffic.txt
 │       ├── ./Microsoft/Note/Forrmat_USB_Boot.txt
 │       ├── ./Microsoft/Note/GPO
-│       │   ├── ./Microsoft/Note/GPO/Gpo_PowerShell.txt
+│       │   ├── ./Microsoft/Note/GPO/Gpo_powershell.txt
 │       │   └── ./Microsoft/Note/GPO/show_politics_wish_permission.ps1
 │       ├── ./Microsoft/Note/Get-WinEvent_logs_windows.txt
 │       ├── ./Microsoft/Note/Get_Model_and_Sireal_Number.txt
@@ -290,6 +1509,7 @@
 │       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_Install_DHCP.txt
 │       │   │   ├── ./Microsoft/Note/PowerShell/DSC/DSC_insall_AD_DNS_USERS_ETC.txt
 │       │   │   └── ./Microsoft/Note/PowerShell/DSC/Description for xModules.txt
+│       │   ├── ./Microsoft/Note/PowerShell/Insstall_Chrome_powershell.txt
 │       │   ├── ./Microsoft/Note/PowerShell/JEA
 │       │   │   ├── ./Microsoft/Note/PowerShell/JEA/Archive
 │       │   │   │   └── ./Microsoft/Note/PowerShell/JEA/Archive/01.txt
@@ -410,6 +1630,8 @@
 │   ├── ./SQL/Access_to_create_table_for_user.txt
 │   ├── ./SQL/MSSQL_Move_bases.txt
 │   ├── ./SQL/MySQL_shpargalka.txt
+│   ├── ./SQL/PostgreSQL
+│   │   └── ./SQL/PostgreSQL/Postgres_Install.txt
 │   ├── ./SQL/SQL_Acces_table.txt
 │   ├── ./SQL/SQL_shrink_log.txt
 │   └── ./SQL/sqllite3.txt
@@ -421,6 +1643,8 @@
 │   ├── ./Virtualization/ESXI
 │   │   ├── ./Virtualization/ESXI/ESXI_diagnostic_lan.txt
 │   │   ├── ./Virtualization/ESXI/ESXI_volumes_diagnostic.txt
+│   │   ├── ./Virtualization/ESXI/Esxi_Install_VIB.txt
+│   │   ├── ./Virtualization/ESXI/Rename_ESXI_host.md
 │   │   └── ./Virtualization/ESXI/Update_ESXI_online.txt
 │   ├── ./Virtualization/Note
 │   │   ├── ./Virtualization/Note/Commands_ESXI.txt
@@ -433,9 +1657,12 @@
 │   │   │   └── ./Virtualization/Note/VM_manipulation_CLI/Esxi_Command_VM.txt
 │   │   └── ./Virtualization/Note/nppBackup
 │   │       └── ./Virtualization/Note/nppBackup/Hyper-V_on_VMware.txt
-│   └── ./Virtualization/Rename_ESXI_host.md
+│   └── ./Virtualization/Vagrant
+│       ├── ./Virtualization/Vagrant/Readme.md
+│       ├── ./Virtualization/Vagrant/vagrant_commands.txt
+│       └── ./Virtualization/Vagrant/vagrant_install.txt
 ├── ./index.txt
 ├── ./note
 └── ./temp.txt
 
-98 directories, 341 files
+109 directories, 1557 files

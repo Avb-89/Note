@@ -1,0 +1,1 @@
+esxcli software vib install -v file:///opt/ssacli-2.65.7.0-5.5.0.vib

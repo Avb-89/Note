@@ -1,0 +1,20 @@
+Основные команды VAGRANT
+
+Список локальных образов:
+    vagrant box list
+Импорт образа:
+    vagrant box import имя_файла
+Поднять ВМ по готовому Vagrantfile:
+    vagrant up [имя_виртуалки]
+Удалить ВМ:
+    vagrant destroy
+Выключить ВМ:
+    vagrant halt
+Поставить на паузу:
+    vagrant suspend
+Возобновление работы:
+    vagrant resume
+Перезагрузка:
+    vagrant reload
+Статус всех машин из проекта:
+    vagrant status

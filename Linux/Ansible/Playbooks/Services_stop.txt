@@ -1,0 +1,7 @@
+- hosts: VM1
+  tasks:
+    - name: stop service
+      service:
+        name: apache2
+        state: stopped
+        enabled: no

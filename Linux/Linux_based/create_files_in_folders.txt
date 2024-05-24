@@ -1,0 +1,8 @@
+Создает файл index.html в папке и подкаталогах
+
+    # find . -type d -exec touch {}/index.html \
+
+Создать несколько файлов в одной папке
+
+    # touch sun(seq 1 9).txt (в fish)
+    # touch sun{1..9}.txt (в баш)

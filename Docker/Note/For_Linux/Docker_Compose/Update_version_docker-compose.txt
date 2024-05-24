@@ -1,0 +1,23 @@
+First, remove the old version:
+
+If installed via apt-get
+
+sudo apt-get remove docker-compose
+If installed via curl
+
+sudo rm /usr/local/bin/docker-compose
+If installed via pip
+
+pip uninstall docker-compose
+Then find the newest version on the release page at GitHub or by curling the API and extracting the version from the response using grep or jq (thanks to dragon788, frbl, and Saber Hayati for these improvements):
+
+# curl + grep
+VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+или
+# curl + jq
+VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)
+Finally, download to your favorite $PATH-accessible location and set permissions:
+
+DESTINATION=/usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
+sudo chmod 755 $DESTINATION
