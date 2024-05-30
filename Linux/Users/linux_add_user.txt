@@ -12,3 +12,9 @@
 	useradd admin2
 ===========================
 # useradd -m -G users,audio,wheel test
+
+
+===========================
+
+useradd username
+echo "username:password" | chpasswd

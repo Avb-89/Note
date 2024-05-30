@@ -18,3 +18,7 @@
     vagrant reload
 Статус всех машин из проекта:
     vagrant status
+Статус всех машин
+    vagrant global-status
+Статус всех машин с вычисткой некорректных записей
+    vagrant global-status --prune
