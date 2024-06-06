@@ -1,0 +1,3 @@
+Убрать 'Operation not permitted'
+sudo find / -name tmux 2>&1 | grep -v 'Operation not permitted'
+sudo find / -name tmux 2>&1 | grep -v 'find' (это удобнее)
